@@ -1,5 +1,4 @@
-import { FC, useState } from 'react';
-import './App.css';
+import { FC } from 'react';
 import { Heading } from '@chakra-ui/react';
 import TrackList from './components/TrackList';
 import type { Track } from './components/TrackList';
