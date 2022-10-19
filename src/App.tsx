@@ -1,9 +1,9 @@
-import { FC, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { FC, useState } from 'react';
+import reactLogo from './assets/react.svg';
+import './App.css';
 
 const App: FC = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
@@ -13,7 +13,7 @@ const App: FC = () => {
         </a>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
