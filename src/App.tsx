@@ -1,44 +1,51 @@
 import { FC, useState } from 'react';
 import './App.css';
 import { Heading } from '@chakra-ui/react';
-import LiquorList from './components/LiquorList';
-import type { Liquor } from './components/LiquorList';
+import TrackList from './components/TrackList';
+import type { Track } from './components/TrackList';
 
 const App: FC = () => {
-  const liquors: Liquor[] = [
+  const tracks: Track[] = [
     {
       id: 1,
-      name: 'ビール',
-      price: 300,
-      percentage: 5,
+      name: '織田フィールド',
+      address: '東京都渋谷区神南２丁目３−１',
+      open_hour: '9:00~21:00',
+      site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html',
+      entrance_fee: 0,
     },
     {
       id: 2,
-      name: 'レモンサワー',
-      price: 200,
-      percentage: 5,
-      amount: 150
+      name: '駒沢オリンピック公園',
+      address: '東京都世田谷区駒沢公園１−１',
+      open_hour: '9:00~12:30,13:00~17:00',
+      site_url: 'https://www.tef.or.jp/kopgp/parking.html',
+      entrance_fee: 450,
     },
     {
       id: 3,
-      name: 'ハイボール',
-      price: 200,
-      percentage: 7,
-      amount: 350
+      name: '世田谷運動場陸上競技場',
+      address: '世田谷区大蔵4-6-1',
+      open_hour:
+        '平日9:00～15:00 420円、15:00～21:00 280円、土日祝9:00～15:00 480円、15:00～21:00 320円',
+      site_url: 'https://www.tef.or.jp/kopgp/parking.html',
+      entrance_fee: 280,
     },
     {
       id: 4,
-      name: '日本酒',
-      price: 300,
-      percentage: 12,
-      amount: 120
+      name: '夢の島競技場',
+      address: '江東区夢の島1-1-2',
+      open_hour: '月、水、金曜日 9:00～21:00',
+      site_url: 'https://www.tef.or.jp/kopgp/parking.html',
+      entrance_fee: 400,
     },
     {
       id: 5,
-      name: '梅酒',
-      price: 250,
-      percentage: 12,
-      amount: 90
+      name: '和田堀公園第二競技場',
+      address: '東京都杉並区堀ノ内１丁目１５',
+      open_hour: '毎週水曜日、第1日曜日、第3土曜日 24時間利用可能',
+      site_url: 'https://www.tef.or.jp/kopgp/parking.html',
+      entrance_fee: 450,
     },
   ];
 
@@ -46,9 +53,9 @@ const App: FC = () => {
     <div className="container">
       <div>
         <Heading size="lg" as="h1" my={12}>
-          「０軒目」商品一覧
+          競技場一覧
         </Heading>
-        <LiquorList shop="０軒目" liquors={liquors} />
+        <TrackList prefecture="東京" tracks={tracks} />
       </div>
     </div>
   );
