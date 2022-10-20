@@ -4,7 +4,6 @@ import { prefectureData } from 'data';
 import { Helmet } from 'react-helmet-async';
 import TrackIndex from 'components/organisms/TrackIndex';
 import SiteOutline from 'components/organisms/SiteOutline';
-import TrackList from 'components/TrackList';
 
 const title = '競技場検索';
 
@@ -17,7 +16,7 @@ const Home: FC = () => (
       {title}
     </Heading>
     <SiteOutline my={10} />
-    <TrackList prefectures={prefectureData} />
+    <TrackIndex prefectures={prefectureData} />
   </Box>
 );
 
