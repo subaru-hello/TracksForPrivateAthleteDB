@@ -1,20 +1,23 @@
-import React, { FC } from 'react';
-import { Grid, GridItem, Container, Heading } from '@chakra-ui/react';
+import type { FC } from 'react';
+import { Box, Heading } from '@chakra-ui/react';
+import { prefectureData } from 'data';
+import { Helmet } from 'react-helmet-async';
+import TrackIndex from 'components/organisms/TrackIndex';
+import SiteOutline from 'components/organisms/SiteOutline';
 
-const Home: FC = () => {
-  const title = 'ホーム画面';
-  return (
-    <Container>
-      <Heading>{title}</Heading>
-      <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-        <GridItem w="100%" h="10" bg="blue.500" />
-        <GridItem w="100%" h="10" bg="blue.500" />
-        <GridItem w="100%" h="10" bg="blue.500" />
-        <GridItem w="100%" h="10" bg="blue.500" />
-        <GridItem w="100%" h="10" bg="blue.500" />
-      </Grid>
-    </Container>
-  );
-};
+const title = '競技場検索';
+
+const Home: FC = () => (
+  <Box maxW="3xl">
+    <Helmet>
+      <title>{title}</title>
+    </Helmet>
+    <Heading as="h1" size="xl" my={4}>
+      {title}
+    </Heading>
+    <SiteOutline my={10} />
+    <TrackIndex prefectures={prefectureData} />
+  </Box>
+);
 
 export default Home;
