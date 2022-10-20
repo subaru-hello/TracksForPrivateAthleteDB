@@ -1,7 +1,7 @@
-import { TRACK_CODE } from './constants';
+import { PREFECTURE_CODE } from './constants';
 
 export interface Prefecture {
-    id: typeof TRACK_CODE[number];
+    id: typeof PREFECTURE_CODE[number];
     name: string;
     color: string;
 }
@@ -9,7 +9,7 @@ export interface Prefecture {
 export interface Track {
     id: string;
     name: string;
-    trackID: typeof TRACK_CODE[number];
+    prefectureID: typeof PREFECTURE_CODE[number];
     address?: string;
     open_hour: string;
     entrance_fee: number;
