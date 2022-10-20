@@ -1,0 +1,1 @@
+export const TRACK_CODE = ['tokyo', 'kanagawa', 'saitama'] as const;
