@@ -19,7 +19,10 @@ const IndexRoutes: FC = () => {
     <Routes>
       <Route path="tracks" element={<TracksFrame />}>
         <Route path="" element={<AllTracks my={12} />} />
-        <Route path=":trackID" element={<TrackListByPrefecture my={12} />} />
+        <Route
+          path=":prefectureID"
+          element={<TrackListByPrefecture my={12} />}
+        />
       </Route>
       <Route path="/" element={<Home />} />
       <Route path="*" element={<Navigate to="/" replace />} />
