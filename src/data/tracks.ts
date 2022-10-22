@@ -9,7 +9,8 @@ export const trackData: Track[] = [
     open_hour: '9:00~21:00',
     site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html',
     entrance_fee: 0,
-  }, {
+  },
+  {
     id: 'komazawa',
     prefectureID: 'tokyo',
     name: '駒沢オリンピック公園',
@@ -53,6 +54,15 @@ export const trackData: Track[] = [
     address: '神奈川県川崎市中原区等々力1-1',
     open_hour: '毎週水曜日、第1日曜日、第3土曜日 24時間利用可能',
     site_url: 'https://www.city.kawasaki.jp/nakahara/page/0000088519.html',
+    entrance_fee: 200,
+  },
+  {
+    id: 'kawagoe',
+    prefectureID: 'saitama',
+    name: '川越運動公園',
+    address: '埼玉県川越市大字下老袋388番地1',
+    open_hour: ' 午前9時～午後5時',
+    site_url: 'https://www.kfp.or.jp/facilities/sportspark',
     entrance_fee: 200,
   },
 ];
