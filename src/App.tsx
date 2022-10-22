@@ -1,9 +1,11 @@
 import type { FC } from 'react';
-import Providers from './Providers';
-import IndexRoutes from './routes';
+import Providers from 'Providers';
+import IndexRoutes from 'routes/index';
+import Header from 'components/templates/Header';
 
 const App: FC = () => (
   <Providers>
+    <Header />
     <IndexRoutes />
   </Providers>
 );
