@@ -46,4 +46,13 @@ export const trackData: Track[] = [
     site_url: 'https://www.tef.or.jp/kopgp/parking.html',
     entrance_fee: 450,
   },
+  {
+    id: 'todoroki',
+    prefectureID: 'kanagawa',
+    name: '等々力競技場',
+    address: '神奈川県川崎市中原区等々力1-1',
+    open_hour: '毎週水曜日、第1日曜日、第3土曜日 24時間利用可能',
+    site_url: 'https://www.city.kawasaki.jp/nakahara/page/0000088519.html',
+    entrance_fee: 200,
+  },
 ];
