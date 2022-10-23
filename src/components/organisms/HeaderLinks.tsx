@@ -1,4 +1,6 @@
 import type { FC } from 'react';
+import { useState } from 'react';
+import escapeStringRegexp from 'escape-string-regexp';
 import {
   Box,
   Stack,
@@ -11,10 +13,32 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
+import { trackData } from 'data';
+import { Track } from 'domains';
 
-const HeaderLinks: FC = (props) => {
+type Props = { lists: string[], tracks: Track[] };
+
+const HeaderLinks: FC<Props> = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
+  // 競技場データを配列に保持する
+  const tracks = trackData;
+
+  // ユーザーの入力キーワードをState化する
+  const [searchKeyword, updateSearchKeyword] = useState('');
+
+  // 入力イベントに反応してStateを更新する
+  const onInput = (event: React.FormEvent<HTMLInputElement>) => {
+    // 入力キーワードをstateに格納する
+    updateSearchKeyword(event.currentTarget.value);
+  };
+
+  const filteredList = tracks.filter((item) => {
+    // ユーザー入力を安全に正規表現にする（このときすべて小文字化で正規化する）
+    const escapedText = escapeStringRegexp(searchKeyword.toLowerCase());
+    // 小文字で比較して部分一致するものだけを残す
+    return new RegExp(escapedText).test(item.name.toLowerCase());
+  });
 
   return (
     <Flex
@@ -51,8 +75,18 @@ const HeaderLinks: FC = (props) => {
         <Input
           htmlSize={30}
           width="auto"
+          type="text"
+          onInput={onInput}
           placeholder="競技場名を入れて下さい"
         />
+        
+          {filteredList.map((track) => {
+            return track && <ul key={track.id} className="list">
+                <li >{track.name}</li>
+                <li >{track.site_url}</li>
+                <li >{track.entrance_fee}</li>
+        </ul>
+          })}
       </Stack>
 
       <Box
