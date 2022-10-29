@@ -1,1 +1,1 @@
-export const PREFECTURE_CODE = ['tokyo', 'kanagawa', 'saitama'] as const;
+export const PREFECTURE_CODE = ['tokyo', 'kanagawa', 'saitama', 'chiba', 'gunma'] as const;
