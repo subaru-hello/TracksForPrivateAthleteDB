@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { HelmetProvider } from 'react-helmet-async';
 
-
 const Providers: FC<PropsWithChildren> = ({ children }) => (
   <HelmetProvider>
     <ChakraProvider>
