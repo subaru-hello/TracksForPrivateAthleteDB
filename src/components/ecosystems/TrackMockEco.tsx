@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, UnorderedList, List, ListItem } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import { trackData } from 'data';
 import { Track } from 'domains';
 import axios from 'axios';
 import TrackMockList from 'components/organisms/TrackMockList';
@@ -15,9 +16,10 @@ const TrackMockEco: FC = () => {
     getUser();
   }, []);
 
+  //track_dataをtrackMocksに変えれば外部データを入れることができる。
   return (
     <Box>
-      <TrackMockList track_mock={trackMocks} />
+      <TrackMockList trackData={trackData} />
     </Box>
   );
 };
