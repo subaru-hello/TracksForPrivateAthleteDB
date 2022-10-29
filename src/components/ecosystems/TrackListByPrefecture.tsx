@@ -55,5 +55,3 @@ const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
 };
 
 export default TrackListByPrefecture;
-
-

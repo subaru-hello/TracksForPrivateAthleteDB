@@ -16,7 +16,6 @@ import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
 import { trackData } from 'data';
 import { Track } from 'domains';
 
-
 const HeaderLinks: FC = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
