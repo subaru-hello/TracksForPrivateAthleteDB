@@ -1,4 +1,6 @@
 import type { FC } from 'react';
+import { useState } from 'react';
+import escapeStringRegexp from 'escape-string-regexp';
 import {
   Box,
   Stack,
@@ -11,6 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
+import { trackData } from 'data';
+import { Track } from 'domains';
 
 const HeaderLinks: FC = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,7 +33,7 @@ const HeaderLinks: FC = (props) => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          競技場検索
+          <Link to="/">競技場検索</Link>
         </Heading>
       </Flex>
 
@@ -46,11 +50,13 @@ const HeaderLinks: FC = (props) => {
         p={4}
         mt={{ base: 4, md: 0 }}
       >
+        <Link to="/mock/new">競技場作成mock</Link>
         <Link to="/tracks">競技場一覧</Link>
         <Search2Icon />
         <Input
           htmlSize={30}
           width="auto"
+          type="text"
           placeholder="競技場名を入れて下さい"
         />
       </Stack>

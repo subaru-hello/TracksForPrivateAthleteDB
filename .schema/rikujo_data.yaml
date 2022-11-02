@@ -1,0 +1,1094 @@
+openapi: 3.1.0
+x-stoplight:
+  id: 8y5blc7juyjjp
+info:
+  title: TrackSearch
+  version: '1.0'
+  summary: 全国の陸上競技場情報を集めたAPI
+  description: 一般開放の日時、使用料金、ハードルの質感、名前
+  contact:
+    url: hello
+    name: tako
+    email: tako
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+servers:
+  - url: 'http://localhost:3000/api'
+paths:
+  /tracks:
+    parameters: []
+    get:
+      summary: Get All Track data
+      responses:
+        '200':
+          description: Track Found
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  Example 1:
+                    id: oda
+                    prefectureID: tokyo
+                    name: 織田フィールド
+                    furigana: おだふぃーるど
+                    address: 東京都渋谷区神南２丁目３−１
+                    open_hour: '9:00~21:00'
+                    site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                    entrance_fee: 0
+                properties:
+                  id:
+                    type: string
+                  prefectureID:
+                    type: string
+                  name:
+                    type: string
+                  furigana:
+                    type: string
+                  address:
+                    type: string
+                  open_hour:
+                    type: string
+                  site_url:
+                    type: string
+                  entrance_fee:
+                    type: integer
+              examples:
+                Get:
+                  value:
+                    id: oda
+                    prefectureID: tokyo
+                    name: 織田フィールド
+                    furigana: おだふぃーるど
+                    address: 東京都渋谷区神南２丁目３−１
+                    open_hour: '9:00~21:00'
+                    site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                    entrance_fee: 0
+                example-6:
+                  value:
+                    id: kawagoe
+                    prefectureID: saitama
+                    name: 川越運動公園
+                    furigana: かわごえ
+                    address: 埼玉県川越市大字下老袋388番地1
+                    open_hour: ' 午前9時～午後5時'
+                    site_url: 'https://www.kfp.or.jp/facilities/sportspark'
+                    entrance_fee: 200
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '404':
+          description: User Not Found
+      operationId: get-tracks-trackId
+      description: Retrieve the information of all tracks.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: oda
+                  prefectureID: tokyo
+                  name: 織田フィールド
+                  furigana: おだふぃーるど
+                  address: 東京都渋谷区神南２丁目３−１
+                  open_hour: '9:00~21:00'
+                  site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                  entrance_fee: 0
+              properties:
+                id:
+                  type: string
+                prefectureID:
+                  type: string
+                name:
+                  type: string
+                furigana:
+                  type: string
+                address:
+                  type: string
+                open_hour:
+                  type: string
+                site_url:
+                  type: string
+                entrance_fee:
+                  type: integer
+              required:
+                - id
+            examples:
+              織田:
+                value:
+                  id: oda
+                  prefectureID: tokyo
+                  name: 織田フィールド
+                  furigana: おだふぃーるど
+                  address: 東京都渋谷区神南２丁目３−１
+                  open_hour: '9:00~21:00'
+                  site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                  entrance_fee: 0
+              駒澤:
+                value:
+                  id: komazawa
+                  prefectureID: tokyo
+                  name: 駒沢オリンピック公園
+                  furigana: こまざわおりんぴっく
+                  address: 東京都世田谷区駒沢公園１−１
+                  open_hour: '9:00~12:30,13:00~17:00'
+                  site_url: 'https://www.tef.or.jp/kopgp/parking.html'
+                  entrance_fee: 450
+              世田谷:
+                value:
+                  id: setagaya
+                  prefectureID: tokyo
+                  name: 世田谷運動場陸上競技場
+                  furigana: せたがやうんどう
+                  address: 世田谷区大蔵4-6-1
+                  open_hour: '平日9:00～15:00 420円、15:00～21:00 280円、土日祝9:00～15:00 480円、15:00～21:00 320円'
+                  site_url: 'https://www.tef.or.jp/kopgp/parking.html'
+                  entrance_fee: 280
+              夢の島:
+                value:
+                  id: yumenosima
+                  prefectureID: tokyo
+                  name: 夢の島競技場
+                  furigana: ゆめのしま
+                  address: 江東区夢の島1-1-2
+                  open_hour: '月、水、金曜日 9:00～21:00'
+                  site_url: 'https://www.tef.or.jp/kopgp/parking.html'
+                  entrance_fee: 400
+              和田堀:
+                value:
+                  id: wada
+                  prefectureID: tokyo
+                  name: 和田堀公園第二競技場
+                  furigana: わだぼり
+                  address: 東京都杉並区堀ノ内１丁目１５
+                  open_hour: 毎週水曜日、第1日曜日、第3土曜日 24時間利用可能
+                  site_url: 'https://www.tef.or.jp/kopgp/parking.html'
+                  entrance_fee: 450
+              等々力:
+                value:
+                  id: todoroki
+                  prefectureID: kanagawa
+                  name: 等々力競技場
+                  furigana: とどろき
+                  address: 神奈川県川崎市中原区等々力1-1
+                  open_hour: 毎週水曜日、第1日曜日、第3土曜日 24時間利用可能
+                  site_url: 'https://www.city.kawasaki.jp/nakahara/page/0000088519.html'
+                  entrance_fee: 200
+              川越:
+                value:
+                  id: kawagoe
+                  prefectureID: saitama
+                  name: 川越運動公園
+                  furigana: かわごえ
+                  address: 埼玉県川越市大字下老袋388番地1
+                  open_hour: ' 午前9時～午後5時'
+                  site_url: 'https://www.kfp.or.jp/facilities/sportspark'
+                  entrance_fee: 200
+        description: 競技場のデータ
+    patch:
+      summary: Update Track Information
+      operationId: patch-users-userId
+      responses:
+        '200':
+          description: Track Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Track'
+              examples:
+                Track has been updated:
+                  value:
+                    id: string
+                    prefectureID: string
+                    name: string
+                    furigana: string
+                    address: string
+                    open_hour: string
+                    site_url: string
+                    entrance_fee: 0
+        '404':
+          description: Track Not Found
+        '409':
+          description: Track Already Taken
+      description: Update the information of an existing user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: oda
+                  prefectureID: tokyo
+                  name: 織田フィールド
+                  furigana: おだふぃーるど
+                  address: 東京都渋谷区神南２丁目３−１
+                  open_hour: '9:00~21:00'
+                  site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                  entrance_fee: 0
+              properties:
+                id:
+                  type: string
+                prefectureID:
+                  type: string
+                name:
+                  type: string
+                furigana:
+                  type: string
+                address:
+                  type: string
+                open_hour:
+                  type: string
+                site_url:
+                  type: string
+                entrance_fee:
+                  type: integer
+              required:
+                - id
+            examples:
+              update name:
+                value:
+                  id: string
+                  name: string
+        description: Patch user properties to update.
+    delete:
+      description: 陸上競技場を削除
+      summary: 陸上競技場を削除
+      operationId: deleteapi-tracks
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+              required:
+                - id
+            examples:
+              example-1:
+                value:
+                  id: string
+    post:
+      summary: Create Track
+      operationId: posttracks
+      responses:
+        '200':
+          description: OK
+      description: 競技場を追加する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: oda
+                  prefectureID: tokyo
+                  name: 織田フィールド
+                  furigana: おだふぃーるど
+                  address: 東京都渋谷区神南２丁目３−１
+                  open_hour: '9:00~21:00'
+                  site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                  entrance_fee: 0
+              properties:
+                id:
+                  type: string
+                prefectureID:
+                  type: string
+                name:
+                  type: string
+                furigana:
+                  type: string
+                address:
+                  type: string
+                open_hour:
+                  type: string
+                site_url:
+                  type: string
+                entrance_fee:
+                  type: integer
+              required:
+                - id
+            examples:
+              example-1:
+                value:
+                  id: string
+                  prefectureID: string
+                  name: string
+                  furigana: string
+                  address: string
+                  open_hour: string
+                  site_url: string
+                  entrance_fee: 0
+    put:
+      description: Update Track
+      summary: Update Track
+      operationId: puttracks
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: oda
+                  prefectureID: tokyo
+                  name: 織田フィールド
+                  furigana: おだふぃーるど
+                  address: 東京都渋谷区神南２丁目３−１
+                  open_hour: '9:00~21:00'
+                  site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+                  entrance_fee: 0
+              properties:
+                id:
+                  type: string
+                prefectureID:
+                  type: string
+                name:
+                  type: string
+                furigana:
+                  type: string
+                address:
+                  type: string
+                open_hour:
+                  type: string
+                site_url:
+                  type: string
+                entrance_fee:
+                  type: integer
+              required:
+                - id
+  /users:
+    post:
+      summary: Create New User
+      operationId: post-user
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                example-1:
+                  value:
+                    id: 2
+                    uuid: 123456
+                    name: いか
+                    email: ika@example.com
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                uuid:
+                  type: integer
+                id:
+                  type: integer
+              required:
+                - name
+            examples:
+              example-1:
+                value:
+                  name: string
+                  email: '2019-08-24'
+                  uuid: 0
+                  id: 0
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+    get:
+      summary: Get User
+      operationId: get-user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                example-1:
+                  value:
+                    id: 1
+                    uuid: 123456
+                    name: たこ
+                    email: tako@example.com
+                example-2:
+                  value:
+                    id: 2
+                    uuid: 232329
+                    name: いか
+                    email: ika@example.com
+                example-3:
+                  value:
+                    id: 3
+                    uuid: 37489
+                    name: えび
+                    email: ebi@example.com
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  uuid:
+                    type: integer
+              examples:
+                example-1:
+                  value:
+                    id: 3
+                    uuid: 123456
+                    name: えび
+                    email: ebi@example.com
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                email:
+                  type: string
+                uuid:
+                  type: integer
+              required:
+                - id
+            examples:
+              たこ:
+                value:
+                  id: 1
+                  uuid: 123456
+                  name: たこ
+                  email: tako@example.com
+              イカ:
+                value:
+                  id: 2
+                  uuid: 232329
+                  name: いか
+                  email: ika@example.com
+              えび:
+                value:
+                  id: 3
+                  uuid: 37489
+                  name: えび
+                  email: ebi@example.com
+      description: Fetch all users
+    parameters: []
+    put:
+      description: Update User
+      summary: Update User
+      operationId: putusers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  name: string
+                  email: string
+                  uuid: 0
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                email:
+                  type: string
+                uuid:
+                  type: integer
+              required:
+                - id
+            examples:
+              User Info:
+                value:
+                  id: 0
+                  name: string
+                  email: string
+                  uuid: 0
+              example-1:
+                value:
+                  id: 0
+                  name: string
+                  email: string
+                  uuid: 0
+    delete:
+      description: Userの削除
+      summary: Delete User
+      operationId: deleteusers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  name: string
+                  email: string
+                  uuid: 0
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                uuid:
+                  type: integer
+                id:
+                  type: integer
+              required:
+                - name
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+    patch:
+      description: User情報の更新
+      summary: 更新
+      operationId: patchusers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                example-1:
+                  value:
+                    id: 2
+                    uuid: 123456
+                    name: いか
+                    email: ika@example.com
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  id: 2
+                  uuid: '123456'
+                  name: いか
+                  email: ika@example.com
+              properties:
+                id:
+                  type: integer
+                uuid:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+              required:
+                - id
+        description: ''
+  /comments:
+    post:
+      summary: Create New Comment
+      operationId: post-comment
+      responses:
+        '200':
+          description: User Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+              examples:
+                New User Bob Fellow:
+                  value:
+                    id: 12
+                    firstName: Bob
+                    lastName: Fellow
+                    email: bob.fellow@gmail.com
+                    dateOfBirth: '1996-08-24'
+                    emailVerified: false
+                    createDate: '2020-11-18'
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+                track:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    use_time:
+                      type: string
+                    entrance_fee:
+                      type: string
+                id:
+                  type: integer
+              x-examples:
+                Example 1:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+            examples:
+              Create Comment:
+                value:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+        description: Post the necessary fields for the API to create a new user.
+      description: Create a new user.
+    get:
+      description: Commentの取得
+      summary: Get Comment
+      operationId: get-comment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+                x-examples:
+                  Example 1:
+                    title: string
+                    body: string
+                    track:
+                      id: string
+                      use_time: string
+                      entrance_fee: string
+              examples:
+                example-1:
+                  value:
+                    id: 1
+                    title: 快適な競技場
+                    body: 広くて素晴らしい競技場だと思いました。また使いたいです。
+                    userID: 1
+                    trackID: oda
+                example-2:
+                  value:
+                    id: 2
+                    title: 快適な競技場
+                    body: 広くて素晴らしい競技場だと思いました。また使いたいです。
+                    userID: 3
+                    trackID: wada
+                example-3:
+                  value:
+                    id: 3
+                    title: 快適な競技場
+                    body: 広くて素晴らしい競技場だと思いました。また使いたいです。
+                    userID: 1
+                    trackID: todoroki
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                body:
+                  type: string
+                userID:
+                  type: integer
+                trackID:
+                  type: string
+              required:
+                - id
+            examples:
+              comment 1:
+                value:
+                  id: 1
+                  title: 快適な競技場
+                  body: 広くて素晴らしい競技場だと思いました。また使いたいです。
+                  userID: 1
+                  trackID: oda
+              comment2:
+                value:
+                  id: 2
+                  title: 快適な競技場
+                  body: 広くて素晴らしい競技場だと思いました。また使いたいです。
+                  userID: 3
+                  trackID: wada
+              comment3:
+                value:
+                  id: 3
+                  title: 快適な競技場
+                  body: 広くて素晴らしい競技場だと思いました。また使いたいです。
+                  userID: 1
+                  trackID: todoroki
+    parameters: []
+    put:
+      description: Update Comment
+      summary: Update Comment
+      operationId: putcomments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+              examples:
+                example-1:
+                  value:
+                    title: string
+                    body: string
+                    track:
+                      id: string
+                      use_time: string
+                      entrance_fee: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+                track:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    use_time:
+                      type: string
+                    entrance_fee:
+                      type: string
+                id:
+                  type: integer
+              required:
+                - id
+            examples:
+              example-1:
+                value:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+    delete:
+      description: Delete Comment
+      summary: Delete Comment
+      operationId: deletecomments
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                body:
+                  type: string
+                track:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    use_time:
+                      type: string
+                    entrance_fee:
+                      type: string
+              required:
+                - id
+            examples:
+              example-1:
+                value:
+                  id: 0
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+    patch:
+      description: patch comment
+      summary: ''
+      operationId: patchcomments
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              x-examples:
+                Example 1:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+                track:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    use_time:
+                      type: string
+                    entrance_fee:
+                      type: string
+                id:
+                  type: integer
+              required:
+                - id
+            examples:
+              example-1:
+                value:
+                  title: string
+                  body: string
+                  track:
+                    id: string
+                    use_time: string
+                    entrance_fee: string
+                  id: 0
+  /prefectures:
+    get:
+      description: GET Prefecture
+      summary: Your GET endpoint
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prefecture'
+              examples:
+                example-1:
+                  value:
+                    id: saitama
+                    name: 埼玉県
+                    color: blue.800
+      operationId: get-prefectures
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                id:
+                  type: string
+                color:
+                  type: string
+        description: 県の情報
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ユーザーデータ
+      examples:
+        - id: 2
+          uuid: 123456
+          name: いか
+          email: ika@example.com
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        name:
+          type: string
+        email:
+          type: string
+          description: The date that the user was created.
+        uuid:
+          type: integer
+      required:
+        - id
+        - name
+    Track:
+      type: object
+      x-examples:
+        Example 1:
+          id: oda
+          prefectureID: tokyo
+          name: 織田フィールド
+          furigana: おだふぃーるど
+          address: 東京都渋谷区神南２丁目３−１
+          open_hour: '9:00~21:00'
+          site_url: 'https://www.tokyo-park.or.jp/park/format/facilities039.html'
+          entrance_fee: 0
+      examples:
+        - id: string
+          prefectureID: string
+          name: string
+          furigana: string
+          address: string
+          open_hour: string
+          site_url: string
+          entrance_fee: 0
+      description: ''
+      properties:
+        id:
+          type: string
+        prefectureID:
+          type: string
+        name:
+          type: string
+        furigana:
+          type: string
+        address:
+          type: string
+        open_hour:
+          type: string
+        site_url:
+          type: string
+        entrance_fee:
+          type: integer
+    Comment:
+      type: object
+      x-examples:
+        Example 1:
+          title: string
+          body: string
+          track:
+            id: string
+            use_time: string
+            entrance_fee: string
+      examples:
+        - title: string
+          body: string
+          track:
+            id: string
+            use_time: string
+            entrance_fee: string
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        body:
+          type: string
+        track:
+          type: object
+          properties:
+            id:
+              type: string
+            use_time:
+              type: string
+            entrance_fee:
+              type: string
+    Prefecture:
+      title: Prefecture
+      x-stoplight:
+        id: rk0zuomv3u6w3
+      type: object
+      examples:
+        - id: saitama
+          name: 埼玉県
+          color: blue.800
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+        id:
+          type: string
+  securitySchemes: {}
+x-extension-1: null
+x-extension-2: null
+x-extension-3: null

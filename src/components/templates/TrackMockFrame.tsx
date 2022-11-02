@@ -3,16 +3,18 @@ import { Outlet } from 'react-router-dom';
 import { Box, Heading, Container } from '@chakra-ui/react';
 import HomeButton from 'components/organisms/HomeButton';
 
-const TracksFrame: FC = () => (
+const TrackMockFrame: FC = () => (
   <Container>
     <header>
       <Heading as="h1" size="xl" my={4}>
-        全国の競技場
+        競技場編集
       </Heading>
     </header>
     <Outlet />
+    {/* 検索フォームテンプレート */}
+
     <HomeButton my={16} />
   </Container>
 );
 
-export default TracksFrame;
+export default TrackMockFrame;
