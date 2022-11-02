@@ -8,6 +8,9 @@ import TrackCommentNew from 'components/organisms/TrackCommentNew';
 import TrackMockEco from 'components/ecosystems/TrackMockEco';
 import Home from 'components/templates/Home';
 
+import TrackMockAddEco from 'components/ecosystems/TrackMockAddEco';
+import TrackMockFrame from 'components/templates/TrackMockFrame';
+
 const IndexRoutes: FC = () => {
   const { hash, pathname } = useLocation();
 
@@ -19,7 +22,10 @@ const IndexRoutes: FC = () => {
 
   return (
     <Routes>
-      <Route path="mock" element={<TrackMockEco />} />
+      <Route path="mock" element={<TrackMockFrame />}>
+        <Route path="" element={<TrackMockEco />} />
+        <Route path="new" element={<TrackMockAddEco />} />
+      </Route>
       <Route path="tracks" element={<TracksFrame />}>
         <Route path="" element={<AllTracks my={12} />} />
         <Route

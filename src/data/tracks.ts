@@ -79,7 +79,8 @@ export const trackData: Track[] = [
     furigana: 'ぜっとえー',
     address: '市原市岩崎５３６',
     open_hour: ' 午前9時～午後5時',
-    site_url: 'https://www.city.ichihara.chiba.jp/article?articleId=60238265ece4651c88c19639',
+    site_url:
+      'https://www.city.ichihara.chiba.jp/article?articleId=60238265ece4651c88c19639',
     entrance_fee: 200,
   },
   {
@@ -89,7 +90,8 @@ export const trackData: Track[] = [
     furigana: 'きりゅう',
     address: '桐生市元宿町１７－３３',
     open_hour: ' 午前9時～午後5時',
-    site_url: 'https://www.city.kiryu.lg.jp/shisetsu/sports/taiiku/1002884.html',
+    site_url:
+      'https://www.city.kiryu.lg.jp/shisetsu/sports/taiiku/1002884.html',
     entrance_fee: 200,
   },
 ];
