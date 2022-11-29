@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "react-dotenv && vite",
+    "build": "react-dotenv && tsc && vite build",
     "preview": "vite preview",
     "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
@@ -28,6 +28,7 @@
     "framer-motion": "^6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dotenv": "^0.1.3",
     "react-helmet-async": "^1.3.0",
     "react-router-dom": "^6.4.2"
   },
@@ -70,5 +71,8 @@
   },
   "simple-git-hooks": {
     "pre-commit": ". ./lint-staged-each.sh"
+  },
+    "react-dotenv": {
+    "whitelist": ["API_URL"]
   }
 }
