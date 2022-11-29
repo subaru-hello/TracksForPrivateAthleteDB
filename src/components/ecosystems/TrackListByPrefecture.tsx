@@ -1,12 +1,17 @@
 import type { FC, SyntheticEvent } from 'react';
-import { Navigate, useParams, useSearchParams } from 'react-router-dom';
+import {
+  Outlet,
+  Navigate,
+  useParams,
+  useSearchParams,
+  Link,
+} from 'react-router-dom';
 import { SpinnerIcon } from '@chakra-ui/icons';
 import { Box, IconButton, Heading } from '@chakra-ui/react';
 import { trackData, prefectureData } from 'data';
 import { PREFECTURE_CODE } from 'domains';
 import { Helmet } from 'react-helmet-async';
 import TrackList from 'components/organisms/TrackList';
-
 const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
   const { prefectureID = ' ' } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,6 +52,8 @@ const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
           color={prefecture?.color}
           isLoading={isLoading}
         />
+        <Link to="calender">カレンダーを見る</Link>
+        <Outlet />
       </Box>
     );
   }

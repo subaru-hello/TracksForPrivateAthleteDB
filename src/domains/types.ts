@@ -31,3 +31,12 @@ export interface Comment {
   userID: number;
   trackID: string;
 }
+
+export interface AvailableDate {
+  id: number;
+  day: number;
+  day_of_week: string;
+  event: string;
+  availability_am: boolean;
+  availability_pm: boolean;
+}

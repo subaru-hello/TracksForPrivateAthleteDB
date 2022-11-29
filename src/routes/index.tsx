@@ -7,6 +7,7 @@ import TracksFrame from 'components/templates/TracksFrame';
 import TrackCommentNew from 'components/organisms/TrackCommentNew';
 import TrackMockEco from 'components/ecosystems/TrackMockEco';
 import Home from 'components/templates/Home';
+import ForPublicDate from 'components/templates/ForPublicDate';
 
 import TrackMockAddEco from 'components/ecosystems/TrackMockAddEco';
 import TrackMockFrame from 'components/templates/TrackMockFrame';
@@ -28,10 +29,9 @@ const IndexRoutes: FC = () => {
       </Route>
       <Route path="tracks" element={<TracksFrame />}>
         <Route path="" element={<AllTracks my={12} />} />
-        <Route
-          path=":prefectureID"
-          element={<TrackListByPrefecture my={12} />}
-        />
+        <Route path=":prefectureID" element={<TrackListByPrefecture my={12} />}>
+          <Route path="calender" element={<ForPublicDate />} />
+        </Route>
         <Route path="new" element={<TrackCommentNew />} />
       </Route>
       <Route path="/" element={<Home />} />
