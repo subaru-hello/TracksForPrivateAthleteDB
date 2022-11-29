@@ -50,7 +50,8 @@ const HeaderLinks: FC = (props) => {
         p={4}
         mt={{ base: 4, md: 0 }}
       >
-        <Link to="/mock/new">競技場作成mock</Link>
+        <Link to="/mock/new">競技場作成</Link>
+        <Link to="/tracks/kanagawa/calender">個人開放状況</Link>
         <Link to="/tracks">競技場一覧</Link>
         <Search2Icon />
         <Input

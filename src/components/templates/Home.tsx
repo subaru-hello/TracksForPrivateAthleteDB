@@ -8,7 +8,7 @@ import SiteOutline from 'components/organisms/SiteOutline';
 const title = '競技場検索';
 
 const Home: FC = () => (
-  <Box maxW="3xl">
+  <Container centerContent={true}>
     <Helmet>
       <title>{title}</title>
     </Helmet>
@@ -19,7 +19,7 @@ const Home: FC = () => (
       <SiteOutline my={10} />
       <TrackIndex prefectures={prefectureData} />
     </Container>
-  </Box>
+  </Container>
 );
 
 export default Home;
