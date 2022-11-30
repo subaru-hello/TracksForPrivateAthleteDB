@@ -9,7 +9,10 @@ export const getCommentsData = async (track_id: string) => {
 };
 
 export const addCommentData = async (track_id: string, comment: Comment) => {
-  const response = await axios.post(`${commentDataUrl}/${track_id}/comments`, comment);
+  const response = await axios.post(
+    `${commentDataUrl}/${track_id}/comments`,
+    comment
+  );
   return response.data;
 };
 
@@ -18,7 +21,14 @@ export const deleteCommentData = async (track_id: string, id: string) => {
   return id;
 };
 
-export const updateCommentData = async (track_id: string, id: string, comment: Comment) => {
-  const response = await axios.put(`${commentDataUrl}/${track_id}/${id}`, comment);
+export const updateCommentData = async (
+  track_id: string,
+  id: string,
+  comment: Comment
+) => {
+  const response = await axios.put(
+    `${commentDataUrl}/${track_id}/${id}`,
+    comment
+  );
   return response.data;
 };
