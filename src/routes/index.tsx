@@ -9,6 +9,9 @@ import TrackMockEco from 'components/ecosystems/TrackMockEco';
 import Home from 'components/templates/Home';
 import ForPublicDate from 'components/templates/ForPublicDate';
 
+import UserCollection from 'components/templates/UserCollection';
+import UserCollectionShow from 'components/organisms/UserCollectionShow';
+
 import TrackMockAddEco from 'components/ecosystems/TrackMockAddEco';
 import TrackMockFrame from 'components/templates/TrackMockFrame';
 
@@ -27,6 +30,7 @@ const IndexRoutes: FC = () => {
         <Route path="" element={<TrackMockEco />} />
         <Route path="new" element={<TrackMockAddEco />} />
       </Route>
+
       <Route path="tracks" element={<TracksFrame />}>
         <Route path="" element={<AllTracks my={12} />} />
         <Route path=":prefectureID" element={<TrackListByPrefecture my={12} />}>
@@ -34,6 +38,11 @@ const IndexRoutes: FC = () => {
         </Route>
         <Route path="new" element={<TrackCommentNew />} />
       </Route>
+
+      <Route path="users" element={<UserCollection />}>
+        <Route path=":userID" element={<UserCollectionShow />} />
+      </Route>
+
       <Route path="/" element={<Home />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
