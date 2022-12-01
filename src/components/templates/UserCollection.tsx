@@ -27,6 +27,7 @@ import {
 } from '@chakra-ui/react';
 
 import UserCommentCollection from 'components/templates/UserCommentCollection';
+import { EmailIcon } from '@chakra-ui/icons';
 
 type FirebaseProps = {
   id: string;
@@ -69,10 +70,12 @@ const UserCollection: FC = () => {
     await deleteDoc(userDocumentRef);
   };
 
-  const changeAdmin = async (id: string) => {
+  const updateUserInfo = async (name: string, email: string, id: string) => {
     const userDocumentRef = doc(db, 'users', id);
+    
     await updateDoc(userDocumentRef, {
-      admin: true,
+      name: name,
+      email: email
     });
   };
 
@@ -97,7 +100,10 @@ const UserCollection: FC = () => {
                 </Td>
                 <Td>{user.email}</Td>
                 {user.admin && (
+                  <>
                   <Td onClick={() => deleteUser(user.id)}>削除</Td>
+                  <Td onClick={() => updateUserInfo('aaa', 'aaa@aaa.aaa', user.id)}>更新</Td>
+                  </>
                 )}
               </Tr>
             </Tbody>
@@ -126,7 +132,9 @@ const UserCollection: FC = () => {
       </form>
       <div>
         {users.map((user) => (
-          <UserCommentCollection id={user.id} />
+          <Box key={user.id}>
+            <UserCommentCollection user_id={user.id} />
+          </Box>
         ))}
       </div>
     </Box>
