@@ -72,10 +72,10 @@ const UserCollection: FC = () => {
 
   const updateUserInfo = async (name: string, email: string, id: string) => {
     const userDocumentRef = doc(db, 'users', id);
-    
+
     await updateDoc(userDocumentRef, {
       name: name,
-      email: email
+      email: email,
     });
   };
 
@@ -101,8 +101,14 @@ const UserCollection: FC = () => {
                 <Td>{user.email}</Td>
                 {user.admin && (
                   <>
-                  <Td onClick={() => deleteUser(user.id)}>削除</Td>
-                  <Td onClick={() => updateUserInfo('aaa', 'aaa@aaa.aaa', user.id)}>更新</Td>
+                    <Td onClick={() => deleteUser(user.id)}>削除</Td>
+                    <Td
+                      onClick={() =>
+                        updateUserInfo('aaa', 'aaa@aaa.aaa', user.id)
+                      }
+                    >
+                      更新
+                    </Td>
                   </>
                 )}
               </Tr>

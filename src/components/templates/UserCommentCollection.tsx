@@ -33,15 +33,15 @@ type FirebaseCommentProps = {
 };
 
 type UserCollectionProps = {
-  id?: string;
+  user_id?: string;
 };
 
-const UserCommentCollection: FC<UserCollectionProps> = ({ id = '' }) => {
+const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
   const [comments, setComments] = useState<FirebaseCommentProps[]>([]);
-  console.log(id);
+  console.log(user_id);
   useEffect(() => {
     // usersコレクションを参照する
-    const usersCollectionRef = collection(db, 'users', id, 'comments');
+    const usersCollectionRef = collection(db, 'users', user_id, 'comments');
     // 変更をリアルタイムで検知してusersを変更する
     const unsub = onSnapshot(usersCollectionRef, (querySnapshot) => {
       setComments(
@@ -57,7 +57,7 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ id = '' }) => {
   }) => {
     event.preventDefault();
     const { title, content } = event.target.elements;
-    const usersCollectionRef = collection(db, 'users', id, 'comments');
+    const usersCollectionRef = collection(db, 'users', user_id, 'comments');
     const documentRef = await addDoc(usersCollectionRef, {
       title: title.value,
       content: content.value,
@@ -66,16 +66,9 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ id = '' }) => {
     console.log(documentRef);
   };
 
-  const deleteUser = async (id: string) => {
-    const userDocumentRef = doc(db, 'users', id);
+  const deleteComment = async (id: string) => {
+    const userDocumentRef = doc(db, 'users', user_id, 'comments', id);
     await deleteDoc(userDocumentRef);
-  };
-
-  const changeAdmin = async (id: string) => {
-    const userDocumentRef = doc(db, 'users', id);
-    await updateDoc(userDocumentRef, {
-      admin: true,
-    });
   };
 
   return (
@@ -98,6 +91,7 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ id = '' }) => {
                   <Link to={comment.id}>{comment.title}</Link>
                 </Td>
                 <Td>{comment.content}</Td>
+                <Td onClick={() => deleteComment(comment.id)}>削除</Td>
               </Tr>
             </Tbody>
           ))}
