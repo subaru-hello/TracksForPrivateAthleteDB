@@ -38,7 +38,6 @@ type UserCollectionProps = {
 
 const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
   const [comments, setComments] = useState<FirebaseCommentProps[]>([]);
-  console.log(user_id);
   useEffect(() => {
     // usersコレクションを参照する
     const usersCollectionRef = collection(db, 'users', user_id, 'comments');
@@ -63,7 +62,6 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
       content: content.value,
       timpstamp: serverTimestamp(),
     });
-    console.log(documentRef);
   };
 
   const deleteComment = async (id: string) => {

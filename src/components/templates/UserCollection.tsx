@@ -62,7 +62,6 @@ const UserCollection: FC = () => {
       email: email.value,
       timpstamp: serverTimestamp(),
     });
-    console.log(documentRef);
   };
 
   const deleteUser = async (id: string) => {
