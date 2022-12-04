@@ -8,9 +8,10 @@ import TrackCommentNew from 'components/organisms/TrackCommentNew';
 import TrackMockEco from 'components/ecosystems/TrackMockEco';
 import Home from 'components/templates/Home';
 import ForPublicDate from 'components/templates/ForPublicDate';
-
+import SignUp from 'components/templates/SignUp';
+import Login from 'components/templates/Login';
 import UserCollection from 'components/templates/UserCollection';
-import UserCollectionShow from 'components/organisms/UserCollectionShow';
+// import UserCollectionShow from 'components/organisms/UserCollectionShow';
 
 import TrackMockAddEco from 'components/ecosystems/TrackMockAddEco';
 import TrackMockFrame from 'components/templates/TrackMockFrame';
@@ -40,10 +41,12 @@ const IndexRoutes: FC = () => {
       </Route>
 
       <Route path="users" element={<UserCollection />}>
-        <Route path=":userID" element={<UserCollectionShow />} />
+        {/* <Route path=":userID" element={<UserCollectionShow />} /> */}
       </Route>
 
       <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
