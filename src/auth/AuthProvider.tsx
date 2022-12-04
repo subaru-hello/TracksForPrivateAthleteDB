@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import { createContext, useEffect, useState, ReactNode } from 'react';
 import { auth } from 'Firebase';
 import { User } from 'firebase/auth';
-import Loading from 'components/organisms/Loading';
+import Loading from 'components/organisms/global/Loading';
 
 type AuthContextProps = {
   currentUser: User | null | undefined;
