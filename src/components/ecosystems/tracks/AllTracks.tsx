@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 import { trackData } from 'data';
 import { Helmet } from 'react-helmet-async';
-import TrackList from 'components/organisms/TrackList';
+import TrackList from 'components/organisms/tracks/TrackList';
 
 const SORT = {
   entree_fee: '料金順',
