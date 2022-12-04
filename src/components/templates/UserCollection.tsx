@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, SyntheticEvent } from 'react';
 import {
   collection,
   onSnapshot,
@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from 'Firebase';
 import { Link, Outlet } from 'react-router-dom';
@@ -33,7 +34,7 @@ type FirebaseProps = {
   id: string;
   name: string;
   email: string;
-  admin?: boolean;
+  admin: boolean;
 };
 const UserCollection: FC = () => {
   const [users, setUsers] = useState<FirebaseProps[]>([]);
@@ -43,23 +44,25 @@ const UserCollection: FC = () => {
     const usersCollectionRef = collection(db, 'users');
     // 変更をリアルタイムで検知してusersを変更する
     const unsub = onSnapshot(usersCollectionRef, (querySnapshot) => {
+      const datas: Array<QueryDocumentSnapshot> = querySnapshot.docs;
       setUsers(
-        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        datas.map((doc) => ({ ...(doc.data() as FirebaseProps), id: doc.id }))
       );
     });
     return unsub;
   }, []);
 
-  const handleSubmit = async (event: {
-    preventDefault: () => void;
-    target: { elements: { name: any; email: any } };
-  }) => {
+  const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { name, email } = event.target.elements;
+    const target = event.target as typeof event.target & {
+      name: { value: string };
+      email: { value: string };
+    };
+
     const usersCollectionRef = collection(db, 'users');
     const documentRef = await addDoc(usersCollectionRef, {
-      name: name.value,
-      email: email.value,
+      name: target.name.value,
+      email: target.email.value,
       timpstamp: serverTimestamp(),
     });
   };

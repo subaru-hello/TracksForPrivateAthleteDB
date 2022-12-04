@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, SyntheticEvent } from 'react';
 import {
   collection,
   onSnapshot,
@@ -44,22 +44,28 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
     // 変更をリアルタイムで検知してusersを変更する
     const unsub = onSnapshot(usersCollectionRef, (querySnapshot) => {
       setComments(
-        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        querySnapshot.docs.map((doc) => ({
+          ...(doc.data() as FirebaseCommentProps),
+          id: doc.id,
+        }))
       );
     });
     return unsub;
   }, []);
 
-  const handleSubmitComment = async (event: {
-    preventDefault: () => void;
-    target: { elements: { title: any; content: any } };
-  }) => {
+  const handleSubmitComment = async (
+    event: SyntheticEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
-    const { title, content } = event.target.elements;
+    const target = event.target as typeof event.target & {
+      title: { value: string };
+      content: { value: string };
+    };
+
     const usersCollectionRef = collection(db, 'users', user_id, 'comments');
     const documentRef = await addDoc(usersCollectionRef, {
-      title: title.value,
-      content: content.value,
+      title: target.title.value,
+      content: target.content.value,
       timpstamp: serverTimestamp(),
     });
   };
