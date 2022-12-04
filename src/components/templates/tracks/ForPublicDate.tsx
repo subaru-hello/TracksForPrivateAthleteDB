@@ -16,7 +16,7 @@ import {
   Container,
 } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet-async';
-import TrackForPublicCalender from 'components/organisms/TrackForPublicCalender';
+import TrackForPublicCalender from 'components/organisms/tracks/TrackForPublicCalender';
 import { availableDateData } from 'data/available_date';
 const title = 'カレンダー';
 

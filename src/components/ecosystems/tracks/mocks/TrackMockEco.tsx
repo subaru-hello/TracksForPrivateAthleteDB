@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { trackData } from 'data';
 import { Track } from 'domains';
 import axios from 'axios';
-import TrackMockList from 'components/organisms/TrackMockList';
+import TrackMockList from 'components/organisms/tracks/mocks/TrackMockList';
 
 const TrackMockEco: FC = () => {
   const [trackMocks, setTrackMocks] = useState([]);

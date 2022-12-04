@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import type { FC } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import AllTracks from 'components/ecosystems/AllTracks';
-import TrackListByPrefecture from 'components/ecosystems/TrackListByPrefecture';
-import TracksFrame from 'components/templates/TracksFrame';
-import TrackCommentNew from 'components/organisms/TrackCommentNew';
-import TrackMockEco from 'components/ecosystems/TrackMockEco';
-import Home from 'components/templates/Home';
-import ForPublicDate from 'components/templates/ForPublicDate';
-import SignUp from 'components/templates/SignUp';
-import Login from 'components/templates/Login';
-import UserCollection from 'components/templates/UserCollection';
+import AllTracks from 'components/ecosystems/tracks/AllTracks';
+import TrackListByPrefecture from 'components/ecosystems/tracks/TrackListByPrefecture';
+import TracksFrame from 'components/templates/tracks/TracksFrame';
+import TrackCommentNew from 'components/organisms/tracks/TrackCommentNew';
+import TrackMockEco from 'components/ecosystems/tracks/mocks/TrackMockEco';
+import Home from 'components/templates/layouts/Home';
+import ForPublicDate from 'components/templates/tracks/ForPublicDate';
+import SignUp from 'components/templates/auths/SignUp';
+import Login from 'components/templates/auths/Login';
+import UserCollection from 'components/templates/users/UserCollection';
 // import UserCollectionShow from 'components/organisms/UserCollectionShow';
 
-import TrackMockAddEco from 'components/ecosystems/TrackMockAddEco';
-import TrackMockFrame from 'components/templates/TrackMockFrame';
+import TrackMockAddEco from 'components/ecosystems/tracks/mocks/TrackMockAddEco';
+import TrackMockFrame from 'components/templates/tracks/mock/TrackMockFrame';
 
 const IndexRoutes: FC = () => {
   const { hash, pathname } = useLocation();

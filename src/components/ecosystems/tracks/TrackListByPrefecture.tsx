@@ -11,7 +11,7 @@ import { Box, IconButton, Heading } from '@chakra-ui/react';
 import { trackData, prefectureData } from 'data';
 import { PREFECTURE_CODE } from 'domains';
 import { Helmet } from 'react-helmet-async';
-import TrackList from 'components/organisms/TrackList';
+import TrackList from 'components/organisms/tracks/TrackList';
 const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
   const { prefectureID = ' ' } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
