@@ -1,6 +1,5 @@
-import type { FC } from 'react';
-import { useState } from 'react';
-import escapeStringRegexp from 'escape-string-regexp';
+import { FC, useContext } from 'react';
+// import escapeStringRegexp from 'escape-string-regexp';
 import {
   Box,
   Stack,
@@ -11,14 +10,28 @@ import {
   useDisclosure,
   Input,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
-import { trackData } from 'data';
-import { Track } from 'domains';
+import { AuthContext } from 'auth/AuthProvider';
+import { signOut } from 'firebase/auth';
+import { auth } from 'Firebase';
 
 const HeaderLinks: FC = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
+
+  //ログアウトしたらログインページへリダイレクトさせる
+  const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate('/login', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   return (
     <Flex
@@ -33,7 +46,7 @@ const HeaderLinks: FC = (props) => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          <Link to="/">競技場検索</Link>
+          <Link to="/">個人開放競技場検索</Link>
         </Heading>
       </Flex>
 
@@ -67,12 +80,24 @@ const HeaderLinks: FC = (props) => {
         display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button
-          variant="outline"
-          _hover={{ bg: 'teal.700', borderColor: 'teal.700' }}
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          display={{ base: isOpen ? 'block' : 'none', md: 'flex' }}
+          width={{ base: 'full', md: 'auto' }}
+          alignItems="center"
+          flexGrow={1}
+          p={4}
+          mt={{ base: 4, md: 0 }}
         >
-          アカウント登録
-        </Button>
+          {currentUser ? (
+            <Button onClick={handleLogout}>ログアウト</Button>
+          ) : (
+            <>
+              <Link to="signup">アカウント登録</Link>
+              <Link to="login">ログイン</Link>
+            </>
+          )}
+        </Stack>
       </Box>
     </Flex>
   );
