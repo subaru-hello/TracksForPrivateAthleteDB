@@ -27,7 +27,7 @@ import {
   TableContainer,
 } from '@chakra-ui/react';
 
-import UserCommentCollection from 'components/templates/UserCommentCollection';
+import UserCommentCollection from 'components/templates/users/comments/UserCommentCollection';
 import { EmailIcon } from '@chakra-ui/icons';
 
 type FirebaseProps = {
