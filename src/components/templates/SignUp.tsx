@@ -32,7 +32,6 @@ export const SignUp: FC = () => {
     console.log(currentUser.uid);
   }
   return (
-    // <AuthProvider>
     <Container>
       <Box>SignUp</Box>
       <form onSubmit={handleSubmit}>
@@ -50,7 +49,6 @@ export const SignUp: FC = () => {
       </form>
       <Link to="/login">既にアカウントをお持ちの方はこちら</Link>
     </Container>
-    // </AuthProvider>
   );
 };
 
