@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import {
-  Avatar,
   Box,
   Flex,
   List,
@@ -10,6 +9,7 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
+import TrackImages from 'components/ecosystems/tracks/TrackImages';
 import type { Track } from 'domains';
 
 import { useState } from 'react';
@@ -60,7 +60,7 @@ const TrackList: FC<Props> = ({
           {filteredTracks.map((track) => (
             <ListItem key={track.id} m={6}>
               <Flex>
-                <Avatar size="md" bg="teal.500" />
+                <TrackImages />
                 <Box textAlign="left" ml={3}>
                   <Text>{track.name}</Text>
                   <Text as="span">場所{track.address}</Text>
