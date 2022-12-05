@@ -88,7 +88,6 @@ const UserCollection: FC = () => {
           <TableCaption>ユーザー情報</TableCaption>
           <Thead>
             <Tr>
-              <Th>ID</Th>
               <Th>名前</Th>
               <Th>メールアドレス</Th>
             </Tr>
@@ -96,7 +95,6 @@ const UserCollection: FC = () => {
           {users.map((user) => (
             <Tbody key={user.id}>
               <Tr>
-                <Td>{user.id}</Td>
                 <Td>
                   <Link to={user.id}>{user.name}</Link>
                 </Td>
@@ -118,7 +116,6 @@ const UserCollection: FC = () => {
           ))}
           <Tfoot>
             <Tr>
-              <Th>ID</Th>
               <Th>name</Th>
               <Th>email</Th>
             </Tr>

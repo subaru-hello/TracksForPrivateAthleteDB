@@ -6,15 +6,11 @@ import {
   serverTimestamp,
   deleteDoc,
   doc,
-  updateDoc,
 } from 'firebase/firestore';
 import { db } from 'Firebase';
-import { Link, Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
-  List,
-  ListItem,
   Box,
-  Text,
   Table,
   Thead,
   Tbody,
@@ -82,7 +78,6 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
           <TableCaption>コメント情報</TableCaption>
           <Thead>
             <Tr>
-              <Th>ID</Th>
               <Th>タイトル</Th>
               <Th>内容</Th>
             </Tr>
@@ -90,7 +85,6 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
           {comments.map((comment) => (
             <Tbody key={comment.id}>
               <Tr>
-                <Td>{comment.id}</Td>
                 <Td>
                   <Link to={comment.id}>{comment.title}</Link>
                 </Td>
@@ -101,7 +95,6 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
           ))}
           <Tfoot>
             <Tr>
-              <Th>ID</Th>
               <Th>タイトル</Th>
               <Th>内容</Th>
             </Tr>
