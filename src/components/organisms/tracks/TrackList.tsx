@@ -10,14 +10,13 @@ import {
   Stack,
   Button,
   Heading,
-  Link,
 } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { Card, CardFooter, CardBody } from '@chakra-ui/card';
 import { Search2Icon } from '@chakra-ui/icons';
 import TrackImages from 'components/ecosystems/tracks/TrackImages';
 import type { Track } from 'domains';
-
 import { useState } from 'react';
 import escapeStringRegexp from 'escape-string-regexp';
 
@@ -52,10 +51,8 @@ const TrackList: FC<Props> = ({
     <Box>
       <Stack
         direction={{ base: 'column', md: 'row' }}
-        width={{ base: 'full', md: 'auto' }}
+        width={{ base: 'full' }}
         alignItems="center"
-        flexGrow={1}
-        p={4}
         mt={{ base: 4, md: 0 }}
       >
         <Search2Icon />
@@ -71,7 +68,7 @@ const TrackList: FC<Props> = ({
           <Spinner size="xl" color={color} />
         </Flex>
       ) : (
-        <List my={10}>
+        <List>
           {filteredTracks.map((track) => (
             <ListItem key={track.id} m={6}>
               <Card
@@ -95,15 +92,22 @@ const TrackList: FC<Props> = ({
                       <Text as="span" ml={2}>
                         {track.entrance_fee ?? '不明'}円
                       </Text>
-                      <Link href={track.site_url} isExternal>
-                        {track.site_url} <ExternalLinkIcon mx="2px" />
-                      </Link>
+                      <p>
+                        <a
+                          href={track.site_url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {track.site_url}
+                          <ExternalLinkIcon mx="2px" />
+                        </a>
+                      </p>
                     </Stack>
                   </CardBody>
 
                   <CardFooter>
-                    <Button variant="solid" colorScheme="blue">
-                      詳細
+                    <Button colorScheme="teal" variant="outline">
+                      <Link to={track.id}> 詳細</Link>
                     </Button>
                   </CardFooter>
                 </Stack>

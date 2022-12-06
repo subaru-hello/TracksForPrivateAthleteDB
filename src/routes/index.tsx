@@ -5,16 +5,17 @@ import AllTracks from 'components/ecosystems/tracks/AllTracks';
 import TrackListByPrefecture from 'components/ecosystems/tracks/TrackListByPrefecture';
 import TracksFrame from 'components/templates/tracks/TracksFrame';
 import TrackCommentNew from 'components/organisms/tracks/TrackCommentNew';
+import TrackDetail from 'components/organisms/tracks/TrackDetails';
 import TrackMockEco from 'components/ecosystems/tracks/mocks/TrackMockEco';
 import Home from 'components/templates/layouts/Home';
 import ForPublicDate from 'components/templates/tracks/ForPublicDate';
 import SignUp from 'components/templates/auths/SignUp';
 import Login from 'components/templates/auths/Login';
 import UserCollection from 'components/templates/users/UserCollection';
-// import UserCollectionShow from 'components/organisms/UserCollectionShow';
 
 import TrackMockAddEco from 'components/ecosystems/tracks/mocks/TrackMockAddEco';
 import TrackMockFrame from 'components/templates/tracks/mock/TrackMockFrame';
+import TracksByPrefectureFrame from 'components/organisms/tracks/TracksByPrefectureFrame';
 
 const IndexRoutes: FC = () => {
   const { hash, pathname } = useLocation();
@@ -34,15 +35,15 @@ const IndexRoutes: FC = () => {
 
       <Route path="tracks" element={<TracksFrame />}>
         <Route path="" element={<AllTracks my={12} />} />
-        <Route path=":prefectureID" element={<TrackListByPrefecture my={12} />}>
-          <Route path="calender" element={<ForPublicDate />} />
+
+        <Route path=":prefectureID" element={<TracksByPrefectureFrame />}>
+          <Route path="" element={<TrackListByPrefecture my={12} />} />
+          <Route path=":trackID" element={<TrackDetail />} />
         </Route>
         <Route path="new" element={<TrackCommentNew />} />
       </Route>
 
-      <Route path="users" element={<UserCollection />}>
-        {/* <Route path=":userID" element={<UserCollectionShow />} /> */}
-      </Route>
+      <Route path="users" element={<UserCollection />} />
 
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<SignUp />} />
