@@ -31,5 +31,7 @@ pythonを用いてデータを収集しました。
 PDFで個人向けに開放されている日を管理している市区町村が多く存在していたため、サイトからPDFを取得し、CSVに書き起こす作業をpythonで実施しました。
 方法は記事にまとめています。↓↓
 https://zenn.dev/subaru_hello/articles/73253a46a76f7f
+
 https://zenn.dev/subaru_hello/articles/570e9e990374a6
+
 https://zenn.dev/subaru_hello/articles/38624760719abf
