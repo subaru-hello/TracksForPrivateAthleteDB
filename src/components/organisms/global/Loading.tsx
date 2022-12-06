@@ -1,6 +1,17 @@
-import { Box, Container, Skeleton, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Container,
+  Flex,
+  Skeleton,
+  Spinner,
+  Stack,
+} from '@chakra-ui/react';
 const Loading = () => {
-  return <Container centerContent={true}>Loading中...</Container>;
+  return (
+    <Flex my={14} h="20rem" justify="center" align="center">
+      <Spinner size="xl" />
+    </Flex>
+  );
 };
 
 export default Loading;
