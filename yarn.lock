@@ -319,6 +319,13 @@
     "@chakra-ui/react-use-merge-refs" "2.0.4"
     "@chakra-ui/spinner" "2.0.10"
 
+"@chakra-ui/card@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/card/-/card-2.1.1.tgz#b981a68d81d0f6447eb0d4d3fdcd7846bab2111f"
+  integrity sha512-vvmfuNn6gkfv6bGcXQe6kvWHspziPZgYnnffiEjPaZYtaf98WRszpjyPbFv0oQR/2H1RSE1oaTqa/J1rHrzw3A==
+  dependencies:
+    "@chakra-ui/react-context" "2.0.5"
+
 "@chakra-ui/checkbox@2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@chakra-ui/checkbox/-/checkbox-2.2.2.tgz#494d7090ac11a0a43d05b7849aff6085f7a91045"
@@ -641,6 +648,11 @@
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@chakra-ui/react-context/-/react-context-2.0.4.tgz#1b6ab260d44d9073c95b975b7d1643f011e65e02"
   integrity sha512-eBITFkf7fLSiMZrSdhweK4fYr41WUNMEeIEOP2dCWolE7WgKxNYaYleC+iRGY0GeXkFM2KYywUtixjJe29NuVA==
+
+"@chakra-ui/react-context@2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/react-context/-/react-context-2.0.5.tgz#c434013ecc46c780539791d756dafdfc7c64320e"
+  integrity sha512-WYS0VBl5Q3/kNShQ26BP+Q0OGMeTQWco3hSiJWvO2wYLY7N1BLq6dKs8vyKHZfpwKh2YL2bQeAObi+vSkXp6tQ==
 
 "@chakra-ui/react-env@2.0.10":
   version "2.0.10"
@@ -8233,6 +8245,11 @@ svg-tags@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
   integrity sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==
+
+sweetalert2@^11.6.15:
+  version "11.6.15"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.6.15.tgz#0459e97100810b0734c62d2cce4d3d41c8f30b0a"
+  integrity sha512-FqMy1gRGHEI5G145NE5XSP059TziCJu9Xf9/mkki/aKu5pLNcYzjggOzKO5Ex10EBgAGDXQ99jyGfYYzGCYXRQ==
 
 table@^6.8.0:
   version "6.8.0"

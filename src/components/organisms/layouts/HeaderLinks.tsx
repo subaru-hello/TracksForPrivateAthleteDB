@@ -1,32 +1,48 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 // import escapeStringRegexp from 'escape-string-regexp';
 import {
   Box,
   Stack,
   Heading,
   Flex,
-  Text,
   Button,
   useDisclosure,
   Input,
 } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
-import { AuthContext } from 'auth/AuthProvider';
 import { signOut } from 'firebase/auth';
 import { auth } from 'Firebase';
 
 const HeaderLinks: FC = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   //ログアウトしたらログインページへリダイレクトさせる
   const navigate = useNavigate();
-  const { currentUser } = useContext(AuthContext);
+  // ログイン状態を確認する
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setLoggedIn(true);
+      }
+    });
+  });
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        navigate('/login', { replace: true });
+        setLoggedIn(false);
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'ログアウトしました',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        navigate('/login');
       })
       .catch((err) => {
         console.log(err.message);
@@ -89,7 +105,7 @@ const HeaderLinks: FC = (props) => {
           p={4}
           mt={{ base: 4, md: 0 }}
         >
-          {currentUser ? (
+          {loggedIn ? (
             <Button onClick={handleLogout}>ログアウト</Button>
           ) : (
             <>

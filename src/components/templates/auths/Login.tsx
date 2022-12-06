@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { auth } from 'Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { AuthProvider } from 'auth/AuthProvider';
+import Swal from 'sweetalert2';
 
 export const Login: FC = () => {
   const [error, setError] = useState<string>('');
@@ -27,8 +28,14 @@ export const Login: FC = () => {
     setAuthenticating(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        console.log(result);
         navigate('/');
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'ログインしました',
+          showConfirmButton: false,
+          timer: 1000,
+        });
       })
       .catch((error) => {
         setAuthenticating(false);

@@ -7,7 +7,13 @@ import {
   Spinner,
   Text,
   Input,
+  Stack,
+  Button,
+  Heading,
+  Link,
 } from '@chakra-ui/react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
+import { Card, CardFooter, CardBody } from '@chakra-ui/card';
 import { Search2Icon } from '@chakra-ui/icons';
 import TrackImages from 'components/ecosystems/tracks/TrackImages';
 import type { Track } from 'domains';
@@ -43,14 +49,23 @@ const TrackList: FC<Props> = ({
   });
 
   return (
-    <>
-      <Search2Icon />
-      <Input
-        width="auto"
-        type="text"
-        onInput={onInput}
-        placeholder="競技場名を入れて下さい"
-      />
+    <Box>
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
+        width={{ base: 'full', md: 'auto' }}
+        alignItems="center"
+        flexGrow={1}
+        p={4}
+        mt={{ base: 4, md: 0 }}
+      >
+        <Search2Icon />
+        <Input
+          type="text"
+          onInput={onInput}
+          placeholder="競技場名を入れて下さい"
+        />
+      </Stack>
+
       {isLoading ? (
         <Flex my={14} h="20rem" justify="center" align="center">
           <Spinner size="xl" color={color} />
@@ -59,28 +74,45 @@ const TrackList: FC<Props> = ({
         <List my={10}>
           {filteredTracks.map((track) => (
             <ListItem key={track.id} m={6}>
-              <Flex>
+              <Card
+                direction={{ base: 'column', sm: 'row' }}
+                overflow="hidden"
+                variant="outline"
+              >
                 <TrackImages />
-                <Box textAlign="left" ml={3}>
-                  <Text>{track.name}</Text>
-                  <Text as="span">場所{track.address}</Text>
 
-                  <Text as="span" ml={2}>
-                    {track.open_hour ?? '不明'}
-                  </Text>
-                  <Text as="span" ml={2}>
-                    {track.entrance_fee ?? '不明'}円
-                  </Text>
-                  <Text as="span" ml={2}>
-                    {track.site_url ?? '不明'}
-                  </Text>
-                </Box>
-              </Flex>
+                <Stack>
+                  <CardBody>
+                    <Heading size="md" my={4}>
+                      {track.name}
+                    </Heading>
+                    <Stack>
+                      <Text as="span">場所{track.address}</Text>
+
+                      <Text as="span" ml={2}>
+                        {track.open_hour ?? '不明'}
+                      </Text>
+                      <Text as="span" ml={2}>
+                        {track.entrance_fee ?? '不明'}円
+                      </Text>
+                      <Link href={track.site_url} isExternal>
+                        {track.site_url} <ExternalLinkIcon mx="2px" />
+                      </Link>
+                    </Stack>
+                  </CardBody>
+
+                  <CardFooter>
+                    <Button variant="solid" colorScheme="blue">
+                      詳細
+                    </Button>
+                  </CardFooter>
+                </Stack>
+              </Card>
             </ListItem>
           ))}
         </List>
       )}
-    </>
+    </Box>
   );
 };
 
