@@ -9,19 +9,24 @@
 
 ### 使用技術
 - フロントエンド
+
 React v18
 Typescript
 Vite
 ChakraUI
 
 - バックエンド
+
 Firebase Storage
 Firebase Cloud Firestore
 Firebase Authentication
 
 - インフラ
+
 Firebase Hosting
+
 - その他
+
 Open API スキーマ駆動開発をした際に使用しました。
 
 ### テーブル設計
