@@ -7,7 +7,7 @@ type Props = {
 };
 const BaseImage: FC<Props> = ({ props }) => {
   return (
-    <Box boxSize="sm">
+    <Box w="100%">
       <img src={props.image} />
     </Box>
   );

@@ -18,7 +18,7 @@ const TrackImages: FC = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <Box boxSize="sm">
+    <Box>
       <TrackImage props={{ image: image }} />
     </Box>
   );

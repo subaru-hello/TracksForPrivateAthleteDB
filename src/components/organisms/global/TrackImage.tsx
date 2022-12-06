@@ -11,7 +11,7 @@ const TrackImage: FC<Props> = ({
   props: { image = 'athletics-stadium_13553.png' },
 }) => {
   return (
-    <Box boxSize="sm">
+    <Box>
       <BaseImage props={{ image: image }} />
     </Box>
   );
