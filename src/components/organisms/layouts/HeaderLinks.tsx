@@ -62,7 +62,7 @@ const HeaderLinks: FC = (props) => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          <Link to="/">個人開放競技場検索</Link>
+          <Link to="/">TrackPublicDB</Link>
         </Heading>
       </Flex>
 
