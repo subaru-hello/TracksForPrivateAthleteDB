@@ -55,7 +55,6 @@ const TrackDetail: FC = () => {
         </Card>
       ))}
       <ForPublickDate />
-      <HomeButton my={16} />
     </Container>
   );
 };
