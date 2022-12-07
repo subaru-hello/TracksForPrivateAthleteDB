@@ -1,22 +1,9 @@
 import type { FC } from 'react';
 import { Box } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
-import { storage } from 'Firebase';
-import { ref, getDownloadURL } from 'firebase/storage';
 import TrackImage from 'components/organisms/global/TrackImage';
-
+import trackImage from 'assets/base_track.png';
 const TrackImages: FC = () => {
-  const [image, setImage] = useState('');
-  const gsReference = ref(storage, 'athletics-stadium_13553.png');
-
-  useEffect(() => {
-    getDownloadURL(gsReference)
-      .then((url) => {
-        setImage(url);
-        console.log(image);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const image = trackImage;
   return (
     <Box>
       <TrackImage props={{ image: image }} />

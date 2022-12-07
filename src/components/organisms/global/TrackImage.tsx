@@ -7,9 +7,7 @@ type Props = {
   };
 };
 
-const TrackImage: FC<Props> = ({
-  props: { image = 'athletics-stadium_13553.png' },
-}) => {
+const TrackImage: FC<Props> = ({ props: { image = 'base_track.png' } }) => {
   return (
     <Box>
       <BaseImage props={{ image: image }} />
