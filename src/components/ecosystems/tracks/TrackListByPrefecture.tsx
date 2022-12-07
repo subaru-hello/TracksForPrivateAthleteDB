@@ -1,12 +1,6 @@
 import type { FC, SyntheticEvent } from 'react';
-import {
-  Outlet,
-  Navigate,
-  useParams,
-  useSearchParams,
-  Link,
-} from 'react-router-dom';
-import { Heading, Container } from '@chakra-ui/react';
+import { Navigate, useParams, useSearchParams } from 'react-router-dom';
+import { Heading, Container, Box } from '@chakra-ui/react';
 import { trackData, prefectureData } from 'data';
 import { PREFECTURE_CODE } from 'domains';
 import { Helmet } from 'react-helmet-async';
@@ -26,7 +20,7 @@ const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
     );
 
     return (
-      <Container centerContent={true}>
+      <Box my={my} w="4xl">
         <Helmet>
           <title>競技場 at {prefecture?.name}</title>
         </Helmet>
@@ -39,9 +33,7 @@ const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
           color={prefecture?.color}
           isLoading={isLoading}
         />
-        <Link to="calender">カレンダーを見る</Link>
-        <Outlet />
-      </Container>
+      </Box>
     );
   }
 

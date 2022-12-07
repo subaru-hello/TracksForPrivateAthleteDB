@@ -18,7 +18,7 @@ import {
 import { Helmet } from 'react-helmet-async';
 import TrackForPublicCalender from 'components/organisms/tracks/TrackForPublicCalender';
 import { availableDateData } from 'data/available_date';
-const title = 'カレンダー';
+const title = '個人向け開放状況カレンダー';
 
 const ForPublicDate: FC = () => (
   <Box maxW="3xl">
@@ -32,7 +32,7 @@ const ForPublicDate: FC = () => (
     </Container>
     <TableContainer>
       <Table variant="simple">
-        <TableCaption>Imperial to metric conversion factors</TableCaption>
+        <TableCaption>個人向け開放情報</TableCaption>
         <Thead>
           <Tr>
             <Th>日</Th>
