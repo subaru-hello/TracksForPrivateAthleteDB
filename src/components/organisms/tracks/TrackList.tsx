@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { FC, useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -25,6 +25,20 @@ type Props = {
   color?: string;
   isLoading?: boolean;
 };
+
+const CheckLocationAndCreateLink = (track: Track) => (
+  <CardFooter>
+    {window.location.href.includes(track.prefectureID) ? (
+      <Button colorScheme="teal" variant="outline">
+        <Link to={track.id}> 詳細</Link>
+      </Button>
+    ) : (
+      <Button colorScheme="teal" variant="outline">
+        <Link to={track.prefectureID + '/' + track.id}>詳細</Link>
+      </Button>
+    )}
+  </CardFooter>
+);
 
 const TrackList: FC<Props> = ({
   tracks = [],
@@ -105,11 +119,7 @@ const TrackList: FC<Props> = ({
                     </Stack>
                   </CardBody>
 
-                  <CardFooter>
-                    <Button colorScheme="teal" variant="outline">
-                      <Link to={track.id}> 詳細</Link>
-                    </Button>
-                  </CardFooter>
+                  {CheckLocationAndCreateLink(track)}
                 </Stack>
               </Card>
             </ListItem>

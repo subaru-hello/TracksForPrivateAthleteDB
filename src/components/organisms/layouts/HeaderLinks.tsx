@@ -62,7 +62,7 @@ const HeaderLinks: FC = (props) => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={'tighter'}>
-          <Link to="/">個人開放競技場検索</Link>
+          <Link to="/">TrackPublicDB</Link>
         </Heading>
       </Flex>
 
@@ -81,7 +81,7 @@ const HeaderLinks: FC = (props) => {
       >
         {/* <Link to="/mock/new">競技場作成</Link> */}
         <Link to="/tracks/kanagawa/calender">個人開放状況</Link>
-        <Link to="/tracks">競技場一覧</Link>
+        {/* <Link to="/tracks">競技場一覧</Link> */}
         {/* <Link to="/users">ユーザー一覧</Link> */}
         <Search2Icon />
         <Input

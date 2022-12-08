@@ -5,7 +5,8 @@ import {
   Heading,
   Text,
   Highlight,
-  Divider,
+  chakra,
+  useColorModeValue,
 } from '@chakra-ui/react';
 type Props = {
   my?: number | string;
@@ -13,26 +14,35 @@ type Props = {
 
 const SiteOutline: FC<Props> = ({ my = 0 }) => {
   return (
-    <Box>
-      <Container mt={8} centerContent={true}>
+    <Box textAlign="center">
+      <Container mt={8}>
         <Heading lineHeight="tall">
-          <Highlight
-            query="information"
-            styles={{ px: '2', py: '1', rounded: 'full', bg: 'red.100' }}
-          >
-            the more information
-          </Highlight>
-          <Divider orientation="horizontal" />
-          <Highlight
-            query="run"
-            styles={{ px: '2', py: '1', rounded: 'full', bg: 'red.100' }}
-          >
-            the easier you run
-          </Highlight>
+          <Text fontWeight="bold">
+            <Highlight
+              query="information"
+              styles={{ px: '2', py: '1', rounded: 'full', bg: 'yellow.100' }}
+            >
+              the more information
+            </Highlight>
+          </Text>
+          <Text fontWeight="bold">
+            <Highlight
+              query="run"
+              styles={{ px: '2', py: '1', rounded: 'full', bg: 'yellow.100' }}
+            >
+              the easier you run
+            </Highlight>
+          </Text>
         </Heading>
-        <Text fontSize="3xl" my={4}>
-          一般開放されている競技場を探そう
-        </Text>
+        <chakra.h3
+          py={2}
+          fontSize={48}
+          fontFamily={'Work Sans'}
+          fontWeight={'bold'}
+          color={useColorModeValue('gray.700', 'gray.50')}
+        >
+          競技場を探す
+        </chakra.h3>
       </Container>
     </Box>
   );
