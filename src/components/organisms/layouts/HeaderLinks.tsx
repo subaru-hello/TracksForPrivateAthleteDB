@@ -81,7 +81,7 @@ const HeaderLinks: FC = (props) => {
       >
         {/* <Link to="/mock/new">競技場作成</Link> */}
         <Link to="/tracks/kanagawa/calender">個人開放状況</Link>
-        {/* <Link to="/tracks">競技場一覧</Link> */}
+        <Link to="/tracks">競技場一覧</Link>
         {/* <Link to="/users">ユーザー一覧</Link> */}
         <Search2Icon />
         <Input
@@ -106,7 +106,17 @@ const HeaderLinks: FC = (props) => {
           mt={{ base: 4, md: 0 }}
         >
           {loggedIn ? (
-            <Button onClick={handleLogout}>ログアウト</Button>
+            <Button
+              bg={'teal.300'}
+              colorScheme="teal"
+              color={'white'}
+              _hover={{
+                bg: 'teal.400',
+              }}
+              onClick={handleLogout}
+            >
+              ログアウト
+            </Button>
           ) : (
             <>
               <Link to="signup">アカウント登録</Link>

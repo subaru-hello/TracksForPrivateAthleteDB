@@ -1,13 +1,25 @@
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Container,
+} from '@chakra-ui/react';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Container, Box, Button } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from 'Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { AuthProvider } from 'auth/AuthProvider';
 import Swal from 'sweetalert2';
 
-export const Login: FC = () => {
+const Login: FC = () => {
   const [error, setError] = useState<string>('');
   const [authenticating, setAuthenticating] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -16,7 +28,6 @@ export const Login: FC = () => {
     event: React.FormEvent<HTMLFormElement>
   ): void => {
     event.preventDefault();
-
     if (error !== '') setError('');
     const target = event.target as typeof event.target & {
       email: { value: string };
@@ -44,37 +55,78 @@ export const Login: FC = () => {
   };
 
   return (
-    <AuthProvider>
-      <Container>
-        <Box>Login</Box>
-        <form onSubmit={SignInWithEmailAndPassword}>
-          <div>
-            <label htmlFor="email">メールアドレス</label>
-            <input
-              id="emailSignIn"
-              name="email"
-              type="email"
-              placeholder="email"
-              autoComplete="on"
-            />
-          </div>
-          <div>
-            <label htmlFor="password">パスワード</label>
-            <input
-              id="passwordSignIn"
-              name="password"
-              type="password"
-              autoComplete="on"
-            />
-          </div>
-          <div>
-            <button disabled={authenticating}>ログイン</button>
-          </div>
-        </form>
-        <Link to="/signup">アカウントを持っていない方はこちら</Link>
-        <Button>パスワードを忘れた方はこちら</Button>
-      </Container>
-    </AuthProvider>
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}
+    >
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack align={'center'}>
+          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+          <Text fontSize={'lg'} color={'gray.600'}>
+            to enjoy all of our cool{' '}
+            <Link color={'blue.400'} to="/">
+              features
+            </Link>{' '}
+            ✌️
+          </Text>
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <form onSubmit={SignInWithEmailAndPassword}>
+              <FormControl id="email">
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  type="email"
+                  id="emailSignIn"
+                  name="email"
+                  placeholder="email"
+                  autoComplete="on"
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input
+                  id="passwordSignIn"
+                  name="password"
+                  type="password"
+                  autoComplete="on"
+                />
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: 'column', sm: 'row' }}
+                  align={'start'}
+                  justify={'space-between'}
+                >
+                  <Checkbox>Remember me</Checkbox>
+                  <Link color={'blue.400'} to="/">
+                    Forgot password?
+                  </Link>
+                </Stack>
+                <Button
+                  bg={'blue.400'}
+                  color={'white'}
+                  type="submit"
+                  _hover={{
+                    bg: 'blue.500',
+                  }}
+                  disabled={authenticating}
+                >
+                  Sign in
+                </Button>
+              </Stack>
+            </form>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
 };
 
