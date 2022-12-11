@@ -63,7 +63,7 @@ const Login: FC = () => {
     >
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+          <Heading fontSize={'4xl'}>Emailでログイン</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
             to enjoy all of our cool{' '}
             <Link color={'blue.400'} to="/">
@@ -81,20 +81,21 @@ const Login: FC = () => {
           <Stack spacing={4}>
             <form onSubmit={SignInWithEmailAndPassword}>
               <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
+                <FormLabel>メールアドレス</FormLabel>
                 <Input
                   type="email"
                   id="emailSignIn"
                   name="email"
-                  placeholder="email"
+                  placeholder="your@email.com"
                   autoComplete="on"
                 />
               </FormControl>
               <FormControl id="password">
-                <FormLabel>Password</FormLabel>
+                <FormLabel>パスワード</FormLabel>
                 <Input
                   id="passwordSignIn"
                   name="password"
+                  placeholder="password"
                   type="password"
                   autoComplete="on"
                 />
@@ -105,21 +106,21 @@ const Login: FC = () => {
                   align={'start'}
                   justify={'space-between'}
                 >
-                  <Checkbox>Remember me</Checkbox>
+                  <Checkbox>ログインを維持する</Checkbox>
                   <Link color={'blue.400'} to="/">
-                    Forgot password?
+                    パスワードをお忘れですか？
                   </Link>
                 </Stack>
                 <Button
-                  bg={'blue.400'}
+                  bg={'teal.400'}
                   color={'white'}
                   type="submit"
                   _hover={{
-                    bg: 'blue.500',
+                    bg: 'teal.500',
                   }}
                   disabled={authenticating}
                 >
-                  Sign in
+                  ログイン
                 </Button>
               </Stack>
             </form>

@@ -19,7 +19,11 @@ import { AuthContext } from 'auth/AuthProvider';
 import { useContext, useState, useEffect } from 'react';
 import { auth } from 'Firebase';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword, User } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  User,
+} from 'firebase/auth';
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
@@ -49,15 +53,13 @@ const SignUp: FC = () => {
   ) => {
     event.preventDefault();
     const target = event.target as typeof event.target & {
-      firstName: { value: string };
-      lastName: { value: string };
+      displayName: { value: string };
       email: { value: string };
       password: { value: string };
     };
     const usersCollectionRef = collection(db, 'users');
 
-    const fitstName = target.firstName.value;
-    const lastName = target.lastName.value;
+    const displayName = target.displayName.value;
     const email = target.email.value;
     const password = target.password.value;
 
@@ -65,13 +67,12 @@ const SignUp: FC = () => {
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        addDoc(usersCollectionRef, {
-          firstName: fitstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-          timpstamp: serverTimestamp(),
-        });
+        if (currentUser) {
+          updateProfile(currentUser, {
+            displayName: displayName,
+            photoURL: 'https://example.com/jane-q-user/profile.jpg',
+          });
+        }
         navigate('/');
         Swal.fire({
           position: 'top',
@@ -114,7 +115,7 @@ const SignUp: FC = () => {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
+            アカウント作成
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
             to enjoy all of our cool features ✌️
@@ -129,28 +130,22 @@ const SignUp: FC = () => {
           {error}
           <form onSubmit={createUserAndSignUpWithEmailAndPassword}>
             <Stack spacing={4}>
-              <HStack>
-                <Box>
-                  <FormControl id="firstName" isRequired>
-                    <FormLabel>First Name</FormLabel>
-                    <Input type="text" />
-                  </FormControl>
-                </Box>
-                <Box>
-                  <FormControl id="lastName">
-                    <FormLabel>Last Name</FormLabel>
-                    <Input type="text" />
-                  </FormControl>
-                </Box>
-              </HStack>
+              {/* <HStack> */}
+              <Box>
+                <FormControl id="lastName">
+                  <FormLabel>名前</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+              {/* </HStack> */}
               <FormControl id="email" isRequired>
-                <FormLabel>Email address</FormLabel>
+                <FormLabel>メールアドレス</FormLabel>
                 {invalidEmail}
                 {emailAlreadyUsed}
                 <Input type="email" />
               </FormControl>
               <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>パスワード</FormLabel>
                 {weakPassword}
                 <InputGroup>
                   <Input type={showPassword ? 'text' : 'password'} />
@@ -170,22 +165,23 @@ const SignUp: FC = () => {
                 <Button
                   loadingText="Submitting"
                   size="lg"
-                  bg={'blue.400'}
+                  bg={'teal.400'}
                   color={'white'}
                   _hover={{
-                    bg: 'blue.500',
+                    bg: 'teal.500',
                   }}
                   type="submit"
                   disabled={authenticating}
                 >
-                  Sign up
+                  新規作成
                 </Button>
               </Stack>
               <Stack pt={6}>
                 <Text align={'center'}>
-                  Already a user?{' '}
-                  <Link color={'blue.400'} to="/">
-                    Login
+                  <Link color={'teal.400'} to="/login">
+                    既に作成済みの方はこちら
+                    <br />
+                    ログイン
                   </Link>
                 </Text>
               </Stack>
