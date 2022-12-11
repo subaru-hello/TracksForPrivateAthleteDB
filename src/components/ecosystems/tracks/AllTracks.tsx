@@ -18,10 +18,10 @@ const AllTracks: FC<Props> = ({ sortType = 'entree_fee', my = 0 }) => {
   return (
     <Box my={my} w="3xl">
       <Helmet>
-        <title>競技場一覧|{SORT[sortType]}</title>
+        <title>競技場一覧</title>
       </Helmet>
       <Heading as="h2" size="lg">
-        全国の競技場 | {SORT[sortType]}
+        全国の競技場
       </Heading>
 
       <TrackList tracks={tracks} />
