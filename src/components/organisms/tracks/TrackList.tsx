@@ -1,24 +1,28 @@
-import { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import {
   Box,
-  Flex,
-  List,
-  ListItem,
-  Spinner,
-  Text,
-  Input,
-  Stack,
-  Button,
   Heading,
+  Image,
+  Text,
+  Divider,
+  HStack,
+  Tag,
+  Wrap,
+  WrapItem,
+  SpaceProps,
+  useColorModeValue,
+  Container,
+  VStack,
+  Button,
+  Stack,
+  Input,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { Card, CardFooter, CardBody } from '@chakra-ui/card';
-import { Search2Icon } from '@chakra-ui/icons';
-import TrackImages from 'components/ecosystems/tracks/TrackImages';
 import type { Track } from 'domains';
 import { useState } from 'react';
 import escapeStringRegexp from 'escape-string-regexp';
+import trackImage from 'assets/base_track.png';
+import { Search2Icon } from '@chakra-ui/icons';
 
 type Props = {
   tracks: Track[];
@@ -26,26 +30,65 @@ type Props = {
   isLoading?: boolean;
 };
 
+interface ITrackTags {
+  tags: Array<string>;
+  marginTop?: SpaceProps['marginTop'];
+}
+
+const FeatureTags: FC<ITrackTags> = (props) => {
+  return (
+    <HStack spacing={2} marginTop={props.marginTop}>
+      {props.tags.map((tag) => {
+        return (
+          <Tag size={'md'} variant="solid" colorScheme="orange" key={tag}>
+            {tag}
+          </Tag>
+        );
+      })}
+    </HStack>
+  );
+};
+
+interface CommenterProps {
+  date: Date;
+  name: string;
+}
+
 const CheckLocationAndCreateLink = (track: Track) => (
-  <CardFooter>
+  <>
     {window.location.href.includes(track.prefectureID) ? (
-      <Button colorScheme="teal" variant="outline">
-        <Link to={track.id}> 詳細</Link>
-      </Button>
+      <Link to={track.id}>
+        <Button colorScheme="teal" variant="outline">
+          詳細
+        </Button>
+      </Link>
     ) : (
-      <Button colorScheme="teal" variant="outline">
-        <Link to={track.prefectureID + '/' + track.id}>詳細</Link>
-      </Button>
+      <Link to={track.prefectureID + '/' + track.id}>
+        <Button colorScheme="teal" variant="outline">
+          詳細
+        </Button>
+      </Link>
     )}
-  </CardFooter>
+  </>
 );
 
-const TrackList: FC<Props> = ({
-  tracks = [],
-  color = 'teal.500',
-  isLoading = false,
-}) => {
-  // ユーザーの入力キーワードをState化する
+export const CommentCommenter: React.FC<CommenterProps> = (props) => {
+  return (
+    <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
+      <Image
+        borderRadius="full"
+        boxSize="40px"
+        src="https://100k-faces.glitch.me/random-image"
+        alt={`Avatar of ${props.name}`}
+      />
+      <Text fontWeight="medium">{props.name}</Text>
+      <Text>—</Text>
+      <Text>{props.date.toLocaleDateString()}</Text>
+    </HStack>
+  );
+};
+
+const TrackList: FC<Props> = ({ tracks = [] }) => {
   const [searchKeyword, updateSearchKeyword] = useState('');
 
   // 入力イベントに反応してStateを更新する
@@ -60,9 +103,9 @@ const TrackList: FC<Props> = ({
     // 小文字で比較して部分一致するものだけを残す
     return new RegExp(escapedText).test(item.furigana.toLowerCase());
   });
-
   return (
-    <Box>
+    <Container maxW={'7xl'} p="12">
+      <Heading as="h1">競技場一覧</Heading>
       <Stack
         direction={{ base: 'column', md: 'row' }}
         width={{ base: 'full' }}
@@ -76,57 +119,60 @@ const TrackList: FC<Props> = ({
           placeholder="競技場名を入れて下さい"
         />
       </Stack>
-
-      {isLoading ? (
-        <Flex my={14} h="20rem" justify="center" align="center">
-          <Spinner size="xl" color={color} />
-        </Flex>
-      ) : (
-        <List>
-          {filteredTracks.map((track) => (
-            <ListItem key={track.id} m={6}>
-              <Card
-                direction={{ base: 'column', sm: 'row' }}
-                overflow="hidden"
-                variant="outline"
-              >
-                <TrackImages />
-
-                <Stack>
-                  <CardBody>
-                    <Heading size="md" my={4}>
-                      {track.name}
-                    </Heading>
-                    <Stack>
-                      <Text as="span">場所{track.address}</Text>
-
-                      <Text as="span" ml={2}>
-                        {track.open_hour ?? '不明'}
-                      </Text>
-                      <Text as="span" ml={2}>
-                        {track.entrance_fee ?? '不明'}円
-                      </Text>
-                      <p>
-                        <a
-                          href={track.site_url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {track.site_url}
-                          <ExternalLinkIcon mx="2px" />
-                        </a>
-                      </p>
-                    </Stack>
-                  </CardBody>
-
-                  {CheckLocationAndCreateLink(track)}
-                </Stack>
-              </Card>
-            </ListItem>
-          ))}
-        </List>
-      )}
-    </Box>
+      {filteredTracks.map((track) => (
+        <Box
+          marginTop={{ base: '1', sm: '5' }}
+          display="flex"
+          flexDirection={{ base: 'column', sm: 'row' }}
+          justifyContent="space-between"
+          key={track.id}
+        >
+          <Box
+            display="flex"
+            flex="1"
+            marginRight="3"
+            position="relative"
+            alignItems="center"
+          >
+            <Box
+              width={{ base: '100%', sm: '85%' }}
+              zIndex="2"
+              marginLeft={{ base: '0', sm: '5%' }}
+              marginTop="5%"
+            >
+              <Image
+                borderRadius="lg"
+                src={trackImage}
+                alt="some good alt text"
+                objectFit="contain"
+              />
+            </Box>
+            <Box zIndex="1" width="100%" position="absolute" height="100%">
+              <Box
+                bgGradient={useColorModeValue(
+                  'radial(orange.600 1px, transparent 1px)',
+                  'radial(orange.300 1px, transparent 1px)'
+                )}
+                backgroundSize="20px 20px"
+                opacity="0.4"
+                height="100%"
+              />
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            flex="1"
+            flexDirection="column"
+            justifyContent="center"
+            marginTop={{ base: '3', sm: '0' }}
+          >
+            <FeatureTags tags={[track.prefectureID, 'ハードル可']} />
+            <Heading marginTop="1">{track.name}</Heading>
+            {CheckLocationAndCreateLink(track)}
+          </Box>
+        </Box>
+      ))}
+    </Container>
   );
 };
 
