@@ -1,5 +1,4 @@
 import { FC, useContext, useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
 // import escapeStringRegexp from 'escape-string-regexp';
 import {
   Box,
@@ -10,44 +9,27 @@ import {
   useDisclosure,
   Input,
 } from '@chakra-ui/react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
-import { signOut } from 'firebase/auth';
+
+import Profile from '../users/Profile';
 import { auth } from 'Firebase';
 
 const HeaderLinks: FC = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const handleToggle = () => (isOpen ? onClose() : onOpen());
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-  //ログアウトしたらログインページへリダイレクトさせる
-  const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleToggle = () => (isOpen ? onClose() : onOpen());
   // ログイン状態を確認する
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
       }
     });
-  });
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        setLoggedIn(false);
-        Swal.fire({
-          position: 'top',
-          icon: 'success',
-          title: 'ログアウトしました',
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        navigate('/login');
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+  }, [loggedIn]);
 
   return (
     <Flex
@@ -79,10 +61,8 @@ const HeaderLinks: FC = (props) => {
         p={4}
         mt={{ base: 4, md: 0 }}
       >
-        {/* <Link to="/mock/new">競技場作成</Link> */}
         <Link to="/tracks/kanagawa/calender">個人開放状況</Link>
         <Link to="/tracks">競技場一覧</Link>
-        {/* <Link to="/users">ユーザー一覧</Link> */}
         <Search2Icon />
         <Input
           htmlSize={30}
@@ -106,17 +86,9 @@ const HeaderLinks: FC = (props) => {
           mt={{ base: 4, md: 0 }}
         >
           {loggedIn ? (
-            <Button
-              bg={'teal.300'}
-              colorScheme="teal"
-              color={'white'}
-              _hover={{
-                bg: 'teal.400',
-              }}
-              onClick={handleLogout}
-            >
-              ログアウト
-            </Button>
+            <Link to="mypage">
+              <Profile />
+            </Link>
           ) : (
             <>
               <Link to="signup">アカウント登録</Link>
