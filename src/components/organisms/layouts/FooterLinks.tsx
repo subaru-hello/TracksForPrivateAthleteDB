@@ -17,7 +17,7 @@ import { ReactNode } from 'react';
 const Logo = () => {
   return (
     <>
-      <Image boxSize="5%" objectFit="cover" src={iine} />
+      <Image boxSize="3%" objectFit="cover" src={iine} />
     </>
   );
 };
@@ -57,7 +57,7 @@ const SocialButton = ({
 export default function SmallCentered() {
   return (
     <Box
-      bg={useColorModeValue('gray.50', 'gray.900')}
+      bg={useColorModeValue('gray.300', 'gray.900')}
       color={useColorModeValue('gray.700', 'gray.200')}
     >
       <Container
