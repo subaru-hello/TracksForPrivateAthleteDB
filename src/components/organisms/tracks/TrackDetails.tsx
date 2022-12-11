@@ -1,62 +1,204 @@
-import type { FC } from 'react';
-import { useParams } from 'react-router-dom';
 import {
-  Heading,
+  Box,
+  chakra,
   Container,
   Stack,
-  Button,
   Text,
-  Divider,
-  ButtonGroup,
+  Image,
+  Flex,
+  VStack,
+  Button,
+  Heading,
+  SimpleGrid,
+  StackDivider,
+  useColorModeValue,
+  VisuallyHidden,
+  List,
+  ListItem,
 } from '@chakra-ui/react';
+import type { FC } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { trackData } from 'data';
 import ForPublickDate from 'components/templates/tracks/ForPublicDate';
 import HomeButton from 'components/organisms/layouts/HomeButton';
-import { Card, CardBody, CardFooter } from '@chakra-ui/card';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import TrackImages from 'components/ecosystems/tracks/TrackImages';
+import trackImage from 'assets/base_track.png';
 
-const TrackDetail: FC = () => {
+const TrackDetails = () => {
   const { trackID = '' } = useParams();
   const trackDetail = trackData.filter((track) => track.id === trackID);
 
   return (
-    <Container centerContent={true}>
+    <Box>
       {trackDetail.map((track) => (
-        <Card key={track.id}>
-          <CardBody>
-            <Stack mt="6" spacing="3">
-              <Heading size="md"> {track.name}</Heading>
-              <TrackImages />
-              <Text as="span">場所{track.address}</Text>
+        <SimpleGrid key={track.id}>
+          <Flex>
+            <Image
+              rounded={'md'}
+              alt={'product image'}
+              src={trackImage}
+              fit={'cover'}
+              align={'center'}
+              w={'100%'}
+              h={{ base: '100%', sm: '400px', lg: '500px' }}
+            />
+          </Flex>
+          <Stack spacing={{ base: 6, md: 10 }}>
+            <Box as={'header'}>
+              <Heading
+                lineHeight={1.1}
+                fontWeight={600}
+                fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}
+              >
+                {track.name}
+              </Heading>
+              <Text
+                color={useColorModeValue('gray.900', 'gray.400')}
+                fontWeight={300}
+                fontSize={'2xl'}
+              >
+                神奈川県
+              </Text>
+            </Box>
 
-              <Text as="span" ml={2}>
-                開放時間 {track.open_hour ?? '不明'}
-              </Text>
-              <Text as="span" ml={2}>
-                入場料: {track.entrance_fee ?? '不明'}円
-              </Text>
-              <p>
-                <a href={track.site_url} target="_blank" rel="noreferrer">
-                  サイトURL: {track.site_url}
-                  <ExternalLinkIcon mx="2px" />
-                </a>
-              </p>
+            <Stack
+              spacing={{ base: 4, sm: 6 }}
+              direction={'column'}
+              divider={
+                <StackDivider
+                  borderColor={useColorModeValue('gray.200', 'gray.600')}
+                />
+              }
+            >
+              <VStack spacing={{ base: 4, sm: 6 }}>
+                <Text
+                  color={useColorModeValue('gray.500', 'gray.400')}
+                  fontSize={'2xl'}
+                  fontWeight={'300'}
+                >
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                  diam nonumy eirmod tempor invidunt ut labore
+                </Text>
+                <Text fontSize={'lg'}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad
+                  aliquid amet at delectus doloribus dolorum expedita hic, ipsum
+                  maxime modi nam officiis porro, quae, quisquam quos
+                  reprehenderit velit? Natus, totam.
+                </Text>
+              </VStack>
+              <Box>
+                <Text
+                  fontSize={{ base: '16px', lg: '18px' }}
+                  color={useColorModeValue('yellow.500', 'yellow.300')}
+                  fontWeight={'500'}
+                  textTransform={'uppercase'}
+                  mb={'4'}
+                >
+                  Features
+                </Text>
+
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                  <List spacing={2}>
+                    <ListItem>ハードル可(木製)</ListItem>
+                    <ListItem>400mトラック</ListItem>{' '}
+                    <ListItem>高速タータン</ListItem>
+                  </List>
+                  <List spacing={2}>
+                    <ListItem>個人利用可</ListItem>
+                    <ListItem>砲丸・幅跳び可</ListItem>
+                    <ListItem>Small seconds</ListItem>
+                  </List>
+                </SimpleGrid>
+              </Box>
+              <Box>
+                <Text
+                  fontSize={{ base: '16px', lg: '18px' }}
+                  color={useColorModeValue('yellow.500', 'yellow.300')}
+                  fontWeight={'500'}
+                  textTransform={'uppercase'}
+                  mb={'4'}
+                >
+                  今日の空き状況
+                </Text>
+
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+                  <List spacing={2}>
+                    <ListItem>ハードル可(木製)</ListItem>
+                    <ListItem>400mトラック</ListItem>{' '}
+                    <ListItem>高速タータン</ListItem>
+                  </List>
+                  <List spacing={2}>
+                    <ListItem>個人利用可</ListItem>
+                    <ListItem>砲丸・幅跳び可</ListItem>
+                    <ListItem>Small seconds</ListItem>
+                  </List>
+                </SimpleGrid>
+              </Box>
+              <Box>
+                <Text
+                  fontSize={{ base: '16px', lg: '18px' }}
+                  color={useColorModeValue('yellow.500', 'yellow.300')}
+                  fontWeight={'500'}
+                  textTransform={'uppercase'}
+                  mb={'4'}
+                >
+                  詳細情報
+                </Text>
+
+                <List spacing={2}>
+                  <ListItem>
+                    <Text as={'span'} fontWeight={'bold'}>
+                      場所:
+                    </Text>{' '}
+                    {track.address}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={'span'} fontWeight={'bold'}>
+                      個人解放時間:
+                    </Text>{' '}
+                    {track.open_hour}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={'span'} fontWeight={'bold'}>
+                      利用料金
+                    </Text>{' '}
+                    {track.entrance_fee}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={'span'} fontWeight={'bold'}>
+                      サイトURL:
+                    </Text>{' '}
+                    <a href={track.site_url} target="_blank" rel="noreferrer">
+                      サイトURL: {track.site_url}
+                      <ExternalLinkIcon mx="2px" />
+                    </a>
+                  </ListItem>
+                </List>
+              </Box>
             </Stack>
-          </CardBody>
-          <Divider />
-          <CardFooter>
-            <ButtonGroup spacing="2">
-              <Button variant="outline" colorScheme="teal">
-                よく行く競技場に追加する
-              </Button>
-            </ButtonGroup>
-          </CardFooter>
-        </Card>
+
+            <Button
+              rounded={'none'}
+              w={'full'}
+              mt={8}
+              size={'lg'}
+              py={'7'}
+              bg={useColorModeValue('gray.900', 'gray.50')}
+              color={useColorModeValue('white', 'gray.900')}
+              textTransform={'uppercase'}
+              _hover={{
+                transform: 'translateY(2px)',
+                boxShadow: 'lg',
+              }}
+            >
+              お気に入りに登録
+            </Button>
+          </Stack>
+        </SimpleGrid>
       ))}
-      <ForPublickDate />
-    </Container>
+    </Box>
   );
 };
 
-export default TrackDetail;
+export default TrackDetails;
