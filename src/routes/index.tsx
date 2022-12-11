@@ -12,10 +12,12 @@ import ForPublicDate from 'components/templates/tracks/ForPublicDate';
 import SignUp from 'components/templates/auths/SignUp';
 import Login from 'components/templates/auths/Login';
 import UserCollection from 'components/templates/users/UserCollection';
-
+import ProfilePage from 'components/templates/mypage/ProfilePage';
+import ProfileEdit from 'components/templates/mypage/ProfileEdit';
 import TrackMockAddEco from 'components/ecosystems/tracks/mocks/TrackMockAddEco';
 import TrackMockFrame from 'components/templates/tracks/mock/TrackMockFrame';
 import TracksByPrefectureFrame from 'components/organisms/tracks/TracksByPrefectureFrame';
+import ProfileIndex from 'components/templates/mypage/ProfileIndex';
 
 const IndexRoutes: FC = () => {
   const { hash, pathname } = useLocation();
@@ -45,6 +47,10 @@ const IndexRoutes: FC = () => {
 
       <Route path="users" element={<UserCollection />} />
 
+      <Route path="mypage" element={<ProfileIndex />}>
+        <Route path="" element={<ProfilePage />} />
+        <Route path="edit" element={<ProfileEdit />} />
+      </Route>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
