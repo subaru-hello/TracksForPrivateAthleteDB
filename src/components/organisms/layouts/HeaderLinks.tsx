@@ -61,15 +61,15 @@ const HeaderLinks: FC = (props) => {
         p={4}
         mt={{ base: 4, md: 0 }}
       >
-        <Link to="/tracks/kanagawa/calender">個人開放状況</Link>
+        {/* <Link to="/tracks/kanagawa/calender">個人開放状況</Link> */}
         <Link to="/tracks">競技場一覧</Link>
-        <Search2Icon />
+        {/* <Search2Icon />
         <Input
           htmlSize={30}
           width="auto"
           type="text"
           placeholder="競技場名を入れて下さい"
-        />
+        /> */}
       </Stack>
 
       <Box
