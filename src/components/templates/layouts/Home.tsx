@@ -6,6 +6,7 @@ import TrackIndex from 'components/organisms/tracks/TrackIndex';
 import SiteOutline from 'components/organisms/layouts/SiteOutline';
 import Calender from 'components/organisms/Calender';
 import WithSpeechBubbles from 'components/organisms/layouts/Testimonial';
+import { AmazonBanner } from 'components/atoms/AmazonBanner';
 const title = '競技場検索';
 
 const Home: FC = () => {
@@ -33,6 +34,7 @@ const Home: FC = () => {
         <Calender />
       </Box>
       <WithSpeechBubbles />
+      <AmazonBanner />
     </Box>
   );
 };
