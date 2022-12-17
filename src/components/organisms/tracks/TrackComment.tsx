@@ -9,6 +9,7 @@ import {
   updateDoc,
   QueryDocumentSnapshot,
 } from 'firebase/firestore';
+import { Comment } from 'domains';
 import { db } from 'Firebase';
 import { Link, Outlet } from 'react-router-dom';
 import {
@@ -30,15 +31,8 @@ import {
 interface IFirebaseProps {
   track_id: String;
   user_id: String;
-}
-
-type Comment = {
-  id: string;
-  title: string;
-  body: string;
-  user_id: string;
-  track_id: string;
 };
+
 const InitialState: Comment = {
   id: '',
   title: '',
