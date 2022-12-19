@@ -1,7 +1,5 @@
 import {
   Box,
-  chakra,
-  Container,
   Stack,
   Text,
   Image,
@@ -12,25 +10,37 @@ import {
   SimpleGrid,
   StackDivider,
   useColorModeValue,
-  VisuallyHidden,
   List,
   ListItem,
 } from '@chakra-ui/react';
-import type { FC } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import TrackComment from './TrackComment';
 import { trackData } from 'data';
-import ForPublickDate from 'components/templates/tracks/ForPublicDate';
-import HomeButton from 'components/organisms/layouts/HomeButton';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import trackImage from 'assets/base_track.png';
+import { AuthContext } from 'auth/AuthProvider';
+import { useEffect } from 'preact/hooks';
 
 type Props = {
   prefecture_name: string;
 };
-const TrackDetails: FC<Props> = ({ prefecture_name }) => {
+function TrackDetails({ prefecture_name }: Props) {
   const { trackID = '' } = useParams();
+  const [userId, setUserId] = useState('');
   const trackDetail = trackData.filter((track) => track.id === trackID);
+  const { currentUser } = useContext(AuthContext);
+
+  const userHook = () => {
+    useEffect(() => {
+      if (currentUser) {
+        setUserId(currentUser.uid);
+      } else {
+        setUserId('subaru');
+      }
+    }, []);
+  };
+  userHook;
 
   return (
     <Box>
@@ -174,11 +184,11 @@ const TrackDetails: FC<Props> = ({ prefecture_name }) => {
               お気に入りに登録
             </Button>
           </Stack>
-          <TrackComment track_id={track.id} user_id={'5gontfh5bQuhKYyXog6S'} />
+          <TrackComment track_id={track.id} user_id={userId} />
         </SimpleGrid>
       ))}
     </Box>
   );
-};
+}
 
 export default TrackDetails;
