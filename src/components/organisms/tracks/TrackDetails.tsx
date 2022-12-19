@@ -1,7 +1,5 @@
 import {
   Box,
-  chakra,
-  Container,
   Stack,
   Text,
   Image,
@@ -12,22 +10,37 @@ import {
   SimpleGrid,
   StackDivider,
   useColorModeValue,
-  VisuallyHidden,
   List,
   ListItem,
 } from '@chakra-ui/react';
-import type { FC } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
+import TrackComment from './TrackComment';
 import { trackData } from 'data';
-import ForPublickDate from 'components/templates/tracks/ForPublicDate';
-import HomeButton from 'components/organisms/layouts/HomeButton';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import trackImage from 'assets/base_track.png';
+import { AuthContext } from 'auth/AuthProvider';
+import { useEffect } from 'preact/hooks';
 
-const TrackDetails = () => {
+type Props = {
+  prefecture_name: string;
+};
+function TrackDetails({ prefecture_name }: Props) {
   const { trackID = '' } = useParams();
+  const [userId, setUserId] = useState('');
   const trackDetail = trackData.filter((track) => track.id === trackID);
+  const { currentUser } = useContext(AuthContext);
+
+  const userHook = () => {
+    useEffect(() => {
+      if (currentUser) {
+        setUserId(currentUser.uid);
+      } else {
+        setUserId('subaru');
+      }
+    }, []);
+  };
+  userHook;
 
   return (
     <Box>
@@ -58,7 +71,7 @@ const TrackDetails = () => {
                 fontWeight={300}
                 fontSize={'2xl'}
               >
-                神奈川県
+                {prefecture_name}
               </Text>
             </Box>
 
@@ -95,31 +108,7 @@ const TrackDetails = () => {
                   textTransform={'uppercase'}
                   mb={'4'}
                 >
-                  Features
-                </Text>
-
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-                  <List spacing={2}>
-                    <ListItem>ハードル可(木製)</ListItem>
-                    <ListItem>400mトラック</ListItem>{' '}
-                    <ListItem>高速タータン</ListItem>
-                  </List>
-                  <List spacing={2}>
-                    <ListItem>個人利用可</ListItem>
-                    <ListItem>砲丸・幅跳び可</ListItem>
-                    <ListItem>Small seconds</ListItem>
-                  </List>
-                </SimpleGrid>
-              </Box>
-              <Box>
-                <Text
-                  fontSize={{ base: '16px', lg: '18px' }}
-                  color={useColorModeValue('yellow.500', 'yellow.300')}
-                  fontWeight={'500'}
-                  textTransform={'uppercase'}
-                  mb={'4'}
-                >
-                  今日の空き状況
+                  特徴
                 </Text>
 
                 <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
@@ -195,10 +184,11 @@ const TrackDetails = () => {
               お気に入りに登録
             </Button>
           </Stack>
+          <TrackComment track_id={track.id} user_id={userId} />
         </SimpleGrid>
       ))}
     </Box>
   );
-};
+}
 
 export default TrackDetails;

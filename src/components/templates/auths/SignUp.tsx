@@ -27,13 +27,7 @@ import {
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
-  addDoc,
   collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  serverTimestamp,
-  updateDoc,
 } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 
@@ -102,9 +96,7 @@ const SignUp: FC = () => {
       });
   };
   const { currentUser } = useContext(AuthContext);
-  if (currentUser) {
-    console.log(currentUser.uid);
-  }
+
   return (
     <Flex
       minH={'100vh'}

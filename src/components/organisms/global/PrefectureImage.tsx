@@ -23,7 +23,7 @@ const PrefectureImage: FC<Props> = ({ props }) => {
   }, []);
   return (
     <Box boxSize="sm">
-      <BaseImage props={{ image: image }} />
+      <BaseImage image={image} />
     </Box>
   );
 };

@@ -6,7 +6,7 @@ const TrackImages: FC = () => {
   const image = trackImage;
   return (
     <Box>
-      <TrackImage props={{ image: image }} />
+      <TrackImage image={image} />
     </Box>
   );
 };

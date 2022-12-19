@@ -18,18 +18,30 @@ export interface Track {
 }
 
 export interface User {
-  id: number;
+  id: string;
   uuid: string;
   name: string;
   email?: string;
 }
 
 export interface Comment {
-  id: number;
+  id: string;
   title: string;
   body: string;
-  userID: number;
-  trackID: string;
+  user_id: string;
+  track_id: string;
+}
+
+export interface Shoes {
+  id: string;
+  name: string;
+  url: string;
+}
+
+export interface PracticeShoes {
+  id: string;
+  user_id: string;
+  shoes_id: string;
 }
 
 export interface AvailableDate {
