@@ -4,7 +4,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import AllTracks from 'components/ecosystems/tracks/AllTracks';
 import TrackListByPrefecture from 'components/ecosystems/tracks/TrackListByPrefecture';
 import TracksFrame from 'components/templates/tracks/TracksFrame';
-import TrackCommentNew from 'components/organisms/tracks/TrackCommentNew';
+import TrackCommentNew from 'components/organisms/tracks/TrackComment';
 import TrackDetail from 'components/organisms/tracks/TrackDetails';
 import TrackMockEco from 'components/ecosystems/tracks/mocks/TrackMockEco';
 import Home from 'components/templates/layouts/Home';
@@ -40,9 +40,11 @@ const IndexRoutes: FC = () => {
 
         <Route path=":prefectureID" element={<TracksByPrefectureFrame />}>
           <Route path="" element={<TrackListByPrefecture my={12} />} />
-          <Route path=":trackID" element={<TrackDetail />} />
+          <Route
+            path=":trackID"
+            element={<TrackDetail prefecture_name={'tokyo'} />}
+          />
         </Route>
-        <Route path="new" element={<TrackCommentNew />} />
       </Route>
 
       <Route path="users" element={<UserCollection />} />
