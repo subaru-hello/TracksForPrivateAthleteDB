@@ -57,3 +57,5 @@ https://zenn.dev/subaru_hello/articles/73253a46a76f7f <br/>
 https://zenn.dev/subaru_hello/articles/570e9e990374a6 <br/>
 
 https://zenn.dev/subaru_hello/articles/38624760719abf
+
+`npx json-server --watch db.json --port 3100`
