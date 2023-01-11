@@ -89,6 +89,16 @@
       "open_hour": " 午前9時～午後5時",
       "site_url": "https://www.city.kiryu.lg.jp/shisetsu/sports/taiiku/1002884.html",
       "entrance_fee": 200
+    },
+    {
+      "id": "KdBmqb_",
+      "name": "",
+      "address": "",
+      "furigana": "",
+      "site_url": "",
+      "entrance_fee": null,
+      "prefectureID": "kanagawa",
+      "open_hour": ""
     }
   ]
 }

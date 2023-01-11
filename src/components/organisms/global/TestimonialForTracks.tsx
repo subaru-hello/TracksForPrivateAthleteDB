@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { queryDatas } from 'apis/firebase/comments';
-
+console.log(queryDatas[0])
 const Testimonial = ({ children }: { children: ReactNode }) => {
   return <Box>{children}</Box>;
 };
@@ -88,24 +88,31 @@ const TestimonialAvatar = ({
     </Flex>
   );
 };
-interface ISpeechProps {
+
+interface IPublisher {
+  name: string;
+  date: Date;
   title: string;
+}
+interface ISpeechProps {
+  comment_title: string;
   body: string;
+  publisher: IPublisher
 }
 
 export const SpeechList: FC<ISpeechProps> = (props) => {
   return (
     <Testimonial>
       <TestimonialContent>
-        <TestimonialHeading>{props.title}</TestimonialHeading>
+        <TestimonialHeading>{props.comment_title}</TestimonialHeading>
         <TestimonialText>{props.body}</TestimonialText>
       </TestimonialContent>
       <TestimonialAvatar
         src={
           'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
         }
-        name={'Jane Cooper'}
-        title={'CEO at ABC Corporation'}
+        name={props.publisher.name}
+        title={props.publisher.title}
       />
     </Testimonial>
   );
@@ -129,7 +136,7 @@ const WithSpeechBubbles = () => {
           <SimpleGrid columns={{ sm: 2, md: 1 }}>
             {queryDatas.map((comment, index) => (
               <Box key={index} alignContent={'center'} my={6}>
-                <SpeechList title={comment.title} body={comment.body} />
+                <SpeechList comment_title={comment.title} body={comment.body} publisher={{name: 'subaru', title: 'vice president', date: new Date('2022-04-06T19:01:27Z')}} />
               </Box>
             ))}
           </SimpleGrid>
