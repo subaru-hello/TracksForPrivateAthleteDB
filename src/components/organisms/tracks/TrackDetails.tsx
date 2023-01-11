@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import TrackComment from './TrackComment';
+import TrackCommentForm from './TrackCommentForm';
 import { trackData } from 'data';
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import trackImage from 'assets/base_track.png';
@@ -184,7 +184,7 @@ function TrackDetails({ prefecture_name }: Props) {
               お気に入りに登録
             </Button>
           </Stack>
-          <TrackComment track_id={track.id} user_id={userId} />
+          <TrackCommentForm track_id={track.id} user_id={userId} />
         </SimpleGrid>
       ))}
     </Box>

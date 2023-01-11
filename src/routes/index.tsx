@@ -4,7 +4,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import AllTracks from 'components/ecosystems/tracks/AllTracks';
 import TrackListByPrefecture from 'components/ecosystems/tracks/TrackListByPrefecture';
 import TracksFrame from 'components/templates/tracks/TracksFrame';
-import TrackCommentNew from 'components/organisms/tracks/TrackComment';
+import TrackCommentNew from 'components/organisms/tracks/TrackCommentForm';
 import TrackDetail from 'components/organisms/tracks/TrackDetails';
 import TrackMockEco from 'components/ecosystems/tracks/mocks/TrackMockEco';
 import Home from 'components/templates/layouts/Home';
