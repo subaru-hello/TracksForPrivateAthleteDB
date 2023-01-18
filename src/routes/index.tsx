@@ -18,6 +18,7 @@ import TrackMockAddEco from 'components/ecosystems/tracks/mocks/TrackMockAddEco'
 import TrackMockFrame from 'components/templates/tracks/mock/TrackMockFrame';
 import TracksByPrefectureFrame from 'components/organisms/tracks/TracksByPrefectureFrame';
 import ProfileIndex from 'components/templates/mypage/ProfileIndex';
+import { Counter } from 'features/counter/Counter';
 
 const IndexRoutes: FC = () => {
   const { hash, pathname } = useLocation();
@@ -33,6 +34,7 @@ const IndexRoutes: FC = () => {
       <Route path="mock" element={<TrackMockFrame />}>
         <Route path="" element={<TrackMockEco />} />
         <Route path="new" element={<TrackMockAddEco />} />
+        <Route path="counter" element={<Counter />} />
       </Route>
 
       <Route path="tracks" element={<TracksFrame />}>
