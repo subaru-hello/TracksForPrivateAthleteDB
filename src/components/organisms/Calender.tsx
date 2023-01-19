@@ -6,6 +6,7 @@ import { Box } from '@chakra-ui/react';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import jaLocale from '@fullcalendar/core/locales/ja';
+import { available_date } from 'data/available_date/index';
 
 const Calender: FC = () => {
   return (
@@ -20,14 +21,7 @@ const Calender: FC = () => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek, listWeek',
         }}
-        events={[
-          { title: '等々力', start: '2022-12-14' },
-          {
-            title: '等々力',
-            start: '2022-12-15',
-            end: '2022-12-17',
-          },
-        ]}
+        events={available_date}
       />
     </Box>
   );
