@@ -52,3 +52,9 @@ export interface AvailableDate {
   availability_am: boolean;
   availability_pm: boolean;
 }
+
+export interface AvailableTerm {
+  title: string;
+  start: string;
+  end?: string;
+}
