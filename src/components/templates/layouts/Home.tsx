@@ -7,6 +7,7 @@ import SiteOutline from 'components/organisms/layouts/SiteOutline';
 import Calender from 'components/organisms/Calender';
 import WithSpeechBubbles from 'components/organisms/layouts/Testimonial';
 import { AmazonBanner } from 'components/atoms/AmazonBanner';
+import News from 'components/organisms/News';
 const title = '競技場検索';
 
 const Home: FC = () => {
@@ -32,6 +33,7 @@ const Home: FC = () => {
           現在の個人開放状況
         </chakra.h3>
         <Calender />
+        <News />
       </Box>
       <WithSpeechBubbles />
       <AmazonBanner />
