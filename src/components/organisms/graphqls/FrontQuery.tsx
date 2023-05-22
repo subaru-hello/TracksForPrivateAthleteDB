@@ -1,10 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { HelloDocument } from 'graphql/generated.graphql';
-type Props = {
-  posts: {
-    id: string;
-    title: string;
-  }[];
+type IPost = {
+  id: string;
+  title: string;
 };
 
 function FrontQuery() {
@@ -12,8 +10,13 @@ function FrontQuery() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log(data);
-  return <ul>hello</ul>;
+  return (
+    <ul>
+      {data.GetHello.map((gh: IPost) => (
+        <li key={gh.id}>{gh.title}</li>
+      ))}
+    </ul>
+  );
 }
 
 export default FrontQuery;

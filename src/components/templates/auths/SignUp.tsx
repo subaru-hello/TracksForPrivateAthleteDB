@@ -26,9 +26,7 @@ import {
 } from 'firebase/auth';
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import {
-  collection,
-} from 'firebase/firestore';
+import { collection } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 
 const SignUp: FC = () => {

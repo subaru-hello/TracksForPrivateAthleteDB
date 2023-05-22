@@ -7,9 +7,24 @@ import SiteOutline from 'components/organisms/layouts/SiteOutline';
 import Calender from 'components/organisms/Calender';
 import WithSpeechBubbles from 'components/organisms/layouts/Testimonial';
 import { AmazonBanner } from 'components/atoms/AmazonBanner';
+import FrontQuery from 'components/organisms/graphqls/FrontQuery';
+import axios from 'axios';
 const title = '競技場検索';
 
 const Home: FC = () => {
+  async function fetchData() {
+    try {
+      const response = await axios.get(
+        'https://asia-northeast1-rikujo-b8e9e.cloudfunctions.net/hello'
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  const handlefetchData = () => {
+    fetchData();
+  };
   return (
     <Box fontFamily={'YuMincho'}>
       <Box textAlign={'center'} justifyContent={'space-between'} mx="auto">
@@ -21,6 +36,8 @@ const Home: FC = () => {
           <TrackIndex prefectures={prefectureData} />
         </Box>
       </Box>
+      <button onClick={handlefetchData}>ClickMe</button>
+      <FrontQuery />
       <Box textAlign={'center'} w="75%" mx="auto">
         <chakra.h3
           py={5}

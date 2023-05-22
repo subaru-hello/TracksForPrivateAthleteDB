@@ -96,7 +96,6 @@ export const trackDataSample: Track[] = [
   },
 ];
 
-
 export const trackData: Track[] = [
   {
     id: 'kokuritsu',

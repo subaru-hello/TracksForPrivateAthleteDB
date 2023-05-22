@@ -2,7 +2,7 @@ import { initUrqlClient } from 'next-urql';
 import { Client } from 'urql';
 
 // const GRAPHQL_ENDPOINT = process.env.VITE_GRAPHQL_ENDPOINT!;
-const GRAPHQL_ENDPOINT = "http://localhost:3000/graphql";
+const GRAPHQL_ENDPOINT = 'http://localhost:3000/graphql';
 
 export function urqlClient(): Promise<Client> {
   return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@ export function urqlClient(): Promise<Client> {
       {
         url: GRAPHQL_ENDPOINT,
       },
-      false,
+      false
     );
     if (!client) {
       reject(Error('Failed to init initUrqlClient.'));
