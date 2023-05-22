@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type HelloModel {
+  id: String!
+  title: String!
+}
+
+type UserType {
+  uid: String!
+  email: String!
+  displayName: String
+  photoURL: String
+}
+
+type Query {
+  GetHello: [HelloModel!]
+  getUserDataByUid(uid: String!): UserType!
+  getAllUsers: [UserType!]!
+}

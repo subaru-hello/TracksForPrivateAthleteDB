@@ -1,0 +1,6 @@
+query Hello {
+  GetHello {
+    id
+    title
+  }
+}
