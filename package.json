@@ -11,12 +11,13 @@
     "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:style": "stylelint 'src/**/*.{css,less,sass,scss}'",
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,less,sass,scss}'",
-    "lint": "npm run --silent lint:style; npm run --silent lint:es",
-    "lint:fix": "npm run --silent lint:style:fix; npm run --silent lint:es:fix",
+    "lint": "yarn run --silent lint:style; yarn run --silent lint:es",
+    "lint:fix": "yarn run --silent lint:style:fix; yarn run --silent lint:es:fix",
     "format": "prettier --write --loglevel=warn 'src/**/*.{js,jsx,ts,tsx,html,json,gql,graphql}'",
     "fix": "npm run --silent format; npm run --silent lint:fix",
     "preinstall": "npx typesync || :",
-    "prepare": "npx simple-git-hooks || :"
+    "prepare": "npx simple-git-hooks || :",
+    "deploy": "yarn run build && firebase deploy"
   },
   "dependencies": {
     "@chakra-ui/card": "^2.1.1",
@@ -44,6 +45,7 @@
     "react-router-dom": "^6.4.2",
     "react-tsparticles": "^2.6.0",
     "redux": "^4.2.0",
+    "styled-components": "^6.1.6",
     "sweetalert2": "^11.6.15",
     "tsparticles": "^2.6.0"
   },
