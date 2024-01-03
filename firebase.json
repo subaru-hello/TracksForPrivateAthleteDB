@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "rikujo",
+    "site": "rikujo-b8e9e",
     "public": "dist",
     "ignore": [
       "firebase.json",
