@@ -1,14 +1,16 @@
 import type { FC } from 'react';
-import '@fullcalendar/react/dist/vdom';
 import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import '@fullcalendar/react/dist/vdom';
 import { Box } from '@chakra-ui/react';
+import jaLocale from '@fullcalendar/core/locales/ja';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import jaLocale from '@fullcalendar/core/locales/ja';
-import { available_date } from 'data/available_date/index';
-
-const Calender: FC = () => {
+import { AvailableTerm } from 'domains';
+type Props = {
+  availableDates: AvailableTerm[];
+};
+const Calender: FC<Props> = (props) => {
   return (
     <Box>
       <FullCalendar
@@ -21,7 +23,11 @@ const Calender: FC = () => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek, listWeek',
         }}
-        events={available_date}
+        // dateClick={handleDateClick}
+        // events={available_date}
+        events={props.availableDates}
+        // selectable={true}
+        // eventContent={renderEventContent}
       />
     </Box>
   );

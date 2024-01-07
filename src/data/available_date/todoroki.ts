@@ -3,6 +3,10 @@ import { AvailableTerm } from 'domains';
 export const todoroki: AvailableTerm[] = [
   {
     title: '等々力',
+    start: '2024-01-14',
+  },
+  {
+    title: '等々力',
     start: '2023-12-14',
   },
   {

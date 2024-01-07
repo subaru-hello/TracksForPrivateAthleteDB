@@ -15,7 +15,11 @@ const title = '競技場検索';
 const Home: FC = () => {
   useFetchAvailableDate();
   const availableDates = useAppSelector(selectAvailableDate);
-  console.log('^^^^^^^^^^', availableDates[0]?.availableDates);
+  console.log(
+    '^^^^^^^^^^',
+    availableDates[0]?.availableDates,
+    import.meta.env.VITE_FIREBASE_URL.split(', ')[0]
+  );
   return (
     <Box fontFamily={'YuMincho'}>
       {/* <Button onClick={handleTracks}>Track取得</Button> */}

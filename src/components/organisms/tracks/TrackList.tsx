@@ -1,28 +1,23 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { Search2Icon } from '@chakra-ui/icons';
 import {
   Box,
   Heading,
   Image,
   Text,
-  Divider,
   HStack,
   Tag,
-  Wrap,
-  WrapItem,
   SpaceProps,
   useColorModeValue,
   Container,
-  VStack,
   Button,
   Stack,
   Input,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import type { Track } from 'domains';
-import { useState } from 'react';
-import escapeStringRegexp from 'escape-string-regexp';
 import trackImage from 'assets/base_track.png';
-import { Search2Icon } from '@chakra-ui/icons';
+import type { Track } from 'domains';
+import escapeStringRegexp from 'escape-string-regexp';
+import { Link } from 'react-router-dom';
 
 type Props = {
   tracks: Track[];
@@ -31,7 +26,7 @@ type Props = {
 };
 
 interface ITrackTags {
-  tags: Array<string>;
+  tags: string[];
   marginTop?: SpaceProps['marginTop'];
 }
 
@@ -100,9 +95,11 @@ const TrackList: FC<Props> = ({ tracks = [] }) => {
   const filteredTracks = tracks.filter((item) => {
     // ユーザー入力を安全に正規表現にする（このときすべて小文字化で正規化する）
     const escapedText = escapeStringRegexp(searchKeyword.toLowerCase());
+
     // 小文字で比較して部分一致するものだけを残す
     return new RegExp(escapedText).test(item.furigana.toLowerCase());
   });
+
   return (
     <Container maxW={'7xl'} p="12">
       <Heading as="h1">競技場一覧</Heading>

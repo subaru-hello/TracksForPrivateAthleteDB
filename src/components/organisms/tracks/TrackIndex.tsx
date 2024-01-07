@@ -1,14 +1,7 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  ListItem,
-  List,
-  Flex,
-  Button,
-  ButtonGroup,
-  Box,
-} from '@chakra-ui/react';
+import { ListItem, List, Button, ButtonGroup, Box } from '@chakra-ui/react';
 import type { Prefecture } from 'domains';
+import { Link } from 'react-router-dom';
 
 type Props = { prefectures: Prefecture[]; my?: number | string };
 

@@ -1,19 +1,22 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
-
-import { onRequest } from 'firebase-functions/v2/https';
 import * as logger from 'firebase-functions/logger';
+import { onRequest } from 'firebase-functions/v2/https';
+export { availableDates } from './availableDate';
+export { tracks } from './trackData';
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
-
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+export const cors = process.env.CORS_URL?.split(', ');
+console.log('-----', cors, process.env.CORS_URL?.split(', '));
+export const helloworld = onRequest(
+  {
+    cors,
+  },
+  (request, response) => {
+    logger.info('Hello logs!', { structuredData: true });
+    response.send(
+      `Hello ${process.env.PLANET} and ${
+        process.env.AUDIENCE
+      } ${cors} process: ${typeof process.env.CORS_URL} ${typeof []}`
+    );
+  }
+);

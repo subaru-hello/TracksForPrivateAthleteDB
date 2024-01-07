@@ -16,7 +16,7 @@ const AllTracks: FC<Props> = ({ sortType = 'entree_fee', my = 0 }) => {
   );
 
   return (
-    <Box my={my} w="3xl">
+    <Box my={my}>
       <Helmet>
         <title>競技場一覧</title>
       </Helmet>

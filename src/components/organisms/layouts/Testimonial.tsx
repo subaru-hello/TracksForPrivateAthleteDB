@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   chakra,
-  Container,
   Flex,
   Icon,
   SimpleGrid,
@@ -61,6 +60,7 @@ interface TestimonialCardProps {
 
 function TestimonialCard(props: TestimonialCardProps) {
   const { name, role, content, avatar, index } = props;
+
   return (
     <Flex
       boxShadow={'lg'}

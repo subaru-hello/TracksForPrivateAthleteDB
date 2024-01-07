@@ -1,3 +1,5 @@
+import { useContext, useState } from 'react';
+import { ExternalLinkIcon } from '@chakra-ui/icons';
 import {
   Box,
   Stack,
@@ -13,25 +15,25 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react';
-import { useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import TrackComment from './TrackComment';
+// import axios from 'axios';
 import { trackData } from 'data';
-import { ExternalLinkIcon } from '@chakra-ui/icons';
-import trackImage from 'assets/base_track.png';
-import { AuthContext } from 'auth/AuthProvider';
 import { useEffect } from 'preact/hooks';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from 'auth/AuthProvider';
+import TrackComment from './TrackComment';
 
 type Props = {
   prefecture_name: string;
 };
+
 function TrackDetails({ prefecture_name }: Props) {
   const { trackID = '' } = useParams();
   const [userId, setUserId] = useState('');
+  // const [resp, setresp] = useState();
   const trackDetail = trackData.filter((track) => track.id === trackID);
   const { currentUser } = useContext(AuthContext);
 
-  const userHook = () => {
+  const userHook = async () => {
     useEffect(() => {
       if (currentUser) {
         setUserId(currentUser.uid);
@@ -50,11 +52,11 @@ function TrackDetails({ prefecture_name }: Props) {
             <Image
               rounded={'md'}
               alt={'product image'}
-              src={trackImage}
+              src={'../../../assets/base_track.png'}
               fit={'cover'}
               align={'center'}
-              w={'100%'}
-              h={{ base: '100%', sm: '400px', lg: '500px' }}
+              // w={'100%'}
+              // h={{ base: '100%', sm: '400px', lg: '500px' }}
             />
           </Flex>
           <Stack spacing={{ base: 6, md: 10 }}>
@@ -126,7 +128,7 @@ function TrackDetails({ prefecture_name }: Props) {
               </Box>
               <Box>
                 <Text
-                  fontSize={{ base: '16px', lg: '18px' }}
+                  // fontSize={{ base: '16px', lg: '18px' }}
                   color={useColorModeValue('yellow.500', 'yellow.300')}
                   fontWeight={'500'}
                   textTransform={'uppercase'}
@@ -169,10 +171,10 @@ function TrackDetails({ prefecture_name }: Props) {
 
             <Button
               rounded={'none'}
-              w={'full'}
-              mt={8}
-              size={'lg'}
-              py={'7'}
+              // w={'full'}
+              // mt={8}
+              // size={'lg'}
+              // py={'7'}
               bg={useColorModeValue('gray.900', 'gray.50')}
               color={useColorModeValue('white', 'gray.900')}
               textTransform={'uppercase'}

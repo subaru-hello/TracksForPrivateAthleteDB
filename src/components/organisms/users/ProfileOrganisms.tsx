@@ -1,3 +1,4 @@
+import { useState, useEffect, FC } from 'react';
 import {
   Button,
   Flex,
@@ -9,14 +10,12 @@ import {
   Box,
   Text,
 } from '@chakra-ui/react';
-import { auth } from 'Firebase';
 import { signOut } from 'firebase/auth';
+import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { auth, db } from 'Firebase';
 import Profile from 'components/organisms/users/Profile';
-import { useState, useEffect, FC } from 'react';
-import { db } from 'Firebase';
-import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
 
 const InitialState: DocumentData = {
   id: '',
@@ -25,14 +24,14 @@ const InitialState: DocumentData = {
   admin: false,
 };
 
-type Props = {
-  email: '' | null;
-};
+// type Props = {
+//   email: '' | null;
+// };
 
-const ProfileOrganism: FC<{ email: String | null | undefined }> = ({
+const ProfileOrganism: FC<{ email: string | null | undefined }> = ({
   email,
 }) => {
-  const usersCollectionRef = collection(db, 'users');
+  // const usersCollectionRef = collection(db, 'users');
   const [user, setUser] = useState<DocumentData>(InitialState);
   useEffect(() => {
     const usersCollectionRef = collection(db, 'users');
@@ -43,10 +42,11 @@ const ProfileOrganism: FC<{ email: String | null | undefined }> = ({
       // usersコレクションを参照する
       setUser(matchedUser[0]);
     });
+
     return unsub;
   }, []);
 
-  //ログアウトしたらログインページへリダイレクトさせる
+  // ログアウトしたらログインページへリダイレクトさせる
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -65,6 +65,7 @@ const ProfileOrganism: FC<{ email: String | null | undefined }> = ({
         console.log(err.message);
       });
   };
+
   return (
     <Flex
       align={'center'}

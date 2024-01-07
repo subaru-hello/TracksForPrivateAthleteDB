@@ -1,5 +1,5 @@
-import { Box, Heading } from '@chakra-ui/react';
 import { FC } from 'react';
+import { Box, Heading } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 
 const ShoesIndex: FC = () => {

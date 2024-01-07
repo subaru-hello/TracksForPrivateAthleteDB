@@ -1,5 +1,5 @@
-import { Avatar, Box, Flex, keyframes } from '@chakra-ui/react';
 import { FC } from 'react';
+import { Avatar, Box, Flex, keyframes } from '@chakra-ui/react';
 
 type Props = {
   image: string;

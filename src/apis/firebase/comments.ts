@@ -1,10 +1,10 @@
-import { db } from 'Firebase';
 import {
   addDoc,
   collection,
   getDocs,
   serverTimestamp,
 } from 'firebase/firestore';
+import { db } from 'Firebase';
 
 const docCommentRef = collection(db, 'comments');
 
@@ -18,11 +18,11 @@ export const AddCommentDoc = async (
   user_id: string,
   track_id: string
 ) => {
-  const documentRef = await addDoc(docCommentRef, {
-    title: title,
-    body: body,
-    user_id: user_id,
-    track_id: track_id,
+  await addDoc(docCommentRef, {
+    title,
+    body,
+    user_id,
+    track_id,
     timpstamp: serverTimestamp(),
   });
 };

@@ -1,7 +1,7 @@
 import type { FC, SyntheticEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ArrowUpIcon } from '@chakra-ui/icons';
 import { Box, Button } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeButton: FC<{ my?: number | string }> = ({ my = 0 }) => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import type { FC, PropsWithChildren } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { HelmetProvider } from 'react-helmet-async';
-import { AuthProvider } from 'auth/AuthProvider';
-import { store } from 'store';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { store } from 'store';
+import { AuthProvider } from 'auth/AuthProvider';
 
 const Providers: FC<PropsWithChildren> = ({ children }) => (
   <AuthProvider>

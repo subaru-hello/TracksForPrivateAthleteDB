@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import Particles from 'react-tsparticles';
-import type { Container, Engine } from 'tsparticles-engine';
 import { loadFull } from 'tsparticles';
+import type { Container, Engine } from 'tsparticles-engine';
 
 const ParticleEffect = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -15,6 +15,7 @@ const ParticleEffect = () => {
     async (container: Container | undefined) => {},
     []
   );
+
   return (
     <>
       <Particles

@@ -1,5 +1,5 @@
+import { FC } from 'react';
 import AvatarWithRipple from 'components/atoms/AvatarWithRipple';
-import { FC, useEffect, useState } from 'react';
 
 const Profile: FC = () => {
   return (

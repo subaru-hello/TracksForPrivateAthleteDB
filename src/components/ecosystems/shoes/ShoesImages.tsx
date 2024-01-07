@@ -1,13 +1,5 @@
-
 import { AddIcon } from '@chakra-ui/icons';
-import {
-  Flex,
-  HStack,
-  Image,
-  Text,
-  IconButton,
-  SimpleGrid,
-} from '@chakra-ui/react';
+import { HStack, Image, Text, IconButton } from '@chakra-ui/react';
 import trackImage from 'assets/base_track.png';
 interface ShoesMakerProps {
   name: string;
@@ -36,7 +28,7 @@ export const ShoesMaker: React.FC<ShoesMakerProps> = (props) => {
   );
 };
 
-//セレクトされたらボタンが出現する仕組みにしておく(setShoesTagにセットする)
+// セレクトされたらボタンが出現する仕組みにしておく(setShoesTagにセットする)
 const ShoesImages = () => {
   const images = [
     {
@@ -62,13 +54,13 @@ const ShoesImages = () => {
   ];
 
   return (
-    <Flex>
+    <div>
       {images.map((image) => (
-        <SimpleGrid key={image.id} columns={3} spacing={10}>
+        <div key={image.id}>
           <ShoesMaker name={image.name} src={image.url} />
-        </SimpleGrid>
+        </div>
       ))}
-    </Flex>
+    </div>
   );
 };
 

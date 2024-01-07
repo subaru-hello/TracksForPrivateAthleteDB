@@ -1,6 +1,6 @@
+import { AvailableTerm } from "domains";
 import { todoroki } from "./todoroki";
 import { yumenoshima } from "./yumenoshima";
-import { AvailableTerm } from "domains";
 
 const baseArray: AvailableTerm[] = [];
 

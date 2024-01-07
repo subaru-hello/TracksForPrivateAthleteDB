@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { useRef } from 'react';
-import useTrack from 'hooks/useTrack';
 import {
   Input,
   Container,
@@ -15,9 +14,10 @@ import {
   NumberInput,
   NumberInputField,
 } from '@chakra-ui/react';
+import useTrack from 'hooks/useTrack';
 
 const TrackMockNewEco: FC = () => {
-  //hooksを呼び出す
+  // hooksを呼び出す
   const { addTrackListItem, trackList, deleteTrackListItem } = useTrack();
 
   // 入力する要素の数だけuseRefオブジェクトを作成する
@@ -37,7 +37,7 @@ const TrackMockNewEco: FC = () => {
   const handleAddTrackListItem = () => {
     // if (refInputName.current.name === '') {
     //   return;
-    //}
+    // }
     addTrackListItem({
       id: refInputId.current!.value,
       name: refInputName.current!.value,

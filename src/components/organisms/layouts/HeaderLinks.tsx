@@ -1,19 +1,11 @@
-import { FC, useContext, useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 // import escapeStringRegexp from 'escape-string-regexp';
-import {
-  Box,
-  Stack,
-  Heading,
-  Flex,
-  Button,
-  useDisclosure,
-  Input,
-} from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
+import { Box, Stack, Heading, Flex, useDisclosure } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { HamburgerIcon, Search2Icon } from '@chakra-ui/icons';
 
-import Profile from '../users/Profile';
 import { auth } from 'Firebase';
+import Profile from '../users/Profile';
 
 const HeaderLinks: FC = (props) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);

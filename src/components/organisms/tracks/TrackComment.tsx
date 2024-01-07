@@ -1,6 +1,4 @@
 import { FC, SyntheticEvent } from 'react';
-import { AddCommentDoc } from 'apis/firebase/comments';
-import WithSpeechBubbles from '../global/TestimonialForTracks';
 import {
   Image,
   Box,
@@ -12,9 +10,11 @@ import {
   Button,
   HStack,
 } from '@chakra-ui/react';
+import { AddCommentDoc } from 'apis/firebase/comments';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ShoesImages from 'components/ecosystems/shoes/ShoesImages';
+import WithSpeechBubbles from '../global/TestimonialForTracks';
 
 // Commentした人コンポーネント
 interface BlogAuthorProps {
@@ -24,10 +24,10 @@ interface BlogAuthorProps {
 
 export const BlogAuthor: React.FC<BlogAuthorProps> = (props) => {
   return (
-    <HStack marginTop="2" spacing="2" display="flex" alignItems="center">
+    <HStack display="flex" alignItems="center">
       <Image
-        borderRadius="full"
-        boxSize="40px"
+        // borderRadius="full"
+        // boxSize="40px"
         src="https://100k-faces.glitch.me/random-image"
         alt={`Avatar of ${props.name}`}
       />
@@ -78,7 +78,7 @@ const TrackCommentForm: FC<IFirebaseProps> = (props) => {
       props.user_id,
       props.track_id
     )
-      .then((result) => {
+      .then(() => {
         navigate(window.location.href);
         Swal.fire({
           position: 'top',
@@ -93,9 +93,9 @@ const TrackCommentForm: FC<IFirebaseProps> = (props) => {
       });
   };
 
-  //あるユーザーのコメントを削除する
+  // あるユーザーのコメントを削除する
 
-  //あるユーザーのコメントを更新する
+  // あるユーザーのコメントを更新する
 
   return (
     <Box>
@@ -110,7 +110,10 @@ const TrackCommentForm: FC<IFirebaseProps> = (props) => {
           <FormLabel>Body</FormLabel>
           <Input name="body" type="text" />
         </FormControl>
-        <ShoesImages />
+        <div>
+          <ShoesImages />
+        </div>
+
         <div>
           <Button type="submit">追加</Button>
         </div>

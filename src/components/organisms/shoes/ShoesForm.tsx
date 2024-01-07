@@ -1,7 +1,4 @@
-import { useState, FC, SyntheticEvent } from 'react';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { Shoes } from 'domains';
-import { db } from 'Firebase';
+import { FC, SyntheticEvent } from 'react';
 import {
   Box,
   FormControl,
@@ -9,42 +6,45 @@ import {
   FormLabel,
   Input,
 } from '@chakra-ui/react';
+// import { Shoes } from 'domains';
+// import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+// import { db } from 'Firebase';
 
 interface IFirebaseProps {
-  track_id: String;
-  user_id: String;
+  track_id: string;
+  user_id: string;
 }
 
-const InitialState: Shoes = {
-  id: '',
-  name: '',
-  url: '',
-};
+// const InitialState: Shoes = {
+//   id: '',
+//   name: '',
+//   url: '',
+// };
 
 const ShoesForm: FC<IFirebaseProps> = (props) => {
   console.log(props);
-  const [comment, setComment] = useState<Shoes>(InitialState);
+  // const [comment, setComment] = useState<Shoes>(InitialState);
 
   // あるユーザーが練習靴を作成する
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const target = event.target as typeof event.target & {
-      title: { value: string };
-      body: { value: string };
-    };
-    const commentsCollectionRef = collection(db, 'comments');
-    const documentRef = await addDoc(commentsCollectionRef, {
-      title: target.title.value,
-      body: target.body.value,
-      user_id: props.user_id,
-      track_id: props.track_id,
-      timpstamp: serverTimestamp(),
-    });
+    // const target = event.target as typeof event.target & {
+    //   title: { value: string };
+    //   body: { value: string };
+    // };
+    // const commentsCollectionRef = collection(db, 'comments');
+    // const documentRef = await addDoc(commentsCollectionRef, {
+    //   title: target.title.value,
+    //   body: target.body.value,
+    //   user_id: props.user_id,
+    //   track_id: props.track_id,
+    //   timpstamp: serverTimestamp(),
+    // });
   };
 
-  //あるユーザーのコメントを削除する
+  // あるユーザーのコメントを削除する
 
-  //あるユーザーのコメントを更新する
+  // あるユーザーのコメントを更新する
 
   return (
     <Box>

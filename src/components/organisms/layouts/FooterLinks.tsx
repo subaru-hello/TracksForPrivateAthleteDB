@@ -1,18 +1,17 @@
+import React, { ReactNode } from 'react';
 import {
   Box,
   chakra,
-  Container,
   Stack,
   Text,
   useColorModeValue,
   VisuallyHidden,
   Image,
-  Flex,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
-import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import iine from 'assets/iine.svg';
-import { ReactNode } from 'react';
+import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { styled } from 'styled-components';
 
 const Logo = () => {
   return (
@@ -54,56 +53,53 @@ const SocialButton = ({
   );
 };
 
-export default function SmallCentered() {
-  return (
-    <Box
-      bg={useColorModeValue('gray.300', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}
-    >
-      <Container
-        as={Stack}
-        maxW={'6xl'}
-        py={4}
-        spacing={4}
-        justify={'center'}
-        align={'center'}
-      >
-        <Logo />
-        <Stack direction={'row'} spacing={6}>
-          <Link to="/">ホーム</Link>
-          <Link to="tracks">競技場一覧</Link>
-          <Link to="tracks/kanagawa/calendar">個人開放状況（神奈川）</Link>
-        </Stack>
-      </Container>
+const SmallCentered: React.FC = () => {
+  const currentYear = new Date().getFullYear();
 
-      <Box
-        borderTopWidth={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.700')}
-      >
-        <Container
-          as={Stack}
-          maxW={'6xl'}
-          py={4}
-          direction={{ base: 'column', md: 'row' }}
-          spacing={4}
-          justify={{ base: 'center', md: 'space-between' }}
-          align={{ base: 'center', md: 'center' }}
-        >
-          <Text>© 2022 TrackPublicDB. All rights reserved</Text>
-          <Stack direction={'row'} spacing={6}>
-            <SocialButton label={'Twitter'} href={'#'}>
-              <FaTwitter />
-            </SocialButton>
-            <SocialButton label={'YouTube'} href={'#'}>
-              <FaYoutube />
-            </SocialButton>
-            <SocialButton label={'Instagram'} href={'#'}>
-              <FaInstagram />
-            </SocialButton>
-          </Stack>
-        </Container>
+  return (
+    <>
+      <Box as={Stack} justify={'center'} align={'center'}>
+        <Logo />
+        <Stack direction={'row'} fontSize={{ md: '10px' }}>
+          <StyledLink to="/">ホーム</StyledLink>
+          <StyledLink to="tracks">競技場一覧</StyledLink>
+          <StyledLink to="tracks/kanagawa/calendar">
+            個人開放状況（神奈川）
+          </StyledLink>
+        </Stack>
       </Box>
-    </Box>
+
+      <StyledText>
+        © {currentYear} TrackPublicDB. All rights reserved
+      </StyledText>
+      <Stack direction={'row'} spacing={6} justifyContent={{ base: 'center' }}>
+        <SocialButton label={'Twitter'} href={'#'}>
+          <FaTwitter />
+        </SocialButton>
+        <SocialButton label={'YouTube'} href={'#'}>
+          <FaYoutube />
+        </SocialButton>
+        <SocialButton label={'Instagram'} href={'#'}>
+          <FaInstagram />
+        </SocialButton>
+      </Stack>
+    </>
   );
-}
+};
+
+export default SmallCentered;
+
+const StyledLink = styled(Link)`
+  font-size: 16px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+const StyledText = styled(Text)`
+  font-size: 16px;
+  text-align: center;
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+`;

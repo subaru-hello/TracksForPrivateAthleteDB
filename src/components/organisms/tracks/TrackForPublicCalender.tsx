@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Box, Heading, Text, List, ListItem, Tr, Td } from '@chakra-ui/react';
+import { Td } from '@chakra-ui/react';
 import type { AvailableDate } from 'domains';
 type Props = {
   calender: AvailableDate;

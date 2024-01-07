@@ -1,8 +1,8 @@
 import type { FC } from 'react';
-import { Box } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { storage } from 'Firebase';
+import { Box } from '@chakra-ui/react';
 import { ref, getDownloadURL } from 'firebase/storage';
+import { storage } from 'Firebase';
 import BaseImage from 'components/atoms/BaseImage';
 type Props = {
   props: {
@@ -21,6 +21,7 @@ const PrefectureImage: FC<Props> = ({ props }) => {
       })
       .catch((err) => console.log(err));
   }, []);
+
   return (
     <Box boxSize="sm">
       <BaseImage image={image} />
