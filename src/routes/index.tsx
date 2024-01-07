@@ -3,22 +3,20 @@ import type { FC } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import AllTracks from 'components/ecosystems/tracks/AllTracks';
 import TrackListByPrefecture from 'components/ecosystems/tracks/TrackListByPrefecture';
-import TracksFrame from 'components/templates/tracks/TracksFrame';
-import TrackCommentNew from 'components/organisms/tracks/TrackComment';
-import TrackDetail from 'components/organisms/tracks/TrackDetails';
-import TrackMockEco from 'components/ecosystems/tracks/mocks/TrackMockEco';
-import Home from 'components/templates/layouts/Home';
-import ForPublicDate from 'components/templates/tracks/ForPublicDate';
-import SignUp from 'components/templates/auths/SignUp';
-import Login from 'components/templates/auths/Login';
-import UserCollection from 'components/templates/users/UserCollection';
-import ProfilePage from 'components/templates/mypage/ProfilePage';
-import ProfileEdit from 'components/templates/mypage/ProfileEdit';
 import TrackMockAddEco from 'components/ecosystems/tracks/mocks/TrackMockAddEco';
-import TrackMockFrame from 'components/templates/tracks/mock/TrackMockFrame';
+import TrackMockEco from 'components/ecosystems/tracks/mocks/TrackMockEco';
+import TrackDetail from 'components/organisms/tracks/TrackDetails';
 import TracksByPrefectureFrame from 'components/organisms/tracks/TracksByPrefectureFrame';
-import ProfileIndex from 'components/templates/mypage/ProfileIndex';
-import { Counter } from 'features/counter/Counter';
+import Login from 'pages/auths/Login';
+import SignUp from 'pages/auths/SignUp';
+import Home from 'pages/layouts/Home';
+import ProfileEdit from 'pages/mypage/ProfileEdit';
+import ProfileIndex from 'pages/mypage/ProfileIndex';
+import ProfilePage from 'pages/mypage/ProfilePage';
+import TracksFrame from 'pages/tracks/TracksFrame';
+import TrackMockFrame from 'pages/tracks/mock/TrackMockFrame';
+import UserCollection from 'pages/users/UserCollection';
+import { Counter } from 'examples/counter/Counter';
 
 const IndexRoutes: FC = () => {
   const { hash, pathname } = useLocation();
@@ -28,7 +26,6 @@ const IndexRoutes: FC = () => {
       window.scrollTo(0, 0);
     }
   }, [hash, pathname]);
-
   return (
     <Routes>
       <Route path="mock" element={<TrackMockFrame />}>

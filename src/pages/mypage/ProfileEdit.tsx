@@ -1,3 +1,5 @@
+import { useContext, useState, useEffect, useRef } from 'react';
+import { SmallCloseIcon } from '@chakra-ui/icons';
 import {
   Button,
   Flex,
@@ -7,24 +9,14 @@ import {
   Input,
   Stack,
   useColorModeValue,
-  HStack,
   Avatar,
   AvatarBadge,
   IconButton,
   Center,
 } from '@chakra-ui/react';
-import { SmallCloseIcon } from '@chakra-ui/icons';
-import { AuthContext } from 'auth/AuthProvider';
-import { useContext, useState, useEffect, useRef } from 'react';
+import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
 import { db } from 'Firebase';
-import {
-  collection,
-  doc,
-  DocumentData,
-  onSnapshot,
-  QueryDocumentSnapshot,
-  updateDoc,
-} from 'firebase/firestore';
+import { AuthContext } from 'auth/AuthProvider';
 
 const InitialState: DocumentData = {
   id: '',
@@ -53,6 +45,7 @@ const ProfileEdit = (): JSX.Element => {
       }
       // usersコレクションを参照する
     });
+
     return unsub;
   }, []);
   const updateUserInfo = (id: string) => {

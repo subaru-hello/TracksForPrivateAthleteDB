@@ -6,18 +6,15 @@ import {
   Tfoot,
   Tr,
   Th,
-  Td,
   TableCaption,
   TableContainer,
-  Flex,
-  List,
   Box,
   Heading,
   Container,
 } from '@chakra-ui/react';
+import { availableDateData } from 'data/available_date';
 import { Helmet } from 'react-helmet-async';
 import TrackForPublicCalender from 'components/organisms/tracks/TrackForPublicCalender';
-import { availableDateData } from 'data/available_date';
 const title = '個人向け開放状況カレンダー';
 
 const ForPublicDate: FC = () => (

@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+import { useState } from 'react';
 import {
   Flex,
   Box,
@@ -10,14 +12,11 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Container,
 } from '@chakra-ui/react';
-import type { FC } from 'react';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { auth } from 'Firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { auth } from 'Firebase';
 
 const Login: FC = () => {
   const [error, setError] = useState<string>('');

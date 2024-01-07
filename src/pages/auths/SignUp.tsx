@@ -1,3 +1,7 @@
+import type { FC, SyntheticEvent } from 'react';
+import { useContext, useState } from 'react';
+
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   Flex,
   Box,
@@ -5,7 +9,6 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
   Stack,
   Button,
@@ -13,35 +16,24 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { db } from 'Firebase';
-import type { FC, SyntheticEvent } from 'react';
-import { AuthContext } from 'auth/AuthProvider';
-import { useContext, useState, useEffect } from 'react';
-import { auth } from 'Firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+// import { collection } from 'firebase/firestore';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  User,
-} from 'firebase/auth';
-
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-import {
-  collection,
-} from 'firebase/firestore';
 import Swal from 'sweetalert2';
+import { auth } from 'Firebase';
+import { AuthContext } from 'auth/AuthProvider';
 
 const SignUp: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string>('');
-  const [emailAlreadyUsed, setEmailAlreadyUsed] = useState<string>('');
-  const [invalidEmail, setInvalidEmail] = useState<string>('');
-  const [weakPassword, setWeakPassword] = useState<string>('');
-  const [authenticating, setAuthenticating] = useState<boolean>(false);
+  // const [error, setError] = useState<string>('');
+  // const [emailAlreadyUsed, setEmailAlreadyUsed] = useState<string>('');
+  // const [invalidEmail, setInvalidEmail] = useState<string>('');
+  // const [weakPassword, setWeakPassword] = useState<string>('');
+  // const [authenticating, setAuthenticating] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  console.log(error);
-  useEffect(() => {}, [error]);
+  // console.log(error);
+  // useEffect(() => {}, [error]);
   const createUserAndSignUpWithEmailAndPassword = async (
     event: SyntheticEvent<HTMLFormElement>
   ) => {
@@ -51,7 +43,7 @@ const SignUp: FC = () => {
       email: { value: string };
       password: { value: string };
     };
-    const usersCollectionRef = collection(db, 'users');
+    // const usersCollectionRef = collection(db, 'users');
 
     const displayName = target.displayName.value;
     const email = target.email.value;
@@ -60,10 +52,10 @@ const SignUp: FC = () => {
     // validationの追加
 
     await createUserWithEmailAndPassword(auth, email, password)
-      .then((result) => {
+      .then(() => {
         if (currentUser) {
           updateProfile(currentUser, {
-            displayName: displayName,
+            displayName,
             photoURL: 'https://example.com/jane-q-user/profile.jpg',
           });
         }
@@ -77,9 +69,9 @@ const SignUp: FC = () => {
         });
       })
       .catch((error) => {
-        setAuthenticating(false);
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        // setAuthenticating(false);
+        const errorCode = error.code;
+        const errorMessage = error.message;
         if (errorCode == 'auth/weak-password') {
           alert(errorMessage);
           // setWeakPassword('パスワードは6文字以上にしてください');
@@ -119,7 +111,7 @@ const SignUp: FC = () => {
           boxShadow={'lg'}
           p={8}
         >
-          {error}
+          {/* {error} */}
           <form onSubmit={createUserAndSignUpWithEmailAndPassword}>
             <Stack spacing={4}>
               {/* <HStack> */}
@@ -132,13 +124,13 @@ const SignUp: FC = () => {
               {/* </HStack> */}
               <FormControl id="email" isRequired>
                 <FormLabel>メールアドレス</FormLabel>
-                {invalidEmail}
-                {emailAlreadyUsed}
+                {/* {invalidEmail}
+                {emailAlreadyUsed} */}
                 <Input type="email" />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>パスワード</FormLabel>
-                {weakPassword}
+                {/* {weakPassword} */}
                 <InputGroup>
                   <Input type={showPassword ? 'text' : 'password'} />
                   <InputRightElement h={'full'}>
@@ -163,7 +155,7 @@ const SignUp: FC = () => {
                     bg: 'teal.500',
                   }}
                   type="submit"
-                  disabled={authenticating}
+                  // disabled={authenticating}
                 >
                   新規作成
                 </Button>

@@ -1,15 +1,5 @@
 import { useState, useEffect, FC, SyntheticEvent } from 'react';
 import {
-  collection,
-  onSnapshot,
-  addDoc,
-  serverTimestamp,
-  deleteDoc,
-  doc,
-} from 'firebase/firestore';
-import { db } from 'Firebase';
-import { Link } from 'react-router-dom';
-import {
   Box,
   Table,
   Thead,
@@ -21,6 +11,9 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
+import { collection, onSnapshot, deleteDoc, doc } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
+import { db } from 'Firebase';
 
 type FirebaseCommentProps = {
   id: string;
@@ -46,6 +39,7 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
         }))
       );
     });
+
     return unsub;
   }, []);
 
@@ -53,17 +47,17 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
     event: SyntheticEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-    const target = event.target as typeof event.target & {
-      title: { value: string };
-      content: { value: string };
-    };
+    // const target = event.target as typeof event.target & {
+    //   title: { value: string };
+    //   content: { value: string };
+    // };
 
-    const usersCollectionRef = collection(db, 'users', user_id, 'comments');
-    const documentRef = await addDoc(usersCollectionRef, {
-      title: target.title.value,
-      content: target.content.value,
-      timpstamp: serverTimestamp(),
-    });
+    // const usersCollectionRef = collection(db, 'users', user_id, 'comments');
+    // const documentRef = await addDoc(usersCollectionRef, {
+    //   title: target.title.value,
+    //   content: target.content.value,
+    //   timpstamp: serverTimestamp(),
+    // });
   };
 
   const deleteComment = async (id: string) => {
@@ -89,7 +83,9 @@ const UserCommentCollection: FC<UserCollectionProps> = ({ user_id = '' }) => {
                   <Link to={comment.id}>{comment.title}</Link>
                 </Td>
                 <Td>{comment.content}</Td>
-                <Td onClick={() => deleteComment(comment.id)}>削除</Td>
+                <Td onClick={async () => await deleteComment(comment.id)}>
+                  削除
+                </Td>
               </Tr>
             </Tbody>
           ))}

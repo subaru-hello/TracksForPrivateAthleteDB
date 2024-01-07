@@ -1,17 +1,24 @@
-import type { FC } from 'react';
-import { Container, Box, useColorModeValue, chakra } from '@chakra-ui/react';
+import { type FC } from 'react';
+import { Box, useColorModeValue, chakra, Button } from '@chakra-ui/react';
 import { prefectureData } from 'data';
 import { Helmet } from 'react-helmet-async';
-import TrackIndex from 'components/organisms/tracks/TrackIndex';
-import SiteOutline from 'components/organisms/layouts/SiteOutline';
-import Calender from 'components/organisms/Calender';
-import WithSpeechBubbles from 'components/organisms/layouts/Testimonial';
 import { AmazonBanner } from 'components/atoms/AmazonBanner';
+import Calender from 'components/organisms/Calender';
+import SiteOutline from 'components/organisms/layouts/SiteOutline';
+import WithSpeechBubbles from 'components/organisms/layouts/Testimonial';
+import TrackIndex from 'components/organisms/tracks/TrackIndex';
+import { useFetchAvailableDate } from 'hooks/useFetchAvailableDate';
+import { useAppSelector } from 'hooks/useStore';
+import { selectAvailableDate } from 'examples/availableDate/availableDateSlice';
 const title = '競技場検索';
 
 const Home: FC = () => {
+  useFetchAvailableDate();
+  const availableDates = useAppSelector(selectAvailableDate);
+  console.log('^^^^^^^^^^', availableDates[0]?.availableDates);
   return (
     <Box fontFamily={'YuMincho'}>
+      {/* <Button onClick={handleTracks}>Track取得</Button> */}
       <Box textAlign={'center'} justifyContent={'space-between'} mx="auto">
         <Helmet>
           <title>{title}</title>
@@ -31,7 +38,7 @@ const Home: FC = () => {
         >
           現在の個人開放状況
         </chakra.h3>
-        <Calender />
+        <Calender availableDates={availableDates[0]?.availableDates} />
       </Box>
       <WithSpeechBubbles />
       <AmazonBanner />

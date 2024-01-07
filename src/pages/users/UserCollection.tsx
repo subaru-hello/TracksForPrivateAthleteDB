@@ -1,21 +1,7 @@
 import { useState, useEffect, FC, SyntheticEvent } from 'react';
+
 import {
-  collection,
-  onSnapshot,
-  addDoc,
-  serverTimestamp,
-  deleteDoc,
-  doc,
-  updateDoc,
-  QueryDocumentSnapshot,
-} from 'firebase/firestore';
-import { db } from 'Firebase';
-import { Link, Outlet } from 'react-router-dom';
-import {
-  List,
-  ListItem,
   Box,
-  Text,
   Table,
   Thead,
   Tbody,
@@ -26,9 +12,20 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react';
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  serverTimestamp,
+  deleteDoc,
+  doc,
+  updateDoc,
+  QueryDocumentSnapshot,
+} from 'firebase/firestore';
+import { Link } from 'react-router-dom';
+import { db } from 'Firebase';
 
-import UserCommentCollection from 'components/templates/users/comments/UserCommentCollection';
-import { EmailIcon } from '@chakra-ui/icons';
+import UserCommentCollection from 'pages/users/comments/UserCommentCollection';
 
 type FirebaseProps = {
   id: string;
@@ -44,11 +41,12 @@ const UserCollection: FC = () => {
     const usersCollectionRef = collection(db, 'users');
     // 変更をリアルタイムで検知してusersを変更する
     const unsub = onSnapshot(usersCollectionRef, (querySnapshot) => {
-      const datas: Array<QueryDocumentSnapshot> = querySnapshot.docs;
+      const datas: QueryDocumentSnapshot[] = querySnapshot.docs;
       setUsers(
         datas.map((doc) => ({ ...(doc.data() as FirebaseProps), id: doc.id }))
       );
     });
+
     return unsub;
   }, []);
 
@@ -60,7 +58,8 @@ const UserCollection: FC = () => {
     };
 
     const usersCollectionRef = collection(db, 'users');
-    const documentRef = await addDoc(usersCollectionRef, {
+    // const documentRef =
+    await addDoc(usersCollectionRef, {
       name: target.name.value,
       email: target.email.value,
       timpstamp: serverTimestamp(),
@@ -76,8 +75,8 @@ const UserCollection: FC = () => {
     const userDocumentRef = doc(db, 'users', id);
 
     await updateDoc(userDocumentRef, {
-      name: name,
-      email: email,
+      name,
+      email,
     });
   };
 
@@ -101,10 +100,12 @@ const UserCollection: FC = () => {
                 <Td>{user.email}</Td>
                 {user.admin && (
                   <>
-                    <Td onClick={() => deleteUser(user.id)}>削除</Td>
+                    <Td onClick={async () => await deleteUser(user.id)}>
+                      削除
+                    </Td>
                     <Td
-                      onClick={() =>
-                        updateUserInfo('aaa', 'aaa@aaa.aaa', user.id)
+                      onClick={async () =>
+                        await updateUserInfo('aaa', 'aaa@aaa.aaa', user.id)
                       }
                     >
                       更新
