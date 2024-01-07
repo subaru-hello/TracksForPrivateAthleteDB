@@ -14,6 +14,12 @@
       }
     ]
   },
+  "emulators": {
+    "functions": {
+      "host": "localhost",
+      "port": 5002
+    }
+  },
   "functions": [
     {
       "source": "functions",
