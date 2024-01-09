@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 8
+  version: 6
   cacheKey: 10c0
 
 "@aashutoshrathi/word-wrap@npm:^1.2.3":
@@ -8080,9 +8080,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@npm%3A~2.3.2#optional!builtin<compat/fsevents>":
+"fsevents@patch:fsevents@npm%3A~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#optional!builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
   dependencies:
     node-gyp: "npm:latest"
   conditions: os=darwin
@@ -8167,20 +8167,20 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "functions@workspace:functions"
   dependencies:
-    "@types/eslint": "npm:~8.56.0"
-    "@typescript-eslint/eslint-plugin": "npm:^5.12.0"
-    "@typescript-eslint/parser": "npm:^5.12.0"
-    env-cmd: "npm:^10.1.0"
-    eslint: "npm:^8.9.0"
-    eslint-config-google: "npm:^0.14.0"
-    eslint-plugin-import: "npm:^2.25.4"
-    eslint-plugin-jsx-a11y: "npm:^6.8.0"
-    eslint-plugin-local: "npm:^1.0.0"
-    eslint-plugin-no-null: "npm:^1.0.2"
-    firebase-admin: "npm:^11.8.0"
-    firebase-functions: "npm:^4.3.1"
-    firebase-functions-test: "npm:^3.1.0"
-    typescript: "npm:^4.9.0"
+    "@types/eslint": ~8.56.0
+    "@typescript-eslint/eslint-plugin": ^5.12.0
+    "@typescript-eslint/parser": ^5.12.0
+    env-cmd: ^10.1.0
+    eslint: ^8.9.0
+    eslint-config-google: ^0.14.0
+    eslint-plugin-import: ^2.25.4
+    eslint-plugin-jsx-a11y: ^6.8.0
+    eslint-plugin-local: ^1.0.0
+    eslint-plugin-no-null: ^1.0.2
+    firebase-admin: ^11.8.0
+    firebase-functions: ^4.3.1
+    firebase-functions-test: ^3.1.0
+    typescript: ^4.9.0
   languageName: unknown
   linkType: soft
 
@@ -9993,18 +9993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "json5@npm:1.0.1"
-  dependencies:
-    minimist: "npm:^1.2.0"
-  bin:
-    json5: lib/cli.js
-  checksum: 7f75dd797151680a4e14c4224c1343b32a43272aa6e6333ddec2b0822df4ea116971689b251879a1248592da24f7929902c13f83d7390c3f3d44f18e8e9719f5
-  languageName: node
-  linkType: hard
-
-"json5@npm:^1.0.2":
+"json5@npm:^1.0.1, json5@npm:^1.0.2":
   version: 1.0.2
   resolution: "json5@npm:1.0.2"
   dependencies:
@@ -12918,42 +12907,42 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.10.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.19.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#optional!builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.0#~builtin<compat/resolve>, resolve@patch:resolve@npm%3A^1.22.1#~builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.9.0"
     path-parse: "npm:^1.0.7"
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 0d8ccceba5537769c42aa75e4aa75ae854aac866a11d7e9ffdb1663f0158ee646a0d48fc2818ed5e7fb364d64220a1fb9092a160e11e00cbdd5fbab39a13092c
+  checksum: 8/5656f4d0bedcf8eb52685c1abdf8fbe73a1603bb1160a24d716e27a57f6cecbe2432ff9c89c2bd57542c3a7b9d14b1882b73bfe2e9d7849c9a4c0b8b39f02b8b
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^1.22.4#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^1.22.4#~builtin<compat/resolve>":
   version: 1.22.8
-  resolution: "resolve@patch:resolve@npm%3A1.22.8#optional!builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A1.22.8#~builtin<compat/resolve>::version=1.22.8&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.13.0"
     path-parse: "npm:^1.0.7"
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: 0446f024439cd2e50c6c8fa8ba77eaa8370b4180f401a96abf3d1ebc770ac51c1955e12764cde449fde3fff480a61f84388e3505ecdbab778f4bef5f8212c729
+  checksum: 8/5479b7d431cacd5185f8db64bfcb7286ae5e31eb299f4c4f404ad8aa6098b77599563ac4257cb2c37a42f59dfc06a1bec2bcf283bb448f319e37f0feb9a09847
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@npm%3A^2.0.0-next.3#optional!builtin<compat/resolve>":
+"resolve@patch:resolve@npm%3A^2.0.0-next.3#~builtin<compat/resolve>":
   version: 2.0.0-next.4
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#optional!builtin<compat/resolve>::version=2.0.0-next.4&hash=c3c19d"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=c3c19d"
   dependencies:
     is-core-module: "npm:^2.9.0"
     path-parse: "npm:^1.0.7"
     supports-preserve-symlinks-flag: "npm:^1.0.0"
   bin:
     resolve: bin/resolve
-  checksum: ed2bb51d616b9cd30fe85cf49f7a2240094d9fa01a221d361918462be81f683d1855b7f192391d2ab5325245b42464ca59690db5bd5dad0a326fc0de5974dd10
+  checksum: 8/4bf9f4f8a458607af90518ff73c67a4bc1a38b5a23fef2bb0ccbd45e8be89820a1639b637b0ba377eb2be9eedfb1739a84cde24fe4cd670c8207d8fea922b011
   languageName: node
   linkType: hard
 
@@ -13030,60 +13019,60 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "rikujo@workspace:."
   dependencies:
-    "@chakra-ui/card": "npm:^2.1.1"
-    "@chakra-ui/icons": "npm:^2.0.11"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@emotion/react": "npm:^11"
-    "@emotion/styled": "npm:^11"
-    "@fullcalendar/core": "npm:^5.11.3"
-    "@fullcalendar/daygrid": "npm:^5.11.3"
-    "@fullcalendar/list": "npm:^5.11.3"
-    "@fullcalendar/react": "npm:^5.11.3"
-    "@fullcalendar/timegrid": "npm:^5.11.3"
-    "@reduxjs/toolkit": "npm:^1.9.1"
-    "@types/eslint": "npm:^8.4.6"
-    "@types/prettier": "npm:^2.7.1"
-    "@types/react": "npm:^18.0.17"
-    "@types/react-dom": "npm:^18.0.6"
-    "@types/react-redux": "npm:^7.1.25"
-    "@typescript-eslint/eslint-plugin": "npm:^5.0.0"
-    "@vitejs/plugin-react": "npm:^2.1.0"
-    axios: "npm:^1.1.3"
-    dotenv: "npm:^16.0.3"
-    escape-string-regexp: "npm:^5.0.0"
-    eslint: "npm:^8.0.1"
-    eslint-config-prettier: "npm:^8.5.0"
-    eslint-config-standard-with-typescript: "npm:^23.0.0"
-    eslint-plugin-import: "npm:^2.25.2"
-    eslint-plugin-n: "npm:^15.0.0"
-    eslint-plugin-promise: "npm:^6.0.0"
-    eslint-plugin-react: "npm:^7.31.10"
-    firebase: "npm:^10.7.1"
-    firebase-admin: "npm:^12.0.0"
-    firebase-functions: "npm:^4.5.0"
-    firebase-tools: "npm:^11.16.1"
-    framer-motion: "npm:^6"
-    lint-staged: "npm:^13.0.3"
-    prettier: "npm:^2.7.1"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-helmet-async: "npm:^1.3.0"
-    react-icons: "npm:^4.7.1"
-    react-redux: "npm:^8.0.5"
-    react-router-dom: "npm:^6.21.1"
-    react-tsparticles: "npm:^2.6.0"
-    redux: "npm:^4.2.0"
-    simple-git-hooks: "npm:^2.8.1"
-    styled-components: "npm:^6.1.6"
-    stylelint: "npm:^14.14.0"
-    stylelint-config-recess-order: "npm:^3.0.0"
-    stylelint-config-standard: "npm:^29.0.0"
-    stylelint-order: "npm:^5.0.0"
-    sweetalert2: "npm:^11.10.2"
-    tsparticles: "npm:^2.6.0"
-    typescript: "npm:*"
-    vite: "npm:^3.1.0"
-    vite-tsconfig-paths: "npm:^3.5.1"
+    "@chakra-ui/card": ^2.1.1
+    "@chakra-ui/icons": ^2.0.11
+    "@chakra-ui/react": ^2.8.2
+    "@emotion/react": ^11
+    "@emotion/styled": ^11
+    "@fullcalendar/core": ^5.11.3
+    "@fullcalendar/daygrid": ^5.11.3
+    "@fullcalendar/list": ^5.11.3
+    "@fullcalendar/react": ^5.11.3
+    "@fullcalendar/timegrid": ^5.11.3
+    "@reduxjs/toolkit": ^1.9.1
+    "@types/eslint": ^8.4.6
+    "@types/prettier": ^2.7.1
+    "@types/react": ^18.0.17
+    "@types/react-dom": ^18.0.6
+    "@types/react-redux": ^7.1.25
+    "@typescript-eslint/eslint-plugin": ^5.0.0
+    "@vitejs/plugin-react": ^2.1.0
+    axios: ^1.1.3
+    dotenv: ^16.0.3
+    escape-string-regexp: ^5.0.0
+    eslint: ^8.0.1
+    eslint-config-prettier: ^8.5.0
+    eslint-config-standard-with-typescript: ^23.0.0
+    eslint-plugin-import: ^2.25.2
+    eslint-plugin-n: ^15.0.0
+    eslint-plugin-promise: ^6.0.0
+    eslint-plugin-react: ^7.31.10
+    firebase: ^10.7.1
+    firebase-admin: ^12.0.0
+    firebase-functions: ^4.5.0
+    firebase-tools: ^11.16.1
+    framer-motion: ^6
+    lint-staged: ^13.0.3
+    prettier: ^2.7.1
+    react: ^18.2.0
+    react-dom: ^18.2.0
+    react-helmet-async: ^1.3.0
+    react-icons: ^4.7.1
+    react-redux: ^8.0.5
+    react-router-dom: ^6.21.1
+    react-tsparticles: ^2.6.0
+    redux: ^4.2.0
+    simple-git-hooks: ^2.8.1
+    styled-components: ^6.1.6
+    stylelint: ^14.14.0
+    stylelint-config-recess-order: ^3.0.0
+    stylelint-config-standard: ^29.0.0
+    stylelint-order: ^5.0.0
+    sweetalert2: ^11.10.2
+    tsparticles: ^2.6.0
+    typescript: "*"
+    vite: ^3.1.0
+    vite-tsconfig-paths: ^3.5.1
   languageName: unknown
   linkType: soft
 
@@ -15021,23 +15010,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A*#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@*#~builtin<compat/typescript>":
   version: 4.8.4
-  resolution: "typescript@patch:typescript@npm%3A4.8.4#optional!builtin<compat/typescript>::version=4.8.4&hash=1a91c8"
+  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=1a91c8"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: eecab597a5a8c6e7f14804f1447cfce02e214e32c02efcfe5219c94290e3d572490e8a0d8033fd075ac429d35babf85182541a50c50bfb0c21df33c59fb9bf82
+  checksum: 8/c981e82b77a5acdcc4e69af9c56cdecf5b934a87a08e7b52120596701e389a878b8e3f860e73ffb287bf649cc47a8c741262ce058148f71de4cdd88bb9c75153
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^4.9.0#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@^4.9.0#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: e3333f887c6829dfe0ab6c1dbe0dd1e3e2aeb56c66460cb85c5440c566f900c833d370ca34eb47558c0c69e78ced4bfe09b8f4f98b6de7afed9b84b8d1dd06a1
+  checksum: 8/1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 
