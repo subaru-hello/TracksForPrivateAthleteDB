@@ -637,3 +637,20 @@ export const trackData: Track[] = [
     entrance_fee: 200,
   },
 ];
+
+export const trackDetailById = (trackId: string): Track => {
+  console.log('-----', trackId);
+  const trackDetailsObject: { [key: string]: Track } = {};
+  trackData.forEach((track: Track) => {
+    trackDetailsObject[track.id] = track;
+  });
+
+  console.log('^^^^^^^', trackDetailsObject);
+  return trackDetailsObject[trackId];
+  /** 仕方なくこの形 
+    Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '(key: string) => Track | undefined'.
+    No index signature with a parameter of type 'string' was found on type '(key: string) => Track | undefined'.ts(7053)
+    const trackDetailMap: Map<string, Track>
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map#setting_object_properties
+   */
+};

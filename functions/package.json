@@ -1,7 +1,7 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "yarn run lint --fix",
+    "lint": "eslint --fix",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "serve": "yarn run build && firebase emulators:start --only functions",

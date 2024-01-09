@@ -1,6 +1,5 @@
 import * as logger from 'firebase-functions/logger';
 import { onRequest } from 'firebase-functions/v2/https';
-import { cors } from '..';
 import { allAvailableDates } from './availableDate';
 
 // Start writing functions
@@ -8,14 +7,17 @@ import { allAvailableDates } from './availableDate';
 
 export const availableDates = onRequest(
   {
-    cors,
+    cors: !process.env.IS_LOCAL
+      ? process.env.CORS_URL?.split(', ')
+      : // '*'
+        '*',
   },
   (request, response) => {
     const availableDateObject = {
       message: 'fetch succeeded',
       availableDates: allAvailableDates,
     };
-    logger.info('Hello logs!', { structuredData: true });
+    logger.info('Hello logs!', allAvailableDates, { structuredData: true });
     response.send(availableDateObject);
   }
 );
