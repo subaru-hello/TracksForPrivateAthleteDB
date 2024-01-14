@@ -20,7 +20,7 @@ const TrackListByPrefecture: FC<{ my?: number | string }> = ({ my = 0 }) => {
     );
 
     return (
-      <Box my={my} w="4xl">
+      <Box my={my}>
         <Helmet>
           <title>競技場 at {prefecture?.name}</title>
         </Helmet>
