@@ -1,10 +1,16 @@
 import * as logger from 'firebase-functions/logger';
 import { onRequest } from 'firebase-functions/v2/https';
 import { trackData, trackDetailById } from './track';
+import { getEnvVariable } from '../utils/getEnvVariables';
+
+console.log('Rotracksot:', getEnvVariable('IS_LOCAL'));
+console.log('tracks:', getEnvVariable('CORS_URL'));
 
 export const tracks = onRequest(
   {
-    cors: process.env.IS_LOCAL ? '*' : process.env.CORS_URL?.split(', '),
+    cors: getEnvVariable('IS_LOCAL')
+      ? true
+      : getEnvVariable('CORS_URL')?.split(', '),
   },
   (request, response) => {
     const trackObject = { hello: 'Hello from Firebase', trackData };
