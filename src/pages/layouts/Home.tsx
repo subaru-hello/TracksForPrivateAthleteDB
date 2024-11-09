@@ -1,5 +1,5 @@
 import { type FC } from 'react';
-import { Box, useColorModeValue, chakra, Button } from '@chakra-ui/react';
+import { Box, useColorModeValue, chakra } from '@chakra-ui/react';
 import { prefectureData } from 'data';
 import { Helmet } from 'react-helmet-async';
 import { AmazonBanner } from 'components/atoms/AmazonBanner';
@@ -10,19 +10,29 @@ import TrackIndex from 'components/organisms/tracks/TrackIndex';
 import { useFetchAvailableDate } from 'hooks/useFetchAvailableDate';
 import { useAppSelector } from 'hooks/useStore';
 import { selectAvailableDate } from 'examples/availableDate/availableDateSlice';
+import axios from 'axios';
 const title = '競技場検索';
 
 const Home: FC = () => {
   useFetchAvailableDate();
   const availableDates = useAppSelector(selectAvailableDate);
-  console.log(
-    '^^^^^^^^^^',
-    availableDates[0]?.availableDates,
-    import.meta.env.VITE_FIREBASE_URL.split(', ')[0]
-  );
+  const fetchTrackDetail = async (trackId: string) => {
+    try {
+      const response = await axios.post(
+        import.meta.env.VITE_FIREBASE_TRACK_DETAIL_FUNCTION_URL,
+        {
+          trackId: trackId,
+        }
+      );
+      return response.data; // or handle response as needed
+    } catch (error) {
+      console.error('Error fetching track detail:', error);
+      // Handle error appropriately
+    }
+  };
+
   return (
     <Box fontFamily={'YuMincho'}>
-      {/* <Button onClick={handleTracks}>Track取得</Button> */}
       <Box textAlign={'center'} justifyContent={'space-between'} mx="auto">
         <Helmet>
           <title>{title}</title>

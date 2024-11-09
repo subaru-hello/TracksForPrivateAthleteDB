@@ -1,16 +1,16 @@
 import * as logger from 'firebase-functions/logger';
 import { onRequest } from 'firebase-functions/v2/https';
 import { allAvailableDates } from './availableDate';
+import { getEnvVariable } from '../utils/getEnvVariables';
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
 
 export const availableDates = onRequest(
   {
-    cors: !process.env.IS_LOCAL
-      ? process.env.CORS_URL?.split(', ')
-      : // '*'
-        '*',
+    cors: getEnvVariable('IS_LOCAL')
+      ? true
+      : getEnvVariable('CORS_URL')?.split(', '),
   },
   (request, response) => {
     const availableDateObject = {

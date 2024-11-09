@@ -101,7 +101,7 @@ const TrackList: FC<Props> = ({ tracks = [] }) => {
   });
 
   return (
-    <Container maxW={'7xl'} p="12">
+    <Container p="12">
       <Heading as="h1">競技場一覧</Heading>
       <Stack
         direction={{ base: 'column', md: 'row' }}

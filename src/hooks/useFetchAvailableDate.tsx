@@ -15,7 +15,7 @@ export const useFetchAvailableDate = () => {
         dispatch(addAvailableDates(response.data));
         console.log('Response:', response.data);
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error at fetchAvailableDates:', error);
       }
     };
     fetchAvailableDates();

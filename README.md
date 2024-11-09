@@ -6,6 +6,15 @@ https://hurdle.biz
 今日一般開放されている競技場を検索できるサービスです。　<br />
 社会人アスリート（陸上競技を趣味としている方）向けに作成しました。 <br/>
 
+### setup
+
+```
+yarn dev
+
+cd functions
+yarn serve
+```
+
 ### 作成背景
 
 川崎市中原区の等々力競技場で練習をしようと足を運んだ際、受付で「今日は個人向けに貸し出しはしていません」と言われて悔しい思いをしたことがきっかけです。<br />
@@ -37,6 +46,7 @@ ChakraUI
 - バックエンド
 
 ```
+Typescript
 Firebase Storage
 Firebase Cloud Firestore
 Firebase Authentication
