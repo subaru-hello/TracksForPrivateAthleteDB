@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ShoesImage: FC<Props> = (props) => {
-  return <BaseImage image={props.image} />;
+  return <BaseImage src={props.image} />;
 };
 
 export default ShoesImage;
