@@ -1,30 +1,21 @@
 import type { FC } from 'react';
-import { useState, useEffect } from 'react';
 import { Box } from '@chakra-ui/react';
-import { ref, getDownloadURL } from 'firebase/storage';
-import { storage } from 'Firebase';
 import BaseImage from 'components/atoms/BaseImage';
-type Props = {
-  props: {
-    image: string;
-  };
-};
-const PrefectureImage: FC<Props> = ({ props }) => {
-  const [image, setImage] = useState('');
-  const gsReference = ref(storage, props.image);
+import { isLocal } from 'utils/urlUtils';
 
-  useEffect(() => {
-    getDownloadURL(gsReference)
-      .then((url) => {
-        setImage(url);
-        console.log(image);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+type Props = {
+  src: string;
+};
+
+const PrefectureImage: FC<Props> = ({ src }) => {
+  // TODO: NODE_ENVを使ってローカルか判断する
+  const displaySrc = isLocal(window.location.href)
+    ? `${import.meta.env.VITE_FIREBASE_R2_URL}/${src}`
+    : `${window.location.href}/${src}`;
 
   return (
     <Box boxSize="sm">
-      <BaseImage image={image} />
+      <BaseImage src={displaySrc} />
     </Box>
   );
 };
