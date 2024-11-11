@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import { Box } from '@chakra-ui/react';
 type Props = {
-  image: string;
+  src: string;
 };
 const BaseImage: FC<Props> = (props) => {
   return (
     <Box w="100%">
-      <img src={props.image} />
+      <img src={props.src} />
     </Box>
   );
 };

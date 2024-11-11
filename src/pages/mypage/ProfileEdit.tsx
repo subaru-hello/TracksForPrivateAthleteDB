@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect, useRef } from 'react';
-import { SmallCloseIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Button,
   Flex,
@@ -10,59 +11,126 @@ import {
   Stack,
   useColorModeValue,
   Avatar,
-  AvatarBadge,
-  IconButton,
   Center,
+  Text,
 } from '@chakra-ui/react';
-import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
-import { db } from 'Firebase';
+import { DocumentData } from 'firebase/firestore';
 import { AuthContext } from 'auth/AuthProvider';
+import {
+  updateProfileImage,
+  getCurrentUser,
+  updateProfile,
+} from 'apis/firebase/users';
+import axios from 'axios';
+import { putPresignedUrl } from 'apis/cloudflare/r2';
 
-const InitialState: DocumentData = {
+const initialUserState: DocumentData = {
   id: '',
   name: '',
   email: '',
   admin: false,
 };
 
+const initialFormState = {
+  firstName: '',
+  lastName: '',
+};
+
 const ProfileEdit = (): JSX.Element => {
-  const [user, setUser] = useState<DocumentData>(InitialState);
+  const [user, setUser] = useState<DocumentData>(initialUserState);
+  const [formData, setFormData] = useState(initialFormState);
+  const [image, setImage] = useState<File>();
+  const [previewImageUrl, setPreviewImageUrl] = useState<string>('');
+  const [r2ImageUrl, setR2ImageUrl] = useState('');
+
   const { currentUser } = useContext(AuthContext);
+  // ログアウトしたらログインページへリダイレクトさせる
+  const navigate = useNavigate();
   const refInputFirstName = useRef<HTMLInputElement>(null);
   const refInputLastName = useRef<HTMLInputElement>(null);
-  const refInputEmail = useRef<HTMLInputElement>(null);
-  const refInputPassword = useRef<HTMLInputElement>(null);
+  const inputImageRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-    const usersCollectionRef = collection(db, 'users');
-    // 変更をリアルタイムで検知してusersを変更する
-    const unsub = onSnapshot(usersCollectionRef, (querySnapshot) => {
-      const queryDatas = querySnapshot.docs.map((doc) => doc.data());
-      if (currentUser) {
-        const matchedUser = queryDatas.filter(
-          (data) => data.email === currentUser.email
-        );
-        setUser(matchedUser[0]);
-      }
-      // usersコレクションを参照する
-    });
-
-    return unsub;
+    if (currentUser) {
+      const _updateUserInfo = async () => {
+        const userSnapShot = await getCurrentUser(currentUser.email);
+        const userInfo = !userSnapShot.empty
+          ? userSnapShot.docs[0].data()
+          : null;
+        setUser({ ...userInfo, uid: userSnapShot.docs[0]?.id });
+        setFormData({
+          firstName: userInfo?.firstName,
+          lastName: userInfo?.lastName,
+        });
+        setR2ImageUrl(userInfo?.profileImg?.key);
+        console.log('******', userInfo);
+      };
+      _updateUserInfo();
+    } else {
+      // ログインページへリダイレクト
+      // TODO: ログインしてくださいのバリデーションをつける
+      navigate('/login');
+    }
   }, []);
-  const updateUserInfo = (id: string) => {
-    console.log(id);
-    // const userDocumentRef = doc(db, 'users', id);
-    // const firstName = refInputFirstName.current!.value
-    // const lastName = refInputLastName.current!.value
-    // const email = refInputEmail.current!.value
-    // const password = refInputPassword.current!.value
-    // console.log(userDocumentRef)
-    // console.log(firstName, lastName, email, password)
-    // await updateDoc(userDocumentRef, {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   email: email,
-    //   password: password,
-    // });
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setPreviewImageUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const handleInputChange = (e: any) => {
+    // TODO: バリデーション追加
+    // - 空白不許可
+    // - 必須
+    // - 50字以内
+    // - 英数漢字かなカナのみ
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const updateUserInfo = async (id: string) => {
+    // TODO: 許可する拡張子を決める
+    // DBを更新
+    try {
+      if (image) {
+        const bucket: string = import.meta.env
+          .VITE_FIREBASE_R2_PROFILE_IMAGE_BUCKET;
+        // 画像名に空白が入っていたら取り除く
+        const imageName: string = image.name.split(' ').join('');
+        const key: string = `${id}/${imageName}`;
+        const uploadUrl: string = await putPresignedUrl(bucket, key, image);
+        // R2を更新
+        const response = await axios.put(uploadUrl, image, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        // DBを更新
+        await updateProfileImage({
+          id,
+          key,
+          name: imageName,
+        });
+        console.log('===upload result==', response.data);
+      }
+
+      await updateProfile({
+        id,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+      });
+    } catch (error) {
+      console.error('upload failed', error);
+    }
+  };
+
+  const onClickProfileImage = () => {
+    inputImageRef?.current?.click();
   };
 
   return (
@@ -83,34 +151,44 @@ const ProfileEdit = (): JSX.Element => {
         my={12}
       >
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-          User Profile Edit
+          プロフィール編集
         </Heading>
         <FormControl id="userName">
-          <FormLabel>User Icon</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
-              <Avatar size="xl" src="https://bit.ly/sage-adebayo">
-                <AvatarBadge
-                  as={IconButton}
-                  size="sm"
-                  rounded="full"
-                  top="-10px"
-                  colorScheme="red"
-                  aria-label="remove Image"
-                  icon={<SmallCloseIcon />}
-                />
-              </Avatar>
+              <Avatar
+                size="xl"
+                src={
+                  previewImageUrl
+                    ? previewImageUrl
+                    : `${import.meta.env.VITE_FIREBASE_R2_URL}/${r2ImageUrl}` ??
+                      'https://bit.ly/sage-adebayo'
+                }
+              ></Avatar>
             </Center>
-            <Center w="full">
-              <Button w="full">Change Icon</Button>
-            </Center>
+            <Center w="full"></Center>
           </Stack>
+          <Center>
+            <button onClick={onClickProfileImage}>画像変更</button>
+            <input
+              ref={inputImageRef}
+              style={{ visibility: 'hidden' }}
+              onChange={handleImageChange}
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/png, image/jpeg"
+            />
+          </Center>
         </FormControl>
         <FormControl id="firstName" isRequired>
           <FormLabel>First name</FormLabel>
           <Input
-            placeholder={user.firstName}
             _placeholder={{ color: 'gray.500' }}
+            value={formData.firstName}
+            onChange={handleInputChange}
+            id="firstName"
+            name="firstName"
             type="text"
             ref={refInputFirstName}
           />
@@ -118,13 +196,18 @@ const ProfileEdit = (): JSX.Element => {
         <FormControl id="lastName" isRequired>
           <FormLabel>Last name</FormLabel>
           <Input
-            placeholder={user.lastName}
+            value={formData.lastName}
+            onChange={handleInputChange}
             _placeholder={{ color: 'gray.500' }}
+            id="lastName"
+            name="lastName"
             type="text"
             ref={refInputLastName}
           />
         </FormControl>
-        <FormControl id="email" isRequired>
+        <FormLabel>Email</FormLabel>
+        <Text>{user.email}</Text>
+        {/* <FormControl id="email" isRequired>
           <FormLabel>Email address</FormLabel>
           <Input
             placeholder={user.email}
@@ -132,8 +215,8 @@ const ProfileEdit = (): JSX.Element => {
             type="email"
             ref={refInputEmail}
           />
-        </FormControl>
-        <FormControl id="password" isRequired>
+        </FormControl> */}
+        {/* <FormControl id="password" isRequired>
           <FormLabel>Password</FormLabel>
           <Input
             placeholder="password"
@@ -141,7 +224,7 @@ const ProfileEdit = (): JSX.Element => {
             type="password"
             ref={refInputPassword}
           />
-        </FormControl>
+        </FormControl> */}
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
             bg={'red.400'}
@@ -151,7 +234,7 @@ const ProfileEdit = (): JSX.Element => {
               bg: 'red.500',
             }}
           >
-            Cancel
+            キャンセル
           </Button>
           <Button
             bg={'blue.400'}
@@ -162,7 +245,7 @@ const ProfileEdit = (): JSX.Element => {
             }}
             onClick={() => updateUserInfo(user.uid)}
           >
-            Submit
+            更新
           </Button>
         </Stack>
       </Stack>

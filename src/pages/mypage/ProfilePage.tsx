@@ -32,18 +32,20 @@ const ProfileOrganism: FC = () => {
   useEffect(() => {
     const usersCollectionRef = collection(db, 'users');
     // 変更をリアルタイムで検知してusersを変更する
-    const unsub = onSnapshot(usersCollectionRef, (querySnapshot) => {
-      const queryDatas = querySnapshot.docs.map((doc) => doc.data());
-      if (currentUser) {
-        const matchedUser = queryDatas.filter(
-          (data) => data.email === currentUser.email
-        );
-        setUser(matchedUser[0]);
-      }
-      // usersコレクションを参照する
-    });
+    const unsub = () =>
+      onSnapshot(usersCollectionRef, (querySnapshot) => {
+        // FIXME: ランダムアクセスを無くしたい→mapかsetにしてO(1)にしたい
+        const queryDatas = querySnapshot.docs.map((doc) => doc.data());
+        if (currentUser) {
+          const matchedUser = queryDatas.filter(
+            (data) => data.email === currentUser.email
+          );
+          setUser(matchedUser[0]);
+        }
+        // usersコレクションを参照する
+      });
 
-    return unsub;
+    unsub();
   }, []);
 
   // ログアウトしたらログインページへリダイレクトさせる

@@ -21,6 +21,8 @@ const InitialState: DocumentData = {
   id: '',
   name: '',
   email: '',
+  firstName: '',
+  lastName: '',
   admin: false,
 };
 
@@ -33,6 +35,7 @@ const ProfileOrganism: FC<{ email: string | null | undefined }> = ({
 }) => {
   // const usersCollectionRef = collection(db, 'users');
   const [user, setUser] = useState<DocumentData>(InitialState);
+  // TODO: serverlessに移行する
   useEffect(() => {
     const usersCollectionRef = collection(db, 'users');
     // 変更をリアルタイムで検知してusersを変更する
@@ -43,7 +46,7 @@ const ProfileOrganism: FC<{ email: string | null | undefined }> = ({
       setUser(matchedUser[0]);
     });
 
-    return unsub;
+    unsub;
   }, []);
 
   // ログアウトしたらログインページへリダイレクトさせる
@@ -94,14 +97,14 @@ const ProfileOrganism: FC<{ email: string | null | undefined }> = ({
         </Box>
         <Flex id="firstName" justifyContent={'center'}>
           <Text as="b" fontSize="2xl" mx={1}>
-            {user.firstName}
+            {user?.firstName}
           </Text>
           <Text as="b" fontSize="2xl" mx={1}>
-            {user.lastName}
+            {user?.lastName}
           </Text>
         </Flex>
         <Container id="Email" centerContent={true}>
-          <Box>{user.email}</Box>
+          <Box>{user?.email}</Box>
         </Container>
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
