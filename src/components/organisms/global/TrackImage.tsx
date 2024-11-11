@@ -8,7 +8,7 @@ type ImageProps = {
 const TrackImage: FC<ImageProps> = (props) => {
   return (
     <Box>
-      <BaseImage image={props.image} />
+      <BaseImage src={props.image} />
     </Box>
   );
 };
