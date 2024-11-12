@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import {
   Button,
   Flex,
@@ -11,45 +11,23 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { signOut } from 'firebase/auth';
-import { collection, DocumentData, onSnapshot } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { db, auth } from 'Firebase';
+import { auth } from 'Firebase';
 import { AuthContext } from 'auth/AuthProvider';
 import Profile from 'components/organisms/users/Profile';
 
-const InitialState: DocumentData = {
-  id: '',
-  name: '',
-  email: '',
-  admin: false,
-};
-
 const ProfileOrganism: FC = () => {
-  // const usersCollectionRef = collection(db, 'users');
-  const [user, setUser] = useState<DocumentData>(InitialState);
-  const { currentUser } = useContext(AuthContext);
-  useEffect(() => {
-    const usersCollectionRef = collection(db, 'users');
-    // 変更をリアルタイムで検知してusersを変更する
-    const unsub = () =>
-      onSnapshot(usersCollectionRef, (querySnapshot) => {
-        // FIXME: ランダムアクセスを無くしたい→mapかsetにしてO(1)にしたい
-        const queryDatas = querySnapshot.docs.map((doc) => doc.data());
-        if (currentUser) {
-          const matchedUser = queryDatas.filter(
-            (data) => data.email === currentUser.email
-          );
-          setUser(matchedUser[0]);
-        }
-        // usersコレクションを参照する
-      });
-
-    unsub();
-  }, []);
-
+  const { profile, isLoggedIn } = useContext(AuthContext);
   // ログアウトしたらログインページへリダイレクトさせる
   const navigate = useNavigate();
+  // TODO: Providerで定義する
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // TODO: ログインしてくださいのバリデーションをつける
+      navigate('/login');
+    }
+  }, []);
 
   const handleLogout = () => {
     signOut(auth)
@@ -95,19 +73,19 @@ const ProfileOrganism: FC = () => {
         </Heading>
         <Box id="userName">
           <Center>
-            <Profile />
+            <Profile image={profile?.profileImg?.key} />
           </Center>
         </Box>
         <Flex id="firstName" justifyContent={'center'}>
           <Text as="b" fontSize="2xl" mx={1}>
-            {user.firstName}
+            {profile?.firstName}
           </Text>
           <Text as="b" fontSize="2xl" mx={1}>
-            {user.lastName}
+            {profile?.lastName}
           </Text>
         </Flex>
         <Container id="Email" centerContent={true}>
-          <Box>{user.email}</Box>
+          <Box>{profile?.email}</Box>
         </Container>
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
