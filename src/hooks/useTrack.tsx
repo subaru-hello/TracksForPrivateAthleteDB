@@ -5,6 +5,7 @@ import type { Track } from 'domains';
 const useTrack = () => {
   const [trackList, setTrackList] = useState<Track[]>([]);
 
+  // TODO: 降順にする処理を改善
   useEffect(() => {
     trackData.getAllTracksData().then((track) => {
       setTrackList([...track].reverse());

@@ -14,58 +14,30 @@ import {
   Center,
   Text,
 } from '@chakra-ui/react';
-import { DocumentData } from 'firebase/firestore';
 import { AuthContext } from 'auth/AuthProvider';
-import {
-  updateProfileImage,
-  getCurrentUser,
-  updateProfile,
-} from 'apis/firebase/users';
+import { updateProfileImage, updateProfile } from 'apis/firebase/users';
 import axios from 'axios';
 import { putPresignedUrl } from 'apis/cloudflare/r2';
 
-const initialUserState: DocumentData = {
-  id: '',
-  name: '',
-  email: '',
-  admin: false,
-};
-
-const initialFormState = {
-  firstName: '',
-  lastName: '',
-};
-
 const ProfileEdit = (): JSX.Element => {
-  const [user, setUser] = useState<DocumentData>(initialUserState);
-  const [formData, setFormData] = useState(initialFormState);
+  const { currentUser, profile, isLoggedIn } = useContext(AuthContext);
+  // TODO: 初期値にcontextを入れていいのか確認
+  const [formData, setFormData] = useState({
+    firstName: profile?.firstName,
+    lastName: profile?.lastName,
+  });
   const [image, setImage] = useState<File>();
   const [previewImageUrl, setPreviewImageUrl] = useState<string>('');
-  const [r2ImageUrl, setR2ImageUrl] = useState('');
 
-  const { currentUser } = useContext(AuthContext);
   // ログアウトしたらログインページへリダイレクトさせる
   const navigate = useNavigate();
   const refInputFirstName = useRef<HTMLInputElement>(null);
   const refInputLastName = useRef<HTMLInputElement>(null);
   const inputImageRef = useRef<HTMLInputElement>(null);
+
+  // TODO: Providerで定義する
   useEffect(() => {
-    if (currentUser) {
-      const _updateUserInfo = async () => {
-        const userSnapShot = await getCurrentUser(currentUser.email);
-        const userInfo = !userSnapShot.empty
-          ? userSnapShot.docs[0].data()
-          : null;
-        setUser({ ...userInfo, uid: userSnapShot.docs[0]?.id });
-        setFormData({
-          firstName: userInfo?.firstName,
-          lastName: userInfo?.lastName,
-        });
-        setR2ImageUrl(userInfo?.profileImg?.key);
-        console.log('******', userInfo);
-      };
-      _updateUserInfo();
-    } else {
+    if (!isLoggedIn) {
       // ログインページへリダイレクト
       // TODO: ログインしてくださいのバリデーションをつける
       navigate('/login');
@@ -156,13 +128,15 @@ const ProfileEdit = (): JSX.Element => {
         <FormControl id="userName">
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
+              {/* FIXME: もっと綺麗にしたい */}
               <Avatar
                 size="xl"
                 src={
                   previewImageUrl
                     ? previewImageUrl
-                    : `${import.meta.env.VITE_FIREBASE_R2_URL}/${r2ImageUrl}` ??
-                      'https://bit.ly/sage-adebayo'
+                    : `${import.meta.env.VITE_FIREBASE_R2_URL}/${
+                        profile?.profileImg?.key
+                      }` ?? 'https://bit.ly/sage-adebayo'
                 }
               ></Avatar>
             </Center>
@@ -206,7 +180,7 @@ const ProfileEdit = (): JSX.Element => {
           />
         </FormControl>
         <FormLabel>Email</FormLabel>
-        <Text>{user.email}</Text>
+        <Text>{profile?.email}</Text>
         {/* <FormControl id="email" isRequired>
           <FormLabel>Email address</FormLabel>
           <Input
@@ -243,7 +217,7 @@ const ProfileEdit = (): JSX.Element => {
             _hover={{
               bg: 'blue.500',
             }}
-            onClick={() => updateUserInfo(user.uid)}
+            onClick={() => updateUserInfo(profile?.uid)}
           >
             更新
           </Button>

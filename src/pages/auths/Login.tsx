@@ -23,6 +23,7 @@ const Login: FC = () => {
   const [authenticating, setAuthenticating] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  // TODO: 認証方式が何かを調べる
   const SignInWithEmailAndPassword = (
     event: React.FormEvent<HTMLFormElement>
   ): void => {

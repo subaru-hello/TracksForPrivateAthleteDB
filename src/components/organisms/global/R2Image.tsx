@@ -7,7 +7,7 @@ type Props = {
   src: string;
 };
 
-const PrefectureImage: FC<Props> = ({ src }) => {
+const R2Image: FC<Props> = ({ src }) => {
   // TODO: NODE_ENVを使ってローカルか判断する
   const displaySrc = isLocal(window.location.href)
     ? `${import.meta.env.VITE_FIREBASE_R2_URL}/${src}`
@@ -20,4 +20,4 @@ const PrefectureImage: FC<Props> = ({ src }) => {
   );
 };
 
-export default PrefectureImage;
+export default R2Image;
