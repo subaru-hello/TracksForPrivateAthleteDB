@@ -134,9 +134,11 @@ const ProfileEdit = (): JSX.Element => {
                 src={
                   previewImageUrl
                     ? previewImageUrl
-                    : `${import.meta.env.VITE_FIREBASE_R2_URL}/${
+                    : profile?.profileImg?.key
+                    ? `${import.meta.env.VITE_FIREBASE_R2_URL}/${
                         profile?.profileImg?.key
-                      }` ?? 'https://bit.ly/sage-adebayo'
+                      }`
+                    : 'https://bit.ly/sage-adebayo'
                 }
               ></Avatar>
             </Center>
