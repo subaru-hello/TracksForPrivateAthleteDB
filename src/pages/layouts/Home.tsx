@@ -2,7 +2,6 @@ import { type FC } from 'react';
 import { Box, useColorModeValue, chakra } from '@chakra-ui/react';
 import { prefectureData } from 'data';
 import { Helmet } from 'react-helmet-async';
-import { AmazonBanner } from 'components/atoms/AmazonBanner';
 import Calender from 'components/organisms/Calender';
 import SiteOutline from 'components/organisms/layouts/SiteOutline';
 import WithSpeechBubbles from 'components/organisms/layouts/Testimonial';
@@ -55,7 +54,6 @@ const Home: FC = () => {
         <Calender availableDates={availableDates[0]?.availableDates} />
       </Box>
       <WithSpeechBubbles />
-      <AmazonBanner />
     </Box>
   );
 };
