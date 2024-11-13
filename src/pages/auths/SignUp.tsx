@@ -1,5 +1,5 @@
 import type { FC, SyntheticEvent } from 'react';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
@@ -31,9 +31,14 @@ const SignUp: FC = () => {
   // const [weakPassword, setWeakPassword] = useState<string>('');
   // const [authenticating, setAuthenticating] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  // console.log(error);
-  // useEffect(() => {}, [error]);
+  const { isLoggedIn, currentUser } = useContext(AuthContext);
+  // TODO: Providerで定義する
+  useEffect(() => {
+    if (isLoggedIn) {
+      // TOPページへリダイレクト
+      navigate('/');
+    }
+  }, []);
   const createUserAndSignUpWithEmailAndPassword = async (
     event: SyntheticEvent<HTMLFormElement>
   ) => {
@@ -87,7 +92,6 @@ const SignUp: FC = () => {
         }
       });
   };
-  const { currentUser } = useContext(AuthContext);
 
   return (
     <Flex

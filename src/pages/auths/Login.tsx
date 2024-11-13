@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   Flex,
   Box,
@@ -17,11 +17,20 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { auth } from 'Firebase';
+import { AuthContext } from 'auth/AuthProvider';
 
 const Login: FC = () => {
   const [error, setError] = useState<string>('');
   const [authenticating, setAuthenticating] = useState<boolean>(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  // TODO: Providerで定義する
+  useEffect(() => {
+    if (isLoggedIn) {
+      // TOPページへリダイレクト
+      navigate('/');
+    }
+  }, []);
 
   // TODO: 認証方式が何かを調べる
   const SignInWithEmailAndPassword = (
