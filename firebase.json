@@ -2,11 +2,7 @@
   "hosting": {
     "site": "rikujo-b8e9e",
     "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -22,8 +18,8 @@
   },
   "functions": [
     {
-      "source": "functions",
-      "codebase": "default",
+      "source": "ts-functions",
+      "codebase": "ts-functions",
       "ignore": [
         "node_modules",
         ".git",
@@ -34,6 +30,11 @@
         "npm --prefix \"$RESOURCE_DIR\" run lint",
         "npm --prefix \"$RESOURCE_DIR\" run build"
       ]
+    },
+    {
+      "source": "py-functions",
+      "codebase": "py-functions",
+      "ignore": ["venv", ".git", "firebase-debug.log", "firebase-debug.*.log"]
     }
   ]
 }
